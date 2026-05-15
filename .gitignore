@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local design working files (Stitch HTML/screenshots — not needed for prod)
+/design
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

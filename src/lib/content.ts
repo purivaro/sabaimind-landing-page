@@ -12,6 +12,7 @@ export type ContentMeta = {
   gallery?: string[];
   excerpt?: string;
   published?: boolean;
+  featured?: boolean;
   locale?: Locale;
   youtube?: string;
   [key: string]: unknown;
@@ -43,7 +44,7 @@ export function getAllContent(section: string, locale: Locale): ContentItem[] {
   const files = readDir(section);
   const items: ContentItem[] = files
     .map((file) => {
-      const slug = file.replace(/\.mdx?$/, "");
+      const slug = file.replace(/\.mdx?$/, "").replace(/\.(th|ja)$/, "");
       const raw = fs.readFileSync(path.join(CONTENT_DIR, section, file), "utf8");
       const { data, content } = matter(raw);
       return { slug, meta: normalizeMeta(data), body: content };
@@ -54,6 +55,9 @@ export function getAllContent(section: string, locale: Locale): ContentItem[] {
       return true;
     })
     .sort((a, b) => {
+      const af = a.meta.featured ? 1 : 0;
+      const bf = b.meta.featured ? 1 : 0;
+      if (af !== bf) return bf - af;
       const ad = a.meta.date ? new Date(a.meta.date).getTime() : 0;
       const bd = b.meta.date ? new Date(b.meta.date).getTime() : 0;
       return bd - ad;

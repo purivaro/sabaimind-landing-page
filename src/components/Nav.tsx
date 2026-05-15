@@ -1,11 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import { type Locale, locales, localeNames } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
 export function Nav({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
   const items = [
-    { href: "", label: t.site.name },
+    { href: "", label: t.nav.home },
     { href: "/about", label: t.nav.about },
     { href: "/activities", label: t.nav.activities },
     { href: "/news", label: t.nav.news },
@@ -14,36 +15,54 @@ export function Nav({ locale }: { locale: Locale }) {
   ];
 
   return (
-    <header className="border-b border-zinc-200 bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-4 flex flex-wrap items-center justify-between gap-4">
-        <Link href={`/${locale}`} className="text-xl font-semibold tracking-tight">
-          {t.site.name}
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant/30 shadow-sm">
+      <nav className="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+        <Link href={`/${locale}`} className="flex items-center" aria-label={t.site.name}>
+          <Image
+            src="/images/logo/logo-sabiamind.png"
+            alt={t.site.name}
+            width={737}
+            height={323}
+            priority
+            className="h-10 md:h-12 w-auto"
+          />
         </Link>
-        <nav className="flex flex-wrap items-center gap-6 text-sm text-zinc-700">
-          {items.slice(1).map((item) => (
+
+        <div className="hidden md:flex items-center gap-8">
+          {items.map((item) => (
             <Link
               key={item.href}
               href={`/${locale}${item.href}`}
-              className="hover:text-black transition-colors"
+              className="font-body text-body-md text-on-surface-variant hover:text-primary transition-colors duration-300"
             >
               {item.label}
             </Link>
           ))}
-        </nav>
-        <div className="flex items-center gap-2 text-xs text-zinc-500">
-          {locales.map((l, idx) => (
-            <span key={l} className="flex items-center gap-2">
-              {idx > 0 && <span>·</span>}
-              <Link
-                href={`/${l}`}
-                className={l === locale ? "font-semibold text-black" : "hover:text-black"}
-              >
-                {localeNames[l]}
-              </Link>
-            </span>
-          ))}
         </div>
-      </div>
+
+        <div className="flex items-center gap-2">
+          <span className="material-symbols-outlined text-primary text-[20px]">
+            language
+          </span>
+          <div className="flex items-center gap-1 font-label-md text-on-surface-variant">
+            {locales.map((l, idx) => (
+              <span key={l} className="flex items-center gap-1">
+                {idx > 0 && <span className="opacity-40">/</span>}
+                <Link
+                  href={`/${l}`}
+                  className={
+                    l === locale
+                      ? "font-semibold text-primary"
+                      : "hover:text-primary transition-colors"
+                  }
+                >
+                  {localeNames[l]}
+                </Link>
+              </span>
+            ))}
+          </div>
+        </div>
+      </nav>
     </header>
   );
 }

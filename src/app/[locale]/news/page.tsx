@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -11,33 +12,124 @@ export default async function NewsPage({
   const { locale } = await params;
   const t = getDictionary(locale);
   const items = getAllContent("news", locale);
+  const recent = items.slice(0, 2);
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="text-4xl font-bold tracking-tight">{t.nav.news}</h1>
-      <ul className="mt-10 divide-y divide-zinc-200">
-        {items.map((item) => (
-          <li key={item.slug} className="py-6">
-            <Link
-              href={`/${locale}/news/${item.slug}`}
-              className="group block"
-            >
-              {item.meta.date && (
-                <time className="text-sm text-zinc-500">{item.meta.date}</time>
-              )}
-              <h2 className="mt-1 text-xl font-semibold group-hover:text-zinc-600">
-                {item.meta.title}
-              </h2>
-              {item.meta.excerpt && (
-                <p className="mt-2 text-zinc-600">{item.meta.excerpt}</p>
-              )}
-            </Link>
-          </li>
-        ))}
-        {items.length === 0 && (
-          <li className="py-6 text-zinc-500">ยังไม่มีข่าวสาร</li>
-        )}
-      </ul>
-    </div>
+    <main className="pt-12 pb-16 md:pt-24 md:pb-24 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <header className="mb-16 md:mb-24">
+        <h1 className="font-display text-3xl md:text-display text-on-surface mb-4">
+          {t.news.title}
+        </h1>
+        <p className="font-body text-body-lg text-on-surface-variant max-w-2xl">
+          {t.news.subtitle}
+        </p>
+      </header>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+        {/* Article list */}
+        <section className="lg:col-span-8">
+          {items.length === 0 ? (
+            <p className="text-on-surface-variant py-24">
+              {locale === "ja" ? "現在ニュースはありません。" : "ยังไม่มีข่าวสารในขณะนี้"}
+            </p>
+          ) : (
+            <div className="flex flex-col">
+              {items.map((item) => (
+                <Link
+                  key={item.slug}
+                  href={`/${locale}/news/${item.slug}`}
+                  className="py-10 border-b border-on-surface/10 group cursor-pointer block"
+                >
+                  <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-8">
+                    {item.meta.date && (
+                      <time className="font-label-md text-secondary tracking-widest uppercase md:w-32 flex-shrink-0">
+                        {item.meta.date}
+                      </time>
+                    )}
+                    <div className="flex-grow">
+                      <h2 className="font-display text-headline-md text-on-surface group-hover:text-primary transition-colors duration-300 mb-3">
+                        {item.meta.title}
+                      </h2>
+                      {item.meta.excerpt && (
+                        <p className="font-body text-body-md text-on-surface-variant line-clamp-2">
+                          {item.meta.excerpt}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* Sidebar */}
+        <aside className="lg:col-span-4 mt-16 lg:mt-0 lg:sticky lg:top-32 space-y-16">
+          {/* Recent */}
+          {recent.length > 0 && (
+            <section>
+              <h3 className="font-display text-headline-md text-on-surface mb-6 border-b border-on-surface/10 pb-4">
+                {t.news.recentTitle}
+              </h3>
+              <div className="space-y-6">
+                {recent.map((item) => (
+                  <Link
+                    key={item.slug}
+                    href={`/${locale}/news/${item.slug}`}
+                    className="flex gap-4 group"
+                  >
+                    <div className="w-20 h-20 bg-surface-container overflow-hidden rounded-lg flex-shrink-0 relative">
+                      <Image
+                        src={
+                          (item.meta.cover as string | undefined) ||
+                          "/images/news/stones.jpg"
+                        }
+                        alt={item.meta.title}
+                        fill
+                        className="object-cover"
+                        sizes="80px"
+                      />
+                    </div>
+                    <div>
+                      {item.meta.date && (
+                        <time className="text-[12px] text-secondary font-medium tracking-wider uppercase">
+                          {item.meta.date}
+                        </time>
+                      )}
+                      <p className="font-body text-body-md text-on-surface leading-snug mt-1 group-hover:text-primary line-clamp-2">
+                        {item.meta.title}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Newsletter */}
+          <section className="bg-surface-container p-8 rounded-lg">
+            <h4 className="font-display text-headline-md text-primary mb-4">
+              {t.news.newsletterTitle}
+            </h4>
+            <p className="font-body text-body-md text-on-surface-variant mb-6 text-sm">
+              {t.news.newsletterBody}
+            </p>
+            <form className="space-y-4">
+              <input
+                className="w-full bg-transparent border-b border-outline focus:border-primary focus:outline-none px-0 py-2 placeholder:text-outline-variant font-body text-body-md"
+                placeholder={t.news.newsletterPlaceholder}
+                type="email"
+              />
+              <button
+                type="submit"
+                className="w-full bg-primary-container text-on-primary py-3 px-8 font-label-md uppercase tracking-widest hover:bg-primary transition-colors duration-300"
+              >
+                {t.news.newsletterCta}
+              </button>
+            </form>
+          </section>
+        </aside>
+      </div>
+    </main>
   );
 }

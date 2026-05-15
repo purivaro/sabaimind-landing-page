@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
@@ -10,59 +11,103 @@ export default async function ContactPage({
   const t = getDictionary(locale);
 
   return (
-    <div className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="text-4xl font-bold tracking-tight">{t.nav.contact}</h1>
-      <form
-        action="/api/contact"
-        method="post"
-        className="mt-10 space-y-6"
-      >
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-zinc-700">
-            {t.contact.name}
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            className="mt-2 block w-full rounded-md border border-zinc-300 px-4 py-2 focus:border-zinc-500 focus:outline-none"
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-zinc-700">
+    <main className="pt-12 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+      {/* Hero */}
+      <section className="mb-16 md:mb-24 text-center">
+        <h1 className="font-display text-4xl md:text-display text-primary mb-6">
+          {t.contact.title}
+        </h1>
+        <p className="font-body text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+          {t.contact.subtitle}
+        </p>
+      </section>
+
+      {/* Contact card */}
+      <section className="max-w-3xl mx-auto bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/10 p-8 md:p-12">
+        <h2 className="font-display text-headline-md text-secondary mb-8 text-center">
+          {t.contact.sidebarTitle}
+        </h2>
+
+        <ul className="space-y-6 font-body text-body-md text-on-surface-variant max-w-md mx-auto">
+          <li className="flex items-start gap-4">
+            <span className="material-symbols-outlined text-primary mt-0.5">
+              location_on
+            </span>
+            <span>
+              {t.contact.addressLine1}
+              <br />
+              {t.contact.addressLine2}
+            </span>
+          </li>
+          <li className="flex items-center gap-4">
+            <span className="material-symbols-outlined text-primary">
+              call
+            </span>
+            <a
+              href={`tel:${t.contact.phone.replace(/\D/g, "")}`}
+              className="hover:text-primary transition-colors"
+            >
+              {t.contact.phone}
+            </a>
+          </li>
+          <li className="flex items-center gap-4">
+            <span className="material-symbols-outlined text-primary">
+              mail
+            </span>
+            <a
+              href={`mailto:${t.contact.email}`}
+              className="hover:text-primary transition-colors"
+            >
+              {t.contact.email}
+            </a>
+          </li>
+        </ul>
+
+        <div className="mt-10 flex justify-center">
+          <a
+            href={`mailto:${t.contact.email}`}
+            className="inline-flex items-center gap-2 px-12 py-4 bg-primary-container text-on-primary-container font-label-md rounded-full hover:shadow-lg active:scale-95 transition-all duration-300 uppercase tracking-widest"
+          >
+            <span className="material-symbols-outlined text-[20px]">mail</span>
             {t.contact.email}
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            className="mt-2 block w-full rounded-md border border-zinc-300 px-4 py-2 focus:border-zinc-500 focus:outline-none"
-          />
+          </a>
         </div>
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-zinc-700">
-            {t.contact.message}
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={6}
-            required
-            className="mt-2 block w-full rounded-md border border-zinc-300 px-4 py-2 focus:border-zinc-500 focus:outline-none"
-          />
+
+        <div className="mt-10 pt-8 border-t border-outline-variant/30">
+          <h3 className="font-label-md text-on-surface-variant uppercase tracking-widest mb-4 text-center">
+            {t.contact.followTitle}
+          </h3>
+          <div className="flex justify-center gap-6">
+            {["share", "video_library", "public"].map((icon) => (
+              <a
+                key={icon}
+                href="#"
+                className="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary transition-all duration-300"
+              >
+                <span className="material-symbols-outlined">{icon}</span>
+              </a>
+            ))}
+          </div>
         </div>
-        <button
-          type="submit"
-          className="rounded-md bg-zinc-900 px-6 py-2.5 text-white font-medium hover:bg-zinc-700 transition-colors"
-        >
-          {t.contact.submit}
-        </button>
-      </form>
-      <p className="mt-8 text-sm text-zinc-500">
-        * Contact form endpoint (/api/contact) ยังไม่ได้เชื่อมต่อ email service — รอ Resend/SMTP setup
-      </p>
-    </div>
+      </section>
+
+      {/* Map */}
+      <section className="max-w-3xl mx-auto mt-12">
+        <div className="relative group overflow-hidden rounded-xl h-64 md:h-80 border border-outline-variant/20 shadow-sm">
+          <Image
+            src="/images/contact/map.jpg"
+            alt="Sabai Mind location"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 768px"
+          />
+          <div className="absolute inset-0 bg-primary/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button className="bg-surface-container-lowest px-6 py-2 rounded-full font-label-md text-primary shadow-md">
+              Open in Maps
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

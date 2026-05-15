@@ -1,5 +1,10 @@
 import type { Locale } from "./config";
 
+// Content reflects the actual organization (NPO法人 Sabai Mind) from sabaimind.or.jp.
+// Japanese is canonical; Thai translates with equivalent meaning.
+
+type Program = { icon: string; title: string; body: string };
+
 type Dict = {
   nav: {
     home: string;
@@ -12,57 +17,393 @@ type Dict = {
   site: {
     name: string;
     tagline: string;
+    footerDescription: string;
+    rights: string;
+  };
+  home: {
+    eyebrow: string;
+    heroHeadline: string;
+    heroSubhead: string;
+    ctaPrimary: string;
+    featuredActivities: string;
+    featuredActivitiesSub: string;
+    viewAll: string;
+    latestUpdates: string;
+    videoTitle: string;
+    videoSub: string;
+    ctaSectionTitle: string;
+    ctaSectionBody: string;
+    ctaContact: string;
+    ctaActivities: string;
+    readFullStory: string;
+  };
+  about: {
+    eyebrow: string;
+    heroTitle: string;
+    heroBody: string;
+    heroQuote: string;
+    founderName: string;
+    founderRole: string;
+    sectionMessage: string;
+    messageParagraphs: string[];
+    sectionAspirations: string;
+    mission: { title: string; body: string };
+    vision: { title: string; body: string };
+    values: { title: string; body: string };
+    sectionPrograms: string;
+    sectionProgramsSub: string;
+    programs: Program[];
+    sectionCommunity: string;
+    communityCaption: string;
+    sectionOrg: string;
+    orgFields: { label: string; value: string }[];
+    ctaTitle: string;
+    ctaBody: string;
+    ctaVolunteer: string;
+    ctaSupport: string;
+  };
+  activities: {
+    title: string;
+    subtitle: string;
+    ctaTitle: string;
+    ctaBody: string;
+    ctaButton: string;
+    readMore: string;
+    detail: string;
+    empty: string;
+  };
+  news: {
+    title: string;
+    subtitle: string;
+    recentTitle: string;
+    newsletterTitle: string;
+    newsletterBody: string;
+    newsletterPlaceholder: string;
+    newsletterCta: string;
+    empty: string;
+  };
+  videos: {
+    title: string;
+    subtitle: string;
+    empty: string;
   };
   contact: {
-    name: string;
+    title: string;
+    subtitle: string;
+    sidebarTitle: string;
+    addressLine1: string;
+    addressLine2: string;
+    phone: string;
     email: string;
-    message: string;
-    submit: string;
+    followTitle: string;
+  };
+  footer: {
+    explore: string;
+    legal: string;
+    privacy: string;
+    terms: string;
+    volunteer: string;
+    supportUs: string;
   };
 };
 
-const dictionaries: Record<Locale, Dict> = {
-  th: {
-    nav: {
-      home: "หน้าแรก",
-      about: "ข้อมูลองค์กร",
-      activities: "กิจกรรม",
-      news: "ข่าวสาร",
-      videos: "วิดีโอ",
-      contact: "ติดต่อเรา",
-    },
-    site: {
-      name: "Sabaimind",
-      tagline: "องค์กรเพื่อการพัฒนาจิตใจ",
-    },
-    contact: {
-      name: "ชื่อ",
-      email: "อีเมล",
-      message: "ข้อความ",
-      submit: "ส่งข้อความ",
-    },
+const ja: Dict = {
+  nav: {
+    home: "Home",
+    about: "About",
+    activities: "Activities",
+    news: "News",
+    videos: "Videos",
+    contact: "Contact",
   },
-  ja: {
-    nav: {
-      home: "ホーム",
-      about: "私たちについて",
-      activities: "活動",
-      news: "お知らせ",
-      videos: "動画",
-      contact: "お問い合わせ",
+  site: {
+    name: "Sabai Mind",
+    tagline: "瞑想を通じて日本人の心の平安を実現する",
+    footerDescription:
+      "NPO法人 Sabai Mindは、タイの伝統的なマインドフルネスを日本に届け、現代社会に心の休息の場をつくる活動をしています。",
+    rights: "© 2024 NPO法人 Sabai Mind. All rights reserved.",
+  },
+  home: {
+    eyebrow: "NPO法人 Sabai Mind",
+    heroHeadline: "Make You Mindful",
+    heroSubhead: "瞑想を通じて日本人の心の平安を実現する",
+    ctaPrimary: "私たちについて",
+    featuredActivities: "私たちの活動",
+    featuredActivitiesSub: "タイの智慧と日本の日常をつなぐマインドフルネス",
+    viewAll: "すべて見る",
+    latestUpdates: "最新のお知らせ",
+    videoTitle: "心の平安への、ひと呼吸",
+    videoSub: "Sabai Mindの活動と理念を映像でご紹介します。",
+    ctaSectionTitle: "心の休息を、日常へ。",
+    ctaSectionBody:
+      "瞑想指導者派遣・瞑想会・文化イベントに関するご相談、ボランティアやご支援のご希望は、お気軽にご連絡ください。",
+    ctaContact: "お問い合わせ",
+    ctaActivities: "活動を見る",
+    readFullStory: "READ MORE",
+  },
+  about: {
+    eyebrow: "代表挨拶",
+    heroTitle: "穏やかな心で、\n日常を生きる。",
+    heroBody:
+      "日本では、生涯のうちに約15人に1人がうつ病を経験すると言われています。マインドフルネスは欧米の医療やビジネスの現場でうつ病や痛みのマネジメントの手法として高く評価されていますが、日本ではまだ十分に広まっていません。",
+    heroQuote:
+      "宗教の枠を超えて、誰もが日常に取り入れやすい形で。それが Sabai Mind の願いです。",
+    founderName: "磯 實  Iso Minoru",
+    founderRole: "NPO法人 Sabai Mind 理事長",
+    sectionMessage: "代表メッセージ",
+    messageParagraphs: [
+      "現代の日本は、将来の就職、結婚、老後がどうなるか不透明になっており、自分の将来像を描きにくく、多くの人々は先行きの見えない不安を抱えています。驚くような事件や事象が次々と起こり心が休まらない中で、仕事や家事、育児や介護など、なにかと多忙でストレスの多い社会環境のなかで、心のバランスを崩し、不調に陥る人が増えています。",
+      "特に抑うつ気分や不安、精神活動の低下などを特徴とする精神疾患、いわゆるうつ病にかかる人は日本人の約15人に1人が生涯のうちにかかるという、非常にありふれた病気になっています。重度になると生きる気力がなくなり、中には自殺してしまう人もいます。",
+      "このような状況において、うつ病を含む様々な精神疾患の予防や治療に用いられる1つの心理療法として、マインドフルネスが注目されています。マインドフルネスとは、今の自分の状態に意識を向けて心を整える技法で、仏教の瞑想実践法をルーツとし、近年では科学的な研究が進んでいます。うつ病等の再発防止や痛みの管理など医療分野でも有効性が認められ、欧米諸国では既にビジネス、教育、精神医療の分野で幅広く活用され大きな成果を挙げています。しかし、日本ではまだ認知度も普及率も高いとは言えない状況です。",
+      "そこで私たちは、広く一般市民に対して、タイ式マインドフルネスの普及・啓発に関する事業として、タイ式瞑想を用いた実践会、オンライン実践会、SNS等を利用した情報発信を行い、誰でも気軽にマインドフルネスを知り、学び、体験できる環境を整えてまいります。また、タイ伝統文化を通じた地域交流イベントとして、ソンクラーン祭りやスカイランタン祭り、学校等でのマインドフルネスワークショップを開催し、マインドフルネスを全く知らない方にも、楽しい時間の中で興味を持っていただけるよう工夫してまいります。",
+    ],
+    sectionAspirations: "私たちの志",
+    mission: {
+      title: "Mission",
+      body: "タイの伝統的なマインドフルネスを日本に広め、日常の中で誰もが心の平安を取り戻せる社会をつくります。",
     },
-    site: {
-      name: "Sabaimind",
-      tagline: "心の発展のための組織",
+    vision: {
+      title: "Vision",
+      body: "予防医療と心のケアの新しい選択肢として、マインドフルネスが当たり前に取り入れられる社会を目指します。",
     },
-    contact: {
-      name: "お名前",
-      email: "メールアドレス",
-      message: "メッセージ",
-      submit: "送信",
+    values: {
+      title: "Values",
+      body: "慈悲（Metta）、正念（Sati）、そして中道。宗教の勧誘は一切行わず、誰もが安心して参加できる場を大切にします。",
     },
+    sectionPrograms: "事業内容",
+    sectionProgramsSub: "三つの柱で、マインドフルネスを社会へ届けます。",
+    programs: [
+      {
+        icon: "self_improvement",
+        title: "タイマインドフルネスの普及",
+        body: "対面・オンラインの瞑想実践会、学校・企業・地域・児童養護施設でのセミナー、SNSやチラシでの情報発信を通じて、誰もがマインドフルネスに触れられる機会を広げています。",
+      },
+      {
+        icon: "person",
+        title: "瞑想指導者派遣",
+        body: "長年タイで修行を積んだ僧侶を、学校・企業・病院・地域イベントへ全国どこへでも派遣。日本語・英語・中国語・タイ語に対応します。宗教の勧誘は一切いたしません。",
+      },
+      {
+        icon: "celebration",
+        title: "タイ文化を通じた地域交流",
+        body: "ソンクラーン祭り（タイの新年・水かけ祭り）、スカイランタン祭り（夜空に願いを放つ祭典）など、文化体験を通じて地域とつながり、心の福祉を育みます。",
+      },
+    ],
+    sectionCommunity: "地域とのつながり",
+    communityCaption: "理事長 磯 實 が、川俣 純子 那須烏山市長と面会いたしました。地域との連携を深め、マインドフルネスを通じた社会福祉に取り組んでまいります。",
+    sectionOrg: "法人概要",
+    orgFields: [
+      { label: "法人の名称", value: "特定非営利活動法人 Sabai Mind（サバーイマインド）" },
+      { label: "代表者氏名", value: "磯 實（いそ みのる）" },
+      { label: "事業所の所在地", value: "〒321-0625 栃木県那須烏山市曲畑1021番地1" },
+      { label: "電話", value: "080-3274-8673 / 0287-82-7776" },
+      { label: "メールアドレス", value: "support@sabaimind.or.jp" },
+    ],
+    ctaTitle: "共に、歩んでいきませんか？",
+    ctaBody:
+      "私たちの活動は、皆様の温かなご支援とボランティアによって支えられています。一歩、心の平穏へと近づく旅に加わってください。",
+    ctaVolunteer: "ボランティアに参加する",
+    ctaSupport: "活動を支援する",
+  },
+  activities: {
+    title: "活動",
+    subtitle:
+      "瞑想会、瞑想指導者派遣、ソンクラーン祭やスカイランタン祭など、Sabai Mindの活動をご紹介します。",
+    ctaTitle: "ご相談・お申込みはこちら",
+    ctaBody:
+      "各活動への参加、講師派遣のご依頼、団体での体験会のご相談まで、お気軽にお問い合わせください。",
+    ctaButton: "お問い合わせへ",
+    readMore: "Read More",
+    detail: "Detail",
+    empty: "現在予定されている活動はありません。",
+  },
+  news: {
+    title: "News & Insights",
+    subtitle:
+      "瞑想コースの開催情報、イベント報告、最新の取り組みなどをお届けします。",
+    recentTitle: "最新の更新",
+    newsletterTitle: "Quiet Thoughts",
+    newsletterBody:
+      "瞑想のヒント、リトリート情報、月一回のお便りをメールでお届けします。",
+    newsletterPlaceholder: "メールアドレス",
+    newsletterCta: "登録する",
+    empty: "現在ニュースはありません。",
+  },
+  videos: {
+    title: "Videos",
+    subtitle: "瞑想ガイドや活動の様子を映像でご紹介します。",
+    empty: "動画はまだありません。",
+  },
+  contact: {
+    title: "Contact",
+    subtitle:
+      "瞑想指導者派遣、瞑想会、文化イベントに関するお問い合わせ、ご支援のご相談などをお寄せください。",
+    sidebarTitle: "NPO法人 Sabai Mind",
+    addressLine1: "〒321-0625 栃木県那須烏山市曲畑1021番地1",
+    addressLine2: "Sabai Sanctuary",
+    phone: "080-3274-8673 / 0287-82-7776",
+    email: "support@sabaimind.or.jp",
+    followTitle: "Follow Our Journey",
+  },
+  footer: {
+    explore: "Explore",
+    legal: "Legal",
+    privacy: "プライバシーポリシー",
+    terms: "利用規約",
+    volunteer: "ボランティア",
+    supportUs: "ご支援",
   },
 };
+
+const th: Dict = {
+  nav: {
+    home: "หน้าแรก",
+    about: "เกี่ยวกับเรา",
+    activities: "กิจกรรม",
+    news: "ข่าวสาร",
+    videos: "วิดีโอ",
+    contact: "ติดต่อเรา",
+  },
+  site: {
+    name: "Sabai Mind",
+    tagline: "นำการเจริญสติแบบไทยสู่ใจของคนญี่ปุ่น",
+    footerDescription:
+      "NPO Sabai Mind นำการเจริญสติแบบไทยมาสู่ประเทศญี่ปุ่น สร้างพื้นที่พักใจในสังคมยุคปัจจุบัน",
+    rights: "© 2024 NPO Sabai Mind. All rights reserved.",
+  },
+  home: {
+    eyebrow: "NPO Sabai Mind",
+    heroHeadline: "Make You Mindful",
+    heroSubhead: "นำการเจริญสติแบบไทยสู่ความสงบในใจของคนญี่ปุ่น",
+    ctaPrimary: "เกี่ยวกับเรา",
+    featuredActivities: "กิจกรรมของเรา",
+    featuredActivitiesSub: "เชื่อมภูมิปัญญาไทยเข้ากับชีวิตประจำวันของคนญี่ปุ่น",
+    viewAll: "ดูทั้งหมด",
+    latestUpdates: "อัปเดตล่าสุด",
+    videoTitle: "หนึ่งลมหายใจ สู่ความสงบในใจ",
+    videoSub: "ทำความรู้จัก Sabai Mind ผ่านวิดีโอแนะนำองค์กร",
+    ctaSectionTitle: "พา \"การพักใจ\" สู่ชีวิตประจำวัน",
+    ctaSectionBody:
+      "ปรึกษาเรื่องบริการจัดส่งครูสอนเจริญสติ คลาสภาวนา หรือกิจกรรมวัฒนธรรม รวมถึงการร่วมเป็นอาสาสมัครและสนับสนุน ติดต่อมาได้ทุกเมื่อ",
+    ctaContact: "ติดต่อเรา",
+    ctaActivities: "ดูกิจกรรม",
+    readFullStory: "อ่านต่อ",
+  },
+  about: {
+    eyebrow: "สารจากผู้แทน",
+    heroTitle: "ใช้ชีวิตทุกวัน\nด้วยใจที่สงบ",
+    heroBody:
+      "ในประเทศญี่ปุ่น คาดว่าประมาณ 1 ใน 15 คน จะประสบกับภาวะซึมเศร้าครั้งหนึ่งในชีวิต การเจริญสติได้รับการยอมรับอย่างสูงในวงการแพทย์และธุรกิจของฝั่งตะวันตก แต่ในญี่ปุ่นยังไม่แพร่หลายมากนัก",
+    heroQuote:
+      "นำเสนอในรูปแบบที่ทุกคนเข้าถึงได้ โดยปราศจากกรอบของศาสนา — นี่คือความปรารถนาของ Sabai Mind",
+    founderName: "磯 實  Iso Minoru",
+    founderRole: "ประธานกรรมการ NPO Sabai Mind",
+    sectionMessage: "สารจากประธานกรรมการ",
+    messageParagraphs: [
+      "สังคมญี่ปุ่นในปัจจุบัน ทั้งเรื่องการงาน การแต่งงาน และวัยเกษียณ ล้วนเต็มไปด้วยความไม่แน่นอน ผู้คนจำนวนมากวาดภาพอนาคตของตนเองไม่ออก และต้องแบกรับความกังวลใจในชีวิตที่มองไม่เห็นปลายทาง ภายใต้ภาระของการงาน งานบ้าน การเลี้ยงดูบุตร และการดูแลผู้สูงอายุ ในสังคมที่เร่งรีบและเครียดเช่นนี้ ผู้ที่สูญเสียความสมดุลในใจและล้มป่วยจึงเพิ่มจำนวนมากขึ้น",
+      "โดยเฉพาะภาวะซึมเศร้า ซึ่งมีลักษณะเด่นคืออารมณ์เศร้า กังวล และกิจกรรมทางจิตที่ลดลง คาดว่าประมาณ 1 ใน 15 คนของชาวญี่ปุ่นจะประสบภาวะนี้ในช่วงหนึ่งของชีวิต กลายเป็นโรคที่พบได้ทั่วไปอย่างยิ่ง ในกรณีรุนแรง ผู้ป่วยอาจสูญเสียความปรารถนาที่จะมีชีวิตอยู่ และบางรายก็จบชีวิตตนเอง",
+      "ในสถานการณ์เช่นนี้ การเจริญสติ (มายด์ฟูลเนส) ได้รับความสนใจในฐานะหนึ่งในวิธีบำบัดทางจิตที่ใช้ในการป้องกันและรักษาภาวะซึมเศร้าและโรคจิตเวชต่างๆ มายด์ฟูลเนสคือเทคนิคการน้อมจิตให้รู้ตัวเองในปัจจุบันและปรับใจให้สงบ มีรากฐานมาจากการปฏิบัติภาวนาในพระพุทธศาสนา และในระยะหลังมีงานวิจัยทางวิทยาศาสตร์รับรองมากมาย ในวงการแพทย์ตะวันตก การเจริญสติได้รับการยอมรับในเรื่องการป้องกันการกลับเป็นซ้ำของภาวะซึมเศร้าและการจัดการความเจ็บปวด ทั้งยังถูกนำไปใช้อย่างกว้างขวางในธุรกิจ การศึกษา และจิตเวชศาสตร์ในประเทศตะวันตก แต่ในญี่ปุ่นยังไม่เป็นที่รู้จักและแพร่หลายมากนัก",
+      "ดังนั้น เราจึงดำเนินกิจกรรมเผยแพร่และส่งเสริมการเจริญสติแบบไทยให้แก่ประชาชนทั่วไป โดยจัดคลาสภาวนาแบบไทย คลาสออนไลน์ และเผยแพร่ผ่าน SNS เพื่อสร้างสภาพแวดล้อมที่ทุกคนสามารถรู้จัก เรียนรู้ และสัมผัสการเจริญสติได้อย่างสบายใจ นอกจากนี้ ยังจัดกิจกรรมแลกเปลี่ยนวัฒนธรรมในชุมชนผ่านวัฒนธรรมไทยดั้งเดิม เช่น เทศกาลสงกรานต์ เทศกาลโคมลอย และเวิร์กช็อปเจริญสติในโรงเรียน เพื่อให้ผู้ที่ไม่เคยรู้จักหรือไม่เคยสนใจการเจริญสติ ได้สัมผัสและเริ่มสนใจผ่านช่วงเวลาที่สนุกสนาน",
+    ],
+    sectionAspirations: "ปณิธานของเรา",
+    mission: {
+      title: "Mission",
+      body: "เผยแพร่การเจริญสติแบบไทยสู่ญี่ปุ่น สร้างสังคมที่ทุกคนสามารถพบความสงบในใจได้ในชีวิตประจำวัน",
+    },
+    vision: {
+      title: "Vision",
+      body: "การเจริญสติกลายเป็นทางเลือกใหม่ของเวชศาสตร์ป้องกันและการดูแลใจที่ผู้คนเข้าถึงได้อย่างเป็นปกติ",
+    },
+    values: {
+      title: "Values",
+      body: "เมตตา (Metta), สติ (Sati) และทางสายกลาง ปราศจากการชักชวนทางศาสนา ทุกคนเข้าร่วมได้อย่างสบายใจ",
+    },
+    sectionPrograms: "เสาหลักของกิจกรรม",
+    sectionProgramsSub: "สามเสาหลักที่นำการเจริญสติสู่สังคม",
+    programs: [
+      {
+        icon: "self_improvement",
+        title: "เผยแพร่การเจริญสติแบบไทย",
+        body: "จัดคลาสภาวนาทั้งแบบพบหน้าและออนไลน์ จัดสัมมนาที่โรงเรียน องค์กร ชุมชน และสถานสงเคราะห์เด็ก พร้อมเผยแพร่ผ่าน SNS และสื่อสิ่งพิมพ์",
+      },
+      {
+        icon: "person",
+        title: "จัดส่งครูสอนเจริญสติ",
+        body: "ส่งพระภิกษุที่ปฏิบัติธรรมในไทยมายาวนาน ไปยังโรงเรียน องค์กร โรงพยาบาล กิจกรรมในชุมชนทั่วประเทศญี่ปุ่น สอนได้ทั้งภาษาญี่ปุ่น อังกฤษ จีน และไทย ไม่ชักชวนทางศาสนา",
+      },
+      {
+        icon: "celebration",
+        title: "แลกเปลี่ยนวัฒนธรรมไทย",
+        body: "เทศกาลสงกรานต์ (ปีใหม่ไทย รดน้ำ) และเทศกาลโคมลอย Sky Lantern (ปล่อยคำอธิษฐานสู่ท้องฟ้า) สร้างสายสัมพันธ์กับชุมชนและบ่มเพาะสวัสดิภาพทางจิตใจ",
+      },
+    ],
+    sectionCommunity: "สายสัมพันธ์กับชุมชน",
+    communityCaption: "ประธานกรรมการ 磯 實 พบกับ คุณคาวามาตะ จุนโกะ นายกเทศมนตรีเมืองนาสุคาราสึยามะ สานสัมพันธ์กับท้องถิ่นและร่วมพัฒนาสวัสดิการสังคมผ่านการเจริญสติ",
+    sectionOrg: "ข้อมูลองค์กร",
+    orgFields: [
+      { label: "ชื่อองค์กร", value: "NPO Sabai Mind (特定非営利活動法人 Sabai Mind)" },
+      { label: "ผู้แทน", value: "磯 實 (Iso Minoru)" },
+      { label: "ที่อยู่", value: "〒321-0625 จังหวัดโทจิงิ เมืองนาสุคาราสึยามะ คุระบาตะ 1021-1" },
+      { label: "โทรศัพท์", value: "080-3274-8673 / 0287-82-7776" },
+      { label: "อีเมล", value: "support@sabaimind.or.jp" },
+    ],
+    ctaTitle: "ร่วมเดินทางไปด้วยกันไหมครับ?",
+    ctaBody:
+      "กิจกรรมของเราดำเนินอยู่ได้ด้วยการสนับสนุนและจิตอาสาจากทุกท่าน ก้าวเล็กๆ สู่ความสงบในใจ ขอเชิญร่วมเดินทางไปด้วยกัน",
+    ctaVolunteer: "ร่วมเป็นอาสาสมัคร",
+    ctaSupport: "สนับสนุนกิจกรรม",
+  },
+  activities: {
+    title: "กิจกรรม",
+    subtitle:
+      "คลาสภาวนา บริการจัดส่งครูสอนเจริญสติ เทศกาลสงกรานต์ และเทศกาลโคมลอย — รวมกิจกรรมทั้งหมดของ Sabai Mind",
+    ctaTitle: "ปรึกษาหรือสมัครเข้าร่วม",
+    ctaBody:
+      "ทั้งการเข้าร่วมกิจกรรม การขอครูไปสอน หรือจัดกิจกรรมภายในองค์กร ติดต่อเราได้ทุกเมื่อ",
+    ctaButton: "ไปที่หน้าติดต่อ",
+    readMore: "อ่านต่อ",
+    detail: "รายละเอียด",
+    empty: "ยังไม่มีกิจกรรมในขณะนี้",
+  },
+  news: {
+    title: "ข่าวสาร & บทความ",
+    subtitle:
+      "ข่าวการจัดคอร์ส รายงานหลังจัดงาน และข้อมูลล่าสุดของกิจกรรม",
+    recentTitle: "อัปเดตล่าสุด",
+    newsletterTitle: "Quiet Thoughts",
+    newsletterBody:
+      "รับเคล็ดลับการภาวนา ข่าวรีทรีต และจดหมายข่าวรายเดือนทางอีเมล",
+    newsletterPlaceholder: "อีเมลของท่าน",
+    newsletterCta: "สมัครรับ",
+    empty: "ยังไม่มีข่าวสารในขณะนี้",
+  },
+  videos: {
+    title: "วิดีโอ",
+    subtitle: "แนะนำกิจกรรมและคำสอนผ่านวิดีโอ",
+    empty: "ยังไม่มีวิดีโอในขณะนี้",
+  },
+  contact: {
+    title: "ติดต่อเรา",
+    subtitle:
+      "สอบถามเรื่องบริการจัดส่งครูสอนเจริญสติ คลาสภาวนา กิจกรรมวัฒนธรรม หรือการร่วมสนับสนุน เรายินดีรับฟัง",
+    sidebarTitle: "NPO Sabai Mind",
+    addressLine1: "〒321-0625 จังหวัดโทจิงิ เมืองนาสุคาราสึยามะ คุระบาตะ 1021-1",
+    addressLine2: "Sabai Sanctuary",
+    phone: "080-3274-8673 / 0287-82-7776",
+    email: "support@sabaimind.or.jp",
+    followTitle: "ติดตามเรา",
+  },
+  footer: {
+    explore: "เมนู",
+    legal: "ข้อกำหนด",
+    privacy: "นโยบายความเป็นส่วนตัว",
+    terms: "เงื่อนไขการใช้งาน",
+    volunteer: "อาสาสมัคร",
+    supportUs: "สนับสนุนเรา",
+  },
+};
+
+const dictionaries: Record<Locale, Dict> = { ja, th };
 
 export function getDictionary(locale: Locale): Dict {
   return dictionaries[locale];

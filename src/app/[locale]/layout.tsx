@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import "../globals.css";
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/Nav";
@@ -7,9 +7,18 @@ import { Footer } from "@/components/Footer";
 import { locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const notoSerifJP = Noto_Serif_JP({
+  variable: "--font-noto-serif-jp",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  display: "swap",
 });
 
 export async function generateStaticParams() {
@@ -41,10 +50,19 @@ export default async function LocaleLayout({
   const typedLocale = locale as Locale;
 
   return (
-    <html lang={typedLocale} className={`${geistSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-white text-zinc-900">
+    <html
+      lang={typedLocale}
+      className={`${notoSerifJP.variable} ${notoSansJP.variable} h-full antialiased`}
+    >
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-background text-on-surface">
         <Nav locale={typedLocale} />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pt-20">{children}</main>
         <Footer locale={typedLocale} />
       </body>
     </html>
