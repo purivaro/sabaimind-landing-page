@@ -403,7 +403,162 @@ const th: Dict = {
   },
 };
 
-const dictionaries: Record<Locale, Dict> = { ja, th };
+const en: Dict = {
+  nav: {
+    home: "Home",
+    about: "About",
+    activities: "Activities",
+    news: "News",
+    videos: "Videos",
+    contact: "Contact",
+  },
+  site: {
+    name: "Sabai Mind",
+    tagline: "Bringing peace of mind to Japan through Thai mindfulness",
+    footerDescription:
+      "Sabai Mind NPO brings traditional Thai mindfulness to Japan, creating spaces of mental rest in modern society.",
+    rights: "© 2024 Sabai Mind NPO. All rights reserved.",
+  },
+  home: {
+    eyebrow: "Sabai Mind NPO",
+    heroHeadline: "Make You Mindful",
+    heroSubhead: "Bringing peace of mind to Japan through Thai mindfulness",
+    ctaPrimary: "About Us",
+    featuredActivities: "Our Activities",
+    featuredActivitiesSub:
+      "Connecting Thai wisdom with the everyday life of Japan",
+    viewAll: "View All",
+    latestUpdates: "Latest Updates",
+    videoTitle: "A breath toward inner stillness",
+    videoSub: "Discover Sabai Mind through our introduction video.",
+    ctaSectionTitle: "Bring rest to your everyday mind.",
+    ctaSectionBody:
+      "For inquiries about our meditation instructor dispatch, meditation sessions, cultural events — or to volunteer or support us — please feel free to reach out.",
+    ctaContact: "Contact Us",
+    ctaActivities: "View Activities",
+    readFullStory: "READ MORE",
+  },
+  about: {
+    eyebrow: "Message from the Representative",
+    heroTitle: "Live each day\nwith a peaceful mind.",
+    heroBody:
+      "In Japan, approximately 1 in 15 people will experience depression in their lifetime. While mindfulness is highly regarded in Western medicine and business as a method for managing depression and pain, it is still not widely adopted in Japan.",
+    heroQuote:
+      "Beyond the bounds of religion, in a form everyone can incorporate into daily life — that is the wish of Sabai Mind.",
+    founderName: "Iso Minoru  磯 實",
+    founderRole: "Chairman, Sabai Mind NPO",
+    sectionMessage: "Message from the Chairman",
+    messageParagraphs: [
+      "In modern Japan, the future of employment, marriage, and retirement is increasingly uncertain. Many people find it difficult to picture their own future and carry the weight of unseen anxieties. Amid a stream of unsettling events and the demands of work, household, childcare, and elder care, more and more people are losing their inner balance and falling into mental distress.",
+      "Depression — characterized by depressed mood, anxiety, and reduced mental activity — has become a common illness, with about 1 in 15 Japanese people experiencing it in their lifetime. In severe cases, sufferers lose the will to live, and some take their own lives.",
+      "In this context, mindfulness has gained attention as a psychological approach used to prevent and treat depression and other mental conditions. Rooted in Buddhist meditation practice and now backed by growing scientific research, mindfulness is widely used in Western medicine, business, and education with proven results. In Japan, however, awareness and adoption remain low.",
+      "We therefore offer the general public a way to approach Thai-style mindfulness through in-person and online practice sessions and information shared on social media — creating an environment where anyone can learn and experience mindfulness with ease. We also host community events rooted in traditional Thai culture, such as the Songkran Festival, the Sky Lantern Festival, and mindfulness workshops in schools — so even those unfamiliar with mindfulness can encounter it through joyful moments.",
+    ],
+    sectionAspirations: "Our Aspirations",
+    mission: {
+      title: "Mission",
+      body: "To bring traditional Thai mindfulness to Japan and build a society where everyone can recover peace of mind in daily life.",
+    },
+    vision: {
+      title: "Vision",
+      body: "A society where mindfulness is naturally embraced as a new option for preventive medicine and mental care.",
+    },
+    values: {
+      title: "Values",
+      body: "Compassion (Metta), mindful awareness (Sati), and the Middle Way. We never proselytize and welcome everyone to participate with peace of mind.",
+    },
+    sectionPrograms: "Our Programs",
+    sectionProgramsSub:
+      "Three pillars that bring mindfulness to society.",
+    programs: [
+      {
+        icon: "self_improvement",
+        title: "Promoting Thai Mindfulness",
+        body: "Through in-person and online meditation sessions, seminars at schools, companies, communities, and children's homes, and outreach via social media and print, we widen the opportunities for everyone to encounter mindfulness.",
+      },
+      {
+        icon: "person",
+        title: "Meditation Instructor Dispatch",
+        body: "We send Thai monks with years of meditation training to schools, companies, hospitals, and community events — anywhere in Japan. Available in Japanese, English, Chinese, and Thai. We never proselytize.",
+      },
+      {
+        icon: "celebration",
+        title: "Community Exchange Through Thai Culture",
+        body: "Songkran (the Thai New Year water festival), the Sky Lantern Festival (releasing wishes into the night sky), and other cultural experiences strengthen ties with the local community and nurture mental well-being.",
+      },
+    ],
+    sectionCommunity: "Connection with the Community",
+    communityCaption:
+      "Chairman Iso Minoru met with Mayor Junko Kawamata of Nasukarasuyama City, deepening ties with the region and committing to social welfare through mindfulness.",
+    sectionOrg: "Organization",
+    orgFields: [
+      { label: "Name", value: "Specified Non-Profit Corporation Sabai Mind" },
+      { label: "Representative", value: "Iso Minoru" },
+      {
+        label: "Address",
+        value: "1021-1 Kuruhata, Nasukarasuyama, Tochigi 321-0625, Japan",
+      },
+      { label: "Phone", value: "+81-80-3274-8673 / +81-287-82-7776" },
+      { label: "Email", value: "support@sabaimind.or.jp" },
+    ],
+    ctaTitle: "Walk this path with us.",
+    ctaBody:
+      "Our work is sustained by the warm support and volunteer hours of our community. Take a step closer to inner peace — join us on the journey.",
+    ctaVolunteer: "Become a Volunteer",
+    ctaSupport: "Support Our Work",
+  },
+  activities: {
+    title: "Activities",
+    subtitle:
+      "Meditation sessions, instructor dispatch, the Songkran Festival and the Sky Lantern Festival — explore everything Sabai Mind does.",
+    ctaTitle: "Inquiries & Registration",
+    ctaBody:
+      "Whether you'd like to join an event, request an instructor, or arrange a session for your organization — please get in touch anytime.",
+    ctaButton: "Go to Contact",
+    readMore: "Read More",
+    detail: "Detail",
+    empty: "There are no scheduled activities at the moment.",
+  },
+  news: {
+    title: "News & Insights",
+    subtitle:
+      "Meditation course announcements, event reports, and the latest updates from our work.",
+    recentTitle: "Recent Updates",
+    newsletterTitle: "Quiet Thoughts",
+    newsletterBody:
+      "Receive monthly meditation tips, retreat news, and reflections delivered to your inbox.",
+    newsletterPlaceholder: "Email address",
+    newsletterCta: "Subscribe",
+    empty: "No news at the moment.",
+  },
+  videos: {
+    title: "Videos",
+    subtitle:
+      "Meditation guides and glimpses of our activities, in video form.",
+    empty: "No videos yet.",
+  },
+  contact: {
+    title: "Contact",
+    subtitle:
+      "Reach out about meditation instructor dispatch, meditation sessions, cultural events, or how to support us.",
+    sidebarTitle: "Sabai Mind NPO",
+    addressLine1: "1021-1 Kuruhata, Nasukarasuyama, Tochigi 321-0625, Japan",
+    addressLine2: "Sabai Sanctuary",
+    phone: "+81-80-3274-8673 / +81-287-82-7776",
+    email: "support@sabaimind.or.jp",
+    followTitle: "Follow Our Journey",
+  },
+  footer: {
+    explore: "Explore",
+    legal: "Legal",
+    privacy: "Privacy Policy",
+    terms: "Terms of Service",
+    volunteer: "Volunteer",
+    supportUs: "Support Us",
+  },
+};
+
+const dictionaries: Record<Locale, Dict> = { ja, en, th };
 
 export function getDictionary(locale: Locale): Dict {
   return dictionaries[locale];

@@ -44,7 +44,7 @@ export function getAllContent(section: string, locale: Locale): ContentItem[] {
   const files = readDir(section);
   const items: ContentItem[] = files
     .map((file) => {
-      const slug = file.replace(/\.mdx?$/, "").replace(/\.(th|ja)$/, "");
+      const slug = file.replace(/\.mdx?$/, "").replace(/\.(th|ja|en)$/, "");
       const raw = fs.readFileSync(path.join(CONTENT_DIR, section, file), "utf8");
       const { data, content } = matter(raw);
       return { slug, meta: normalizeMeta(data), body: content };
