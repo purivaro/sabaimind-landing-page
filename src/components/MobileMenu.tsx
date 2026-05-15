@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type Locale, locales, localeNames } from "@/i18n/config";
@@ -15,7 +16,12 @@ export function MobileMenu({
   items: Item[];
 }) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close on route change
   useEffect(() => {
@@ -59,42 +65,47 @@ export function MobileMenu({
         </span>
       </button>
 
-      {open && (
-        <div className="md:hidden fixed inset-0 top-20 z-40 bg-background/95 backdrop-blur-md overflow-y-auto">
-          <nav className="flex flex-col px-margin-mobile py-8 gap-2">
-            {items.map((item) => (
-              <Link
-                key={item.href}
-                href={`/${locale}${item.href}`}
-                className="font-display text-2xl text-on-surface hover:text-primary transition-colors py-4 border-b border-outline-variant/30"
-              >
-                {item.label}
-              </Link>
-            ))}
+      {mounted && open &&
+        createPortal(
+          <div
+            className="md:hidden fixed inset-0 z-[60] bg-background overflow-y-auto"
+            style={{ paddingTop: "5rem" }}
+          >
+            <nav className="flex flex-col px-margin-mobile py-8 gap-2">
+              {items.map((item) => (
+                <Link
+                  key={item.href}
+                  href={`/${locale}${item.href}`}
+                  className="font-display text-2xl text-on-surface hover:text-primary transition-colors py-4 border-b border-outline-variant/30"
+                >
+                  {item.label}
+                </Link>
+              ))}
 
-            <div className="mt-8 pt-8 border-t border-outline-variant/30">
-              <p className="font-label-md text-secondary uppercase tracking-widest mb-4">
-                Language
-              </p>
-              <div className="flex flex-col gap-3">
-                {locales.map((l) => (
-                  <Link
-                    key={l}
-                    href={swapLocale(l)}
-                    className={`font-body text-body-lg py-2 ${
-                      l === locale
-                        ? "font-semibold text-primary"
-                        : "text-on-surface-variant hover:text-primary transition-colors"
-                    }`}
-                  >
-                    {localeNames[l]}
-                  </Link>
-                ))}
+              <div className="mt-8 pt-8 border-t border-outline-variant/30">
+                <p className="font-label-md text-secondary uppercase tracking-widest mb-4">
+                  Language
+                </p>
+                <div className="flex flex-col gap-3">
+                  {locales.map((l) => (
+                    <Link
+                      key={l}
+                      href={swapLocale(l)}
+                      className={`font-body text-body-lg py-2 ${
+                        l === locale
+                          ? "font-semibold text-primary"
+                          : "text-on-surface-variant hover:text-primary transition-colors"
+                      }`}
+                    >
+                      {localeNames[l]}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-          </nav>
-        </div>
-      )}
+            </nav>
+          </div>,
+          document.body,
+        )}
     </>
   );
 }
