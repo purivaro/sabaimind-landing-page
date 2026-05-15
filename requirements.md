@@ -132,10 +132,12 @@ public/images/
 
 ## แผนการทำงาน
 
-1. **Init project** — `create-next-app` + Tailwind + โครงสร้างโฟลเดอร์
-2. **ตั้ง i18n** — รองรับ `th` (default ระหว่างพัฒนา) + `ja`
-3. **ระบบอ่าน Markdown** — gray-matter + remark/MDX
-4. **Layout + Navigation** — รอ design จาก Google Stitch
-5. **สร้าง routes 5 หน้า** — โครงเปล่าก่อน
-6. **Contact form** — Cloudflare Workers + email API (เช่น Resend)
-7. **Deploy Cloudflare Pages**
+1. ✅ **Init project** — `create-next-app` + Tailwind + โครงสร้างโฟลเดอร์
+2. ✅ **ตั้ง i18n** — รองรับ `th` (default ระหว่างพัฒนา) + `ja`
+3. ✅ **ระบบอ่าน Markdown** — gray-matter + next-mdx-remote + remark-gfm
+4. ⏳ **Layout + Navigation** — มี placeholder แล้ว, รอ design จริงจาก Google Stitch
+5. ✅ **สร้าง routes 5 หน้า** — โครงเปล่าพร้อม sample content
+6. ⏳ **Contact form** — มี form UI แล้ว, ยังไม่ wire `/api/contact` กับ email service
+7. ⏳ **Deploy Cloudflare Pages** — ยังไม่ทำ
+
+ดู progress ละเอียดที่ [STATUS.md](./STATUS.md) และ Stitch design prompts ที่ [stitch-prompts.md](./stitch-prompts.md)
