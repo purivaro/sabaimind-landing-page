@@ -109,12 +109,12 @@ type Dict = {
 
 const ja: Dict = {
   nav: {
-    home: "Home",
-    about: "About",
-    activities: "Activities",
-    news: "News",
-    videos: "Videos",
-    contact: "Contact",
+    home: "ホーム",
+    about: "私たちについて",
+    activities: "活動",
+    news: "お知らせ",
+    videos: "動画",
+    contact: "お問い合わせ",
   },
   site: {
     name: "Sabai Mind",
