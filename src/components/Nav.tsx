@@ -3,6 +3,7 @@ import Image from "next/image";
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { LocaleSwitcher } from "./LocaleSwitcher";
+import { MobileMenu } from "./MobileMenu";
 
 export function Nav({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
@@ -41,7 +42,11 @@ export function Nav({ locale }: { locale: Locale }) {
           ))}
         </div>
 
-        <LocaleSwitcher current={locale} />
+        <div className="hidden md:block">
+          <LocaleSwitcher current={locale} />
+        </div>
+
+        <MobileMenu locale={locale} items={items} />
       </nav>
     </header>
   );
