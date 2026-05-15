@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { type Locale, locales, localeNames } from "@/i18n/config";
+import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { LocaleSwitcher } from "./LocaleSwitcher";
 
 export function Nav({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
@@ -40,28 +41,7 @@ export function Nav({ locale }: { locale: Locale }) {
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-primary text-[20px]">
-            language
-          </span>
-          <div className="flex items-center gap-1 font-label-md text-on-surface-variant">
-            {locales.map((l, idx) => (
-              <span key={l} className="flex items-center gap-1">
-                {idx > 0 && <span className="opacity-40">/</span>}
-                <Link
-                  href={`/${l}`}
-                  className={
-                    l === locale
-                      ? "font-semibold text-primary"
-                      : "hover:text-primary transition-colors"
-                  }
-                >
-                  {localeNames[l]}
-                </Link>
-              </span>
-            ))}
-          </div>
-        </div>
+        <LocaleSwitcher current={locale} />
       </nav>
     </header>
   );
