@@ -10,7 +10,20 @@ function fmt(d: Date | null) {
   return d ? new Date(d).toISOString().slice(0, 10) : "—";
 }
 
-export default async function AdminBlogList() {
+const LOCALE_FILTERS = [
+  { key: "all", label: "すべて" },
+  { key: "ja", label: "日本語" },
+  { key: "en", label: "English" },
+] as const;
+
+export default async function AdminBlogList({
+  searchParams,
+}: {
+  searchParams: Promise<{ locale?: string }>;
+}) {
+  const sp = await searchParams;
+  const locale = sp.locale === "ja" || sp.locale === "en" ? sp.locale : "all";
+
   const posts = await db
     .select({
       id: articles.id,
@@ -23,11 +36,29 @@ export default async function AdminBlogList() {
     })
     .from(articles)
     .leftJoin(authors, eq(articles.authorId, authors.id))
+    .where(locale === "all" ? undefined : eq(articles.locale, locale))
     .orderBy(desc(articles.updatedAt));
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-8">
-      <h1 className="mb-6 text-xl font-semibold text-on-surface">記事一覧</h1>
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-xl font-semibold text-on-surface">記事一覧</h1>
+        <div className="flex items-center gap-2">
+          {LOCALE_FILTERS.map((opt) => (
+            <Link
+              key={opt.key}
+              href={opt.key === "all" ? "/admin/blog" : `/admin/blog?locale=${opt.key}`}
+              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                locale === opt.key
+                  ? "bg-primary text-on-primary"
+                  : "border border-outline-variant/50 text-on-surface hover:bg-surface-container"
+              }`}
+            >
+              {opt.label}
+            </Link>
+          ))}
+        </div>
+      </div>
 
       {posts.length === 0 ? (
         <div className="rounded-xl border border-dashed border-outline-variant/50 p-12 text-center text-on-surface-variant">
