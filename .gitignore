@@ -44,6 +44,9 @@ yarn-error.log*
 /screenshots
 /.playwright-mcp
 
+# downloaded OAuth client secrets (values belong in .env.local)
+client_secret_*.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
