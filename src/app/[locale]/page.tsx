@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { getAllContent, getContent } from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { VideoHighlight } from "@/components/VideoHighlight";
 
 export default async function HomePage({
@@ -13,7 +13,6 @@ export default async function HomePage({
   const { locale } = await params;
   const t = getDictionary(locale);
 
-  const activities = getAllContent("activities", locale).slice(0, 3);
   const course = getContent("activities", "utsunomiya-meditation-course", locale);
 
   return (
@@ -122,74 +121,6 @@ export default async function HomePage({
                   </span>
                 </Link>
               </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Featured Activities */}
-      {activities.length > 0 && (
-        <section className="py-20 md:py-32 japanese-motif">
-          <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
-              <div>
-                <h2 className="font-display text-headline-lg text-on-surface">
-                  {t.home.featuredActivities}
-                </h2>
-                <p className="font-body text-body-md text-on-surface-variant mt-2">
-                  {t.home.featuredActivitiesSub}
-                </p>
-              </div>
-              <Link
-                href={`/${locale}/activities`}
-                className="font-label-md text-primary border-b border-primary/30 pb-1 hover:border-primary transition-all"
-              >
-                {t.home.viewAll}
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-              {activities.map((item, idx) => (
-                <Link
-                  key={item.slug}
-                  href={`/${locale}/activities/${item.slug}`}
-                  className={`group bg-surface-container-lowest overflow-hidden rounded-2xl border border-outline-variant/20 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
-                    idx > 0 ? "mt-8 md:mt-0" : ""
-                  }`}
-                >
-                  {item.meta.cover ? (
-                    <div className="aspect-4/5 overflow-hidden">
-                      <Image
-                        src={item.meta.cover}
-                        alt={item.meta.title}
-                        width={600}
-                        height={750}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                  ) : (
-                    <div className="aspect-4/5 bg-secondary-fixed/30 flex items-center justify-center">
-                      <span className="material-symbols-outlined text-secondary text-6xl">
-                        spa
-                      </span>
-                    </div>
-                  )}
-                  <div className="p-8">
-                    {item.meta.date && (
-                      <span className="text-[10px] uppercase tracking-widest text-secondary font-semibold mb-3 block">
-                        {item.meta.date}
-                      </span>
-                    )}
-                    <h3 className="font-display text-headline-md mb-4 text-on-surface">
-                      {item.meta.title}
-                    </h3>
-                    {item.meta.excerpt && (
-                      <p className="font-body text-body-md text-on-surface-variant line-clamp-2">
-                        {item.meta.excerpt}
-                      </p>
-                    )}
-                  </div>
-                </Link>
-              ))}
             </div>
           </div>
         </section>
