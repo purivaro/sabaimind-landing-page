@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import "../globals.css";
 import { notFound } from "next/navigation";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { locales, type Locale } from "@/i18n/config";
@@ -208,6 +209,7 @@ export default async function LocaleLayout({
         <main className="flex-1 pt-20">{children}</main>
         <Footer locale={typedLocale} />
       </body>
+      <GoogleAnalytics gaId="G-EVPQ5JME68" />
     </html>
   );
 }
