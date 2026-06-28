@@ -38,23 +38,32 @@ export type BlogPost = {
   authorAvatar: string | null;
 };
 
-/** Published posts for a locale, newest first. */
+/** Published posts for a locale, newest first. Returns [] if the DB is unavailable. */
 export async function getPublishedPosts(locale: Locale): Promise<BlogPost[]> {
-  return db
-    .select(postColumns)
-    .from(articles)
-    .leftJoin(authors, eq(articles.authorId, authors.id))
-    .where(and(eq(articles.status, "published"), eq(articles.locale, locale)))
-    .orderBy(desc(articles.publishedAt));
+  try {
+    return await db
+      .select(postColumns)
+      .from(articles)
+      .leftJoin(authors, eq(articles.authorId, authors.id))
+      .where(and(eq(articles.status, "published"), eq(articles.locale, locale)))
+      .orderBy(desc(articles.publishedAt));
+  } catch {
+    // DB not configured yet (no DATABASE_URL) — show an empty blog instead of 500.
+    return [];
+  }
 }
 
-/** Single published post by slug, or null. */
+/** Single published post by slug, or null (also null if the DB is unavailable). */
 export async function getPublishedPost(slug: string): Promise<BlogPost | null> {
-  const rows = await db
-    .select(postColumns)
-    .from(articles)
-    .leftJoin(authors, eq(articles.authorId, authors.id))
-    .where(and(eq(articles.slug, slug), eq(articles.status, "published")))
-    .limit(1);
-  return rows[0] ?? null;
+  try {
+    const rows = await db
+      .select(postColumns)
+      .from(articles)
+      .leftJoin(authors, eq(articles.authorId, authors.id))
+      .where(and(eq(articles.slug, slug), eq(articles.status, "published")))
+      .limit(1);
+    return rows[0] ?? null;
+  } catch {
+    return null;
+  }
 }

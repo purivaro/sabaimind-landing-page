@@ -59,6 +59,16 @@ public/images/{about,activities,news}/.gitkeep
 
 ---
 
+### Blog CMS (Phase 2 — โค้ดเสร็จ, รอ provision service)
+
+- ฐานข้อมูล Neon Postgres + Drizzle ORM (`src/db/`, migration ใน `drizzle/`)
+- Public blog: `/[locale]/blog` + `/[locale]/blog/[slug]` (SEO/OG metadata, react-markdown)
+- Admin: Google login (Auth.js v5, allowlist `ADMIN_EMAILS`) → `/admin/blog` + editor `/admin/blog/new`
+- รูป: อัปโหลด → Vercel Blob; AI: ร่างบทความ (Claude `claude-opus-4-8`) + สร้างรูป (OpenAI `gpt-image-1`)
+- **ต้องตั้งค่า service + env vars ก่อนใช้จริง** → ดู [BLOG_SETUP.md](./BLOG_SETUP.md)
+
+---
+
 ## ⏳ ยังไม่ได้ทำ (next steps)
 
 ### 1. Design จริง (กำลังรอ)
