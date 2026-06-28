@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "i.ytimg.com" },
       { protocol: "https", hostname: "img.youtube.com" },
+      // Vercel Blob (uploaded blog images)
+      { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
   },
 };

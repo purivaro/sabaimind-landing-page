@@ -14,6 +14,7 @@ export function Nav({ locale }: { locale: Locale }) {
     { href: "/activities", label: t.nav.activities },
     { href: "/news", label: t.nav.news },
     { href: "/videos", label: t.nav.videos },
+    { href: "/blog", label: t.nav.blog },
   ];
 
   return (

@@ -12,7 +12,15 @@ type Dict = {
     activities: string;
     news: string;
     videos: string;
+    blog: string;
     contact: string;
+  };
+  blog: {
+    title: string;
+    subtitle: string;
+    readMore: string;
+    backToList: string;
+    empty: string;
   };
   site: {
     name: string;
@@ -114,7 +122,15 @@ const ja: Dict = {
     activities: "活動",
     news: "お知らせ",
     videos: "動画",
+    blog: "ブログ",
     contact: "お問い合わせ",
+  },
+  blog: {
+    title: "ブログ",
+    subtitle: "瞑想・タイ文化・活動についての記事",
+    readMore: "続きを読む",
+    backToList: "ブログ一覧へ戻る",
+    empty: "まだ記事がありません。",
   },
   site: {
     name: "Sabai Mind",
@@ -262,7 +278,15 @@ const en: Dict = {
     activities: "Activities",
     news: "News",
     videos: "Videos",
+    blog: "Blog",
     contact: "Contact",
+  },
+  blog: {
+    title: "Blog",
+    subtitle: "Articles on meditation, Thai culture, and our activities",
+    readMore: "Read more",
+    backToList: "Back to blog",
+    empty: "No posts yet.",
   },
   site: {
     name: "Sabai Mind",
