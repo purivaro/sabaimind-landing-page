@@ -1,6 +1,6 @@
 ---
 title: "Meditation from Zero — 8-Session Course at the Thai Temple in Utsunomiya"
-date: 2025-05-26
+date: 2026-05-26
 cover: /images/activities/oneday.png
 excerpt: "Every Tuesday — two time slots to fit your schedule (afternoon & evening). A beginner-friendly meditation circle you can join straight from work."
 locale: en
@@ -33,7 +33,7 @@ This is an 8-session course, but single-session attendance is welcome too. Throu
 | ☀ Afternoon | 14:30 – 16:00 | For those who want to settle the mind in the quiet of the afternoon |
 | 🌙 Evening | 19:30 – 21:00 | For those who want to reset mind and head on the way home from work |
 
-## Schedule (8 sessions)
+## Schedule (2026 · 8 sessions)
 
 | # | Date | Time |
 | --- | --- | --- |

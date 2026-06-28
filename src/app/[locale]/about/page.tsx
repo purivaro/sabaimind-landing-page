@@ -161,7 +161,7 @@ export default async function AboutPage({
                 alt={t.about.sectionCommunity}
                 width={1100}
                 height={1430}
-                className="w-full aspect-[4/5] md:aspect-[5/4] object-cover rounded shadow-lg"
+                className="w-full aspect-[4/5] md:aspect-[5/4] object-cover object-top rounded shadow-lg"
               />
             </div>
             <div className="md:col-span-5">
