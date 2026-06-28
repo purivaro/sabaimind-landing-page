@@ -26,6 +26,8 @@ The venue is a quiet temple in Utsunomiya, Tochigi. An experienced Thai monk gui
 
 This is an 8-session course, but single-session attendance is welcome too. Through a different theme each time — a short talk and meditation — you'll gradually learn ways to settle the mind and body in everyday life.
 
+![Meditation guided by an experienced Thai monk](/images/activities/oneday/oneday_9.jpg)
+
 ## Two time slots to choose from
 
 | Slot | Time | Who it's for |
@@ -53,6 +55,8 @@ You can join part-way or leave early. Each session's theme is listed on the sign
 A meditation course to step away from the busyness of work and daily life and bring the mind and body back into balance.
 
 It's designed so beginners can start with ease — beginning with the basics of posture and breath, then progressing step by step through concentration, stability, and applying it to daily life. Across all 8 sessions, the goal is to make meditation not something "special," but a useful everyday habit. Each session pairs a themed talk with practice, and single-session attendance is welcome.
+
+![A quiet, carefully arranged corner of the meditation hall](/images/activities/oneday/oneday_13.jpg)
 
 ## The 8-Session Program — Three Steps
 
@@ -89,12 +93,16 @@ Bring meditation into a form you can use naturally, day to day.
 
 After the session there's an optional time for questions and casual conversation — ask the monk anything, share impressions with other participants, and take it slow.
 
+![Time for questions and conversation after the session](/images/activities/oneday/oneday_11.jpg)
+
 ## Venue
 
 **Wat Phra Dhammakaya, Tochigi Branch — Meditation Hall "Sabai Mind"**
 1068 Ōya-machi, Utsunomiya, Tochigi 321-0345, Japan
 
 Free parking is available on the temple grounds.
+
+![The meditation hall "Sabai Mind", filled with natural light](/images/activities/oneday/oneday_15.jpg)
 
 ## Fee & Capacity
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { getAllContent } from "@/lib/content";
+import { getAllContent, getContent } from "@/lib/content";
 import { VideoHighlight } from "@/components/VideoHighlight";
 
 export default async function HomePage({
@@ -14,6 +14,7 @@ export default async function HomePage({
   const t = getDictionary(locale);
 
   const activities = getAllContent("activities", locale).slice(0, 3);
+  const course = getContent("activities", "utsunomiya-meditation-course", locale);
 
   return (
     <>
@@ -59,6 +60,63 @@ export default async function HomePage({
           </div>
         </div>
       </section>
+
+      {/* Featured course promo */}
+      {course && (
+        <section className="bg-secondary-fixed/40 py-16 md:py-24">
+          <div className="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">
+            <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+              <Link
+                href={`/${locale}/activities/utsunomiya-meditation-course`}
+                className="group relative block aspect-4/3 overflow-hidden rounded-2xl shadow-editorial"
+              >
+                <Image
+                  src="/images/activities/oneday/oneday_9.jpg"
+                  alt={course.meta.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 560px"
+                />
+              </Link>
+              <div>
+                <p className="mb-4 font-label-md uppercase tracking-[0.2em] text-primary">
+                  {t.home.featuredCourseEyebrow}
+                </p>
+                <h2 className="mb-5 font-display text-headline-lg leading-snug text-on-surface">
+                  {course.meta.title}
+                </h2>
+                {course.meta.excerpt && (
+                  <p className="mb-6 font-body text-body-lg text-on-surface-variant">
+                    {course.meta.excerpt}
+                  </p>
+                )}
+                <ul className="mb-8 space-y-3">
+                  {t.home.featuredCourseHighlights.map((h) => (
+                    <li
+                      key={h}
+                      className="flex items-start gap-3 font-body text-body-md text-on-surface"
+                    >
+                      <span className="material-symbols-outlined mt-0.5 text-[20px] text-primary">
+                        check_circle
+                      </span>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={`/${locale}/activities/utsunomiya-meditation-course`}
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-label-md uppercase tracking-wide text-on-primary shadow-[0_10px_30px_-10px_rgb(124_87_31/0.6)] transition-all duration-200 hover:bg-primary-fixed-dim hover:text-on-primary-fixed active:translate-y-px"
+                >
+                  {t.home.featuredCourseCta}
+                  <span className="material-symbols-outlined text-[18px]">
+                    arrow_forward
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Featured Activities */}
       {activities.length > 0 && (

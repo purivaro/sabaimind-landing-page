@@ -44,6 +44,9 @@ type Dict = {
     ctaContact: string;
     ctaActivities: string;
     readFullStory: string;
+    featuredCourseEyebrow: string;
+    featuredCourseCta: string;
+    featuredCourseHighlights: string[];
   };
   about: {
     eyebrow: string;
@@ -156,6 +159,13 @@ const ja: Dict = {
     ctaContact: "お問い合わせ",
     ctaActivities: "活動を見る",
     readFullStory: "READ MORE",
+    featuredCourseEyebrow: "毎週火曜日開催・初心者歓迎",
+    featuredCourseCta: "コースの詳細を見る",
+    featuredCourseHighlights: [
+      "選べる2つの時間帯（午後・夜）",
+      "仕事帰りにそのまま参加OK",
+      "1回 1,500円・単発参加も歓迎",
+    ],
   },
   about: {
     eyebrow: "代表挨拶",
@@ -313,6 +323,13 @@ const en: Dict = {
     ctaContact: "Contact Us",
     ctaActivities: "View Activities",
     readFullStory: "READ MORE",
+    featuredCourseEyebrow: "Every Tuesday · Beginners welcome",
+    featuredCourseCta: "View course details",
+    featuredCourseHighlights: [
+      "Two time slots to choose from (afternoon & evening)",
+      "Join straight from work",
+      "1,500 yen per session · drop-ins welcome",
+    ],
   },
   about: {
     eyebrow: "Message from the Representative",

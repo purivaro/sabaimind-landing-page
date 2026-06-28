@@ -48,7 +48,7 @@ export default async function ActivityDetail({
           />
         </div>
       )}
-      <div className="prose prose-zinc max-w-none prose-headings:font-display prose-headings:text-on-surface prose-p:font-body prose-p:text-on-surface-variant prose-a:text-primary">
+      <div className="prose prose-zinc max-w-none prose-headings:font-display prose-headings:text-on-surface prose-p:font-body prose-p:text-on-surface-variant prose-a:text-primary prose-img:w-full prose-img:rounded-2xl prose-img:shadow-card prose-img:my-10">
         <Markdown source={item.body} />
       </div>
     </article>
