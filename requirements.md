@@ -1,7 +1,7 @@
 # Sabaimind Website Requirements
 
 ## ภาพรวม
-สร้างเว็บไซต์ใหม่ที่ https://new.sabaimind.or.jp เพื่อประชาสัมพันธ์กิจกรรมขององค์กร Sabaimind
+สร้างเว็บไซต์ใหม่ที่ https://sabaimind.or.jp เพื่อประชาสัมพันธ์กิจกรรมขององค์กร Sabaimind
 
 แหล่งข้อมูลเริ่มต้น: ดึงข้อมูลและรูปภาพจากเว็บเดิม https://www.sabaimind.or.jp/
 
@@ -10,9 +10,9 @@
 ## Tech Stack
 - **Framework:** Next.js (App Router)
 - **Styling:** Tailwind CSS
-- **Hosting:** Cloudflare Pages (ใช้ `@cloudflare/next-on-pages`)
+- **Hosting:** Vercel (deploy ผ่าน GitHub integration — push `main` → auto-deploy)
 - **Content:** Markdown files (จัดการใน repo, ใช้ AI ช่วยสร้าง page)
-- **Email service:** สำหรับ Contact form (เช่น Resend หรือ Cloudflare Workers + SMTP)
+- **Email service:** สำหรับ Contact form (เช่น Resend)
 
 ---
 
@@ -83,7 +83,7 @@ public/images/
     - /images/activities/meditation-2025/photo-2.jpg
   ---
   ```
-- ถ้าอนาคตรูปเยอะมาก (>500MB) ค่อยพิจารณาย้ายไป Cloudflare R2 / Images
+- ถ้าอนาคตรูปเยอะมาก (>500MB) ค่อยพิจารณาย้ายไป object storage (เช่น Vercel Blob, Cloudflare R2, S3)
 
 ---
 
@@ -138,6 +138,6 @@ public/images/
 4. ⏳ **Layout + Navigation** — มี placeholder แล้ว, รอ design จริงจาก Google Stitch
 5. ✅ **สร้าง routes 5 หน้า** — โครงเปล่าพร้อม sample content
 6. ⏳ **Contact form** — มี form UI แล้ว, ยังไม่ wire `/api/contact` กับ email service
-7. ⏳ **Deploy Cloudflare Pages** — ยังไม่ทำ
+7. ✅ **Deploy Vercel** — เชื่อม GitHub แล้ว, push `main` → auto-deploy, ผูก custom domain `sabaimind.or.jp` แล้ว (DNS ผ่าน Cloudflare proxy → Vercel)
 
 ดู progress ละเอียดที่ [STATUS.md](./STATUS.md) และ Stitch design prompts ที่ [stitch-prompts.md](./stitch-prompts.md)

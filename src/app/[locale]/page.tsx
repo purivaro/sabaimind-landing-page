@@ -20,7 +20,7 @@ export default async function HomePage({
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative -mt-20 flex min-h-[88vh] items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero/sky-lantern-crowd.jpg"
@@ -30,25 +30,34 @@ export default async function HomePage({
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/35 to-black/50" />
+          <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/20 to-transparent" />
         </div>
-        <div className="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
+        <div className="relative z-10 mx-auto w-full max-w-container-max px-margin-mobile pt-16 md:px-margin-desktop">
           <div className="max-w-2xl">
-            <p className="font-label-md text-primary mb-4 tracking-[0.2em] uppercase">
+            <p className="mb-5 font-label-md uppercase tracking-[0.25em] text-primary-fixed">
               {t.home.eyebrow}
             </p>
-            <h1 className="font-display text-5xl md:text-display mb-6 leading-tight text-on-surface">
+            <h1 className="font-display text-display leading-[1.1] text-white">
               {t.home.heroHeadline}
-              <span className="font-display text-headline-lg block mt-4 font-normal text-on-surface-variant">
+              <span className="mt-5 block font-display text-headline-lg font-normal text-white/80">
                 {t.home.heroSubhead}
               </span>
             </h1>
-            <Link
-              href={`/${locale}/about`}
-              className="inline-block bg-primary text-on-primary px-8 py-4 font-label-md uppercase tracking-wide hover:bg-primary-fixed-dim transition-colors duration-300"
-            >
-              {t.home.ctaPrimary}
-            </Link>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <Link
+                href={`/${locale}/about`}
+                className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 font-label-md uppercase tracking-wide text-on-primary shadow-[0_10px_30px_-10px_rgb(124_87_31/0.7)] transition-all duration-200 hover:bg-primary-fixed-dim hover:text-on-primary-fixed active:translate-y-px"
+              >
+                {t.home.ctaPrimary}
+              </Link>
+              <Link
+                href={`/${locale}/activities`}
+                className="inline-flex items-center justify-center rounded-full border border-white/40 px-8 py-4 font-label-md uppercase tracking-wide text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/10"
+              >
+                {t.home.ctaActivities}
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -78,12 +87,12 @@ export default async function HomePage({
                 <Link
                   key={item.slug}
                   href={`/${locale}/activities/${item.slug}`}
-                  className={`group bg-surface-container-lowest overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-outline-variant/20 ${
+                  className={`group bg-surface-container-lowest overflow-hidden rounded-2xl border border-outline-variant/20 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
                     idx > 0 ? "mt-8 md:mt-0" : ""
                   }`}
                 >
                   {item.meta.cover ? (
-                    <div className="aspect-[4/5] overflow-hidden">
+                    <div className="aspect-4/5 overflow-hidden">
                       <Image
                         src={item.meta.cover}
                         alt={item.meta.title}
@@ -93,7 +102,7 @@ export default async function HomePage({
                       />
                     </div>
                   ) : (
-                    <div className="aspect-[4/5] bg-secondary-fixed/30 flex items-center justify-center">
+                    <div className="aspect-4/5 bg-secondary-fixed/30 flex items-center justify-center">
                       <span className="material-symbols-outlined text-secondary text-6xl">
                         spa
                       </span>
@@ -131,7 +140,7 @@ export default async function HomePage({
             <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
               <Link
                 href={`/${locale}/news/${featured.slug}`}
-                className="md:col-span-8 bg-surface-container-lowest p-10 border border-outline-variant/10 flex flex-col justify-between group"
+                className="md:col-span-8 bg-surface-container-lowest p-10 rounded-2xl border border-outline-variant/10 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover flex flex-col justify-between group"
               >
                 <div>
                   {featured.meta.date && (
@@ -160,7 +169,7 @@ export default async function HomePage({
                   <Link
                     key={item.slug}
                     href={`/${locale}/news/${item.slug}`}
-                    className="bg-surface-container-lowest p-8 border border-outline-variant/10 hover:border-primary/30 transition-colors flex-1 flex flex-col justify-between group"
+                    className="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/10 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover flex-1 flex flex-col justify-between group"
                   >
                     <div>
                       {item.meta.date && (
@@ -188,7 +197,7 @@ export default async function HomePage({
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           <Link
             href={`/${locale}/videos`}
-            className="relative block group cursor-pointer overflow-hidden shadow-2xl"
+            className="relative block group cursor-pointer overflow-hidden rounded-2xl shadow-editorial"
           >
             <div className="relative w-full aspect-video">
               <Image
@@ -231,13 +240,13 @@ export default async function HomePage({
           <div className="flex flex-col md:flex-row justify-center gap-6">
             <Link
               href={`/${locale}/contact`}
-              className="bg-primary text-on-primary px-12 py-5 font-label-md hover:opacity-90 transition-all uppercase tracking-widest"
+              className="rounded-full bg-primary text-on-primary px-12 py-5 font-label-md hover:bg-primary-fixed-dim hover:text-on-primary-fixed transition-all duration-200 active:translate-y-px uppercase tracking-widest shadow-[0_10px_30px_-10px_rgb(124_87_31/0.6)]"
             >
               {t.home.ctaContact}
             </Link>
             <Link
               href={`/${locale}/activities`}
-              className="border border-secondary text-secondary px-12 py-5 font-label-md hover:bg-secondary hover:text-on-secondary transition-all uppercase tracking-widest"
+              className="rounded-full border border-secondary text-secondary px-12 py-5 font-label-md hover:bg-secondary hover:text-on-secondary transition-all duration-200 uppercase tracking-widest"
             >
               {t.home.ctaActivities}
             </Link>

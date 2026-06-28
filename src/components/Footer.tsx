@@ -7,7 +7,7 @@ export function Footer({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
 
   return (
-    <footer className="bg-surface-container-low border-t border-outline-variant/20 mt-32">
+    <footer className="bg-surface-container-low border-t border-outline-variant/20">
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 flex flex-col md:flex-row justify-between gap-gutter">
         <div className="md:max-w-sm">
           <Image

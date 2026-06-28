@@ -1,6 +1,6 @@
 # Project Status
 
-อัปเดตล่าสุด: 2026-05-15
+อัปเดตล่าสุด: 2026-06-28
 
 ## ✅ สิ่งที่ทำไปแล้ว
 
@@ -76,15 +76,14 @@ public/images/{about,activities,news}/.gitkeep
 - หน้า `[locale]/contact/page.tsx` มี form UI แล้ว ส่งไป `POST /api/contact`
 - ต้องสร้าง `src/app/api/contact/route.ts` + เลือก email service:
   - **Resend** (แนะนำ — เรียบ, free tier 3000/เดือน, รองรับ React Email templates)
-  - หรือ Cloudflare Workers + MailChannels / SendGrid
-- เก็บ API key ใน `.env.local` (และ Cloudflare Pages env vars)
+- เก็บ API key ใน `.env.local` (และ Vercel env vars)
 
-### 3. Deploy Cloudflare Pages
-- ติดตั้ง `@cloudflare/next-on-pages` และ adapter
-- ตั้ง build command ใน Pages: `npx @cloudflare/next-on-pages@1`
-- output directory: `.vercel/output/static`
-- Bind custom domain: `new.sabaimind.or.jp`
-- ตั้ง env vars (Resend API key ฯลฯ)
+### 3. Deploy (Vercel) — ✅ deploy แล้ว
+
+- Deploy บน **Vercel** ผ่าน GitHub integration (project: `sabaimind-landing-page`)
+- push `main` → Vercel build/deploy อัตโนมัติบน cloud (ไม่ต้องมี `vercel.json` / `.vercel` ใน repo)
+- ผูก custom domain `sabaimind.or.jp` แล้ว (DNS อยู่บน Cloudflare, proxy → Vercel)
+- ตั้ง env vars (Resend API key ฯลฯ) ใน Vercel → Settings → Environment Variables
 
 ### 4. เนื้อหาจริง
 - ดึง content จาก https://www.sabaimind.or.jp มาแปลง Markdown
@@ -102,7 +101,7 @@ public/images/{about,activities,news}/.gitkeep
 ## 🔑 ข้อมูลสำคัญสำหรับ session ใหม่
 
 - **เป้าหมาย:** เว็บประชาสัมพันธ์ NPO Sabaimind — ทำสมาธิแบบไทยให้คนญี่ปุ่น + กิจกรรมวัฒนธรรมไทย
-- **โดเมน:** https://new.sabaimind.or.jp (ยังไม่ deploy)
+- **โดเมน:** https://sabaimind.or.jp (live บน Vercel, DNS ผ่าน Cloudflare proxy)
 - **ภาษาหลัก:** ญี่ปุ่น (เจ้าของเริ่มทำเป็นไทยก่อน)
 - **Workflow content:** Claude Code สร้าง markdown ให้ + เจ้าของแก้ข้อความเล็กน้อยใน `.md` เอง
 - **ไม่มี:** ระบบรับบริจาค (cut ออกตั้งแต่แรก), CMS หลังบ้าน, payment
@@ -111,5 +110,5 @@ public/images/{about,activities,news}/.gitkeep
 ```bash
 npm run dev          # dev server → http://localhost:3000 (redirect /th)
 npm run build        # production build (validate ก่อน push)
-git push             # auto-deploy ทันทีที่ Cloudflare Pages พร้อม
+git push             # push main → Vercel auto-deploy
 ```

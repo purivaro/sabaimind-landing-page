@@ -39,6 +39,10 @@ yarn-error.log*
 # local design working files (Stitch HTML/screenshots — not needed for prod)
 /design
 
+# local diagnostic artifacts
+/screenshots
+/.playwright-mcp
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

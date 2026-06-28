@@ -58,9 +58,9 @@ export function MobileMenu({
         aria-label="Open menu"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="md:hidden inline-flex items-center justify-center w-10 h-10 -mr-2 text-primary"
+        className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full text-primary hover:bg-primary/10 transition-colors"
       >
-        <span className="material-symbols-outlined text-[28px]">
+        <span className="material-symbols-outlined text-[26px]">
           {open ? "close" : "menu"}
         </span>
       </button>
@@ -68,7 +68,7 @@ export function MobileMenu({
       {mounted && open &&
         createPortal(
           <div
-            className="md:hidden fixed inset-0 z-[60] bg-background overflow-y-auto"
+            className="lg:hidden fixed inset-0 z-[60] bg-background/95 backdrop-blur-xl overflow-y-auto"
             style={{ paddingTop: "5rem" }}
           >
             <nav className="flex flex-col px-margin-mobile py-8 gap-2">

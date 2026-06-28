@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 import { locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
-const SITE_URL = "https://new.sabaimind.or.jp";
+const SITE_URL = "https://sabaimind.or.jp";
 
 const notoSerifJP = Noto_Serif_JP({
   variable: "--font-noto-serif-jp",
@@ -80,30 +80,6 @@ const seo: Record<Locale, {
     locale: "en_US",
     ogAlt: "Sabai Mind Sky Lantern Festival",
   },
-  th: {
-    title: "NPO Sabai Mind — นำการเจริญสติแบบไทยสู่ใจของคนญี่ปุ่น",
-    titleTemplate: "%s | NPO Sabai Mind",
-    description:
-      "NPO Sabai Mind นำการเจริญสติแบบไทยมาสู่ญี่ปุ่น สร้างพื้นที่พักใจในสังคมยุคปัจจุบัน ผ่านคลาสภาวนา บริการจัดส่งครูสอนเจริญสติ และเทศกาลวัฒนธรรมไทย เช่น สงกรานต์และโคมลอย",
-    keywords: [
-      "Sabai Mind",
-      "สบายมายด์",
-      "เจริญสติ",
-      "ภาวนา",
-      "มายด์ฟูลเนส",
-      "ทางสายกลาง",
-      "พระไทย",
-      "วัดธรรมกายญี่ปุ่น",
-      "สงกรานต์ในญี่ปุ่น",
-      "โคมลอย",
-      "Sky Lantern",
-      "โทจิงิ",
-      "อุสึโนะมิยะ",
-      "NPO ญี่ปุ่น",
-    ],
-    locale: "th_TH",
-    ogAlt: "บรรยากาศเทศกาลโคมลอย Sabai Mind",
-  },
 };
 
 export const viewport: Viewport = {
@@ -146,7 +122,6 @@ export async function generateMetadata({
       languages: {
         ja: `${SITE_URL}/ja`,
         en: `${SITE_URL}/en`,
-        th: `${SITE_URL}/th`,
         "x-default": `${SITE_URL}/ja`,
       },
     },
@@ -158,7 +133,7 @@ export async function generateMetadata({
       description: s.description,
       locale: s.locale,
       alternateLocale: (
-        ["ja_JP", "en_US", "th_TH"] as const
+        ["ja_JP", "en_US"] as const
       ).filter((l) => l !== s.locale) as string[],
       images: [
         {
