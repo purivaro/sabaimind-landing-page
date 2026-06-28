@@ -3,6 +3,7 @@ import Image from "next/image";
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getAllContent } from "@/lib/content";
+import { VideoHighlight } from "@/components/VideoHighlight";
 
 export default async function HomePage({
   params,
@@ -130,35 +131,11 @@ export default async function HomePage({
       {/* Video Highlight */}
       <section className="py-20 md:py-32">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          <Link
-            href={`/${locale}/videos`}
-            className="relative block group cursor-pointer overflow-hidden rounded-2xl shadow-editorial"
-          >
-            <div className="relative w-full aspect-video">
-              <Image
-                src="/images/hero/pool-reflection.jpg"
-                alt={t.home.videoTitle}
-                fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                sizes="(max-width: 1120px) 100vw, 1120px"
-              />
-            </div>
-            <div className="absolute inset-0 bg-on-surface/20 flex items-center justify-center">
-              <div className="w-24 h-24 rounded-full border border-surface/50 backdrop-blur-sm flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/20">
-                <span className="material-symbols-outlined text-white text-5xl translate-x-1">
-                  play_arrow
-                </span>
-              </div>
-            </div>
-            <div className="absolute bottom-6 left-6 right-6 md:bottom-12 md:left-12 md:right-12">
-              <h3 className="font-display text-2xl md:text-headline-lg text-white mb-2">
-                {t.home.videoTitle}
-              </h3>
-              <p className="font-body text-body-md text-white/80">
-                {t.home.videoSub}
-              </p>
-            </div>
-          </Link>
+          <VideoHighlight
+            videoId="k5kRCRzlck8"
+            title={t.home.videoTitle}
+            sub={t.home.videoSub}
+          />
         </div>
       </section>
 
