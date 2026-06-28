@@ -29,6 +29,15 @@ export default async function HomePage({
             className="object-cover"
             sizes="100vw"
           />
+          {/* Background video (muted, looping) over the poster image */}
+          <div className="absolute inset-0 overflow-hidden">
+            <iframe
+              title="Sabai Mind"
+              src="https://www.youtube.com/embed/mxboCyuIY18?autoplay=1&mute=1&controls=0&loop=1&playlist=mxboCyuIY18&playsinline=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&fs=0"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              className="pointer-events-none absolute left-1/2 top-1/2 h-[max(100vh,56.25vw)] w-[max(100vw,177.78vh)] -translate-x-1/2 -translate-y-1/2"
+            />
+          </div>
           <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/35 to-black/50" />
           <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/20 to-transparent" />
         </div>
