@@ -21,63 +21,52 @@ export function Footer({ locale }: { locale: Locale }) {
             {t.site.footerDescription}
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-16">
-          <div>
-            <h4 className="font-label-md text-secondary uppercase mb-6 tracking-widest">
-              {t.footer.explore}
-            </h4>
-            <ul className="space-y-4">
-              <li>
-                <Link
-                  href={`/${locale}/activities`}
-                  className="font-body text-body-md text-on-surface-variant hover:text-primary transition-colors"
-                >
-                  {t.nav.activities}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/news`}
-                  className="font-body text-body-md text-on-surface-variant hover:text-primary transition-colors"
-                >
-                  {t.nav.news}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/videos`}
-                  className="font-body text-body-md text-on-surface-variant hover:text-primary transition-colors"
-                >
-                  {t.nav.videos}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/${locale}/contact`}
-                  className="font-body text-body-md text-on-surface-variant hover:text-primary transition-colors"
-                >
-                  {t.nav.contact}
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-label-md text-secondary uppercase mb-6 tracking-widest">
-              {t.footer.legal}
-            </h4>
-            <ul className="space-y-4">
-              <li>
-                <span className="font-body text-body-md text-on-surface-variant">
-                  {t.footer.privacy}
-                </span>
-              </li>
-              <li>
-                <span className="font-body text-body-md text-on-surface-variant">
-                  {t.footer.terms}
-                </span>
-              </li>
-            </ul>
-          </div>
+        <div>
+          <h4 className="font-label-md text-secondary uppercase mb-6 tracking-widest">
+            {t.footer.explore}
+          </h4>
+          <ul className="space-y-4">
+            <li>
+              <Link
+                href={`/${locale}/activities`}
+                className="font-body text-body-md text-on-surface-variant hover:text-primary transition-colors"
+              >
+                {t.nav.activities}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${locale}/news`}
+                className="font-body text-body-md text-on-surface-variant hover:text-primary transition-colors"
+              >
+                {t.nav.news}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${locale}/videos`}
+                className="font-body text-body-md text-on-surface-variant hover:text-primary transition-colors"
+              >
+                {t.nav.videos}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${locale}/blog`}
+                className="font-body text-body-md text-on-surface-variant hover:text-primary transition-colors"
+              >
+                {t.nav.blog}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${locale}/contact`}
+                className="font-body text-body-md text-on-surface-variant hover:text-primary transition-colors"
+              >
+                {t.nav.contact}
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-outline-variant/10 text-center">

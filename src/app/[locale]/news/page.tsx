@@ -105,29 +105,6 @@ export default async function NewsPage({
               </div>
             </section>
           )}
-
-          {/* Newsletter */}
-          <section className="bg-surface-container p-8 rounded-lg">
-            <h4 className="font-display text-headline-md text-primary mb-4">
-              {t.news.newsletterTitle}
-            </h4>
-            <p className="font-body text-body-md text-on-surface-variant mb-6 text-sm">
-              {t.news.newsletterBody}
-            </p>
-            <form className="space-y-4">
-              <input
-                className="w-full bg-transparent border-b border-outline focus:border-primary focus:outline-none px-0 py-2 placeholder:text-outline-variant font-body text-body-md"
-                placeholder={t.news.newsletterPlaceholder}
-                type="email"
-              />
-              <button
-                type="submit"
-                className="w-full bg-primary-container text-on-primary py-3 px-8 font-label-md uppercase tracking-widest hover:bg-primary transition-colors duration-300"
-              >
-                {t.news.newsletterCta}
-              </button>
-            </form>
-          </section>
         </aside>
       </div>
     </main>

@@ -73,27 +73,16 @@ export default async function ContactPage({
           </a>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-outline-variant/30">
-          <h3 className="font-label-md text-on-surface-variant uppercase tracking-widest mb-4 text-center">
-            {t.contact.followTitle}
-          </h3>
-          <div className="flex justify-center gap-6">
-            {["share", "video_library", "public"].map((icon) => (
-              <a
-                key={icon}
-                href="#"
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary transition-all duration-300"
-              >
-                <span className="material-symbols-outlined">{icon}</span>
-              </a>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* Map */}
       <section className="max-w-3xl mx-auto mt-12">
-        <div className="relative group overflow-hidden rounded-xl h-64 md:h-80 border border-outline-variant/20 shadow-sm">
+        <a
+          href="https://maps.app.goo.gl/ZCX5kSUaHnyefWhGA"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative group block overflow-hidden rounded-xl h-64 md:h-80 border border-outline-variant/20 shadow-sm"
+        >
           <Image
             src="/images/contact/map.jpg"
             alt="Sabai Mind location"
@@ -102,11 +91,12 @@ export default async function ContactPage({
             sizes="(max-width: 768px) 100vw, 768px"
           />
           <div className="absolute inset-0 bg-primary/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <button className="bg-surface-container-lowest px-6 py-2 rounded-full font-label-md text-primary shadow-md">
+            <span className="inline-flex items-center gap-2 bg-surface-container-lowest px-6 py-2 rounded-full font-label-md text-primary shadow-md">
+              <span className="material-symbols-outlined text-[20px]">map</span>
               Open in Maps
-            </button>
+            </span>
           </div>
-        </div>
+        </a>
       </section>
     </main>
   );

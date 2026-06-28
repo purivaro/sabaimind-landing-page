@@ -13,9 +13,6 @@ export default async function HomePage({
   const t = getDictionary(locale);
 
   const activities = getAllContent("activities", locale).slice(0, 3);
-  const news = getAllContent("news", locale).slice(0, 3);
-  const featured = news[0];
-  const side = news.slice(1, 3);
 
   return (
     <>
@@ -125,68 +122,6 @@ export default async function HomePage({
                   </div>
                 </Link>
               ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Latest Updates — Bento */}
-      {featured && (
-        <section className="py-20 md:py-32 bg-surface-container-low">
-          <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-            <h2 className="font-display text-headline-lg text-on-surface mb-16 text-center">
-              {t.home.latestUpdates}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-              <Link
-                href={`/${locale}/news/${featured.slug}`}
-                className="md:col-span-8 bg-surface-container-lowest p-10 rounded-2xl border border-outline-variant/10 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover flex flex-col justify-between group"
-              >
-                <div>
-                  {featured.meta.date && (
-                    <span className="text-label-md text-secondary mb-4 block uppercase tracking-widest">
-                      NEWS — {featured.meta.date}
-                    </span>
-                  )}
-                  <h3 className="font-display text-headline-lg mb-6 leading-snug text-on-surface group-hover:text-primary transition-colors">
-                    {featured.meta.title}
-                  </h3>
-                  {featured.meta.excerpt && (
-                    <p className="font-body text-body-lg text-on-surface-variant mb-8">
-                      {featured.meta.excerpt}
-                    </p>
-                  )}
-                </div>
-                <span className="inline-flex items-center gap-2 font-label-md text-primary uppercase tracking-wider">
-                  {t.home.readFullStory}
-                  <span className="material-symbols-outlined transition-transform group-hover:translate-x-1 text-[18px]">
-                    arrow_forward
-                  </span>
-                </span>
-              </Link>
-              <div className="md:col-span-4 flex flex-col gap-gutter">
-                {side.map((item) => (
-                  <Link
-                    key={item.slug}
-                    href={`/${locale}/news/${item.slug}`}
-                    className="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/10 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover flex-1 flex flex-col justify-between group"
-                  >
-                    <div>
-                      {item.meta.date && (
-                        <span className="text-label-md text-secondary mb-3 block uppercase tracking-widest">
-                          {item.meta.date}
-                        </span>
-                      )}
-                      <h4 className="font-display text-headline-md mb-4 text-on-surface group-hover:text-primary transition-colors">
-                        {item.meta.title}
-                      </h4>
-                    </div>
-                    <span className="text-label-md text-primary uppercase font-bold tracking-wider">
-                      {t.home.readFullStory}
-                    </span>
-                  </Link>
-                ))}
-              </div>
             </div>
           </div>
         </section>
