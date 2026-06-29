@@ -2,15 +2,10 @@ import Link from "next/link";
 import { and, desc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { registrations } from "@/db/schema";
-import { ALL_SESSIONS, findSession, sessionLabel } from "@/lib/courseSessions";
+import { getAllCohorts, cohortLabel } from "@/lib/courseDates";
 import { RegistrationActions } from "@/components/admin/RegistrationActions";
 
 export const dynamic = "force-dynamic";
-
-function dateLabel(value: string): string {
-  const s = findSession(value);
-  return s ? sessionLabel(s, "ja") : value;
-}
 
 function fmt(d: Date): string {
   return new Date(d).toLocaleString("ja-JP", {
@@ -31,19 +26,26 @@ export default async function AdminRegistrationsList({
   const sp = await searchParams;
   const sessionFilter = sp.session ?? "all";
 
-  const rows = await db
-    .select()
-    .from(registrations)
-    .where(
-      sessionFilter === "all"
-        ? undefined
-        : and(eq(registrations.sessionDate, sessionFilter)),
-    )
-    .orderBy(desc(registrations.id));
+  const [rows, cohorts] = await Promise.all([
+    db
+      .select()
+      .from(registrations)
+      .where(
+        sessionFilter === "all"
+          ? undefined
+          : and(eq(registrations.sessionDate, sessionFilter)),
+      )
+      .orderBy(desc(registrations.id)),
+    getAllCohorts(),
+  ]);
+
+  // value → JA label, for resolving each registration's chosen cohort.
+  const labelByValue = new Map(cohorts.map((c) => [c.value, cohortLabel(c, "ja")]));
+  const dateLabel = (value: string) => labelByValue.get(value) ?? value;
 
   const filters = [
     { key: "all", label: "すべて" },
-    ...ALL_SESSIONS.map((s) => ({ key: s.value, label: sessionLabel(s, "ja") })),
+    ...cohorts.map((c) => ({ key: c.value, label: cohortLabel(c, "ja") })),
   ];
 
   return (

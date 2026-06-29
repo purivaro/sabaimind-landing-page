@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { desc } from "drizzle-orm";
 import { db } from "@/db";
 import { registrations } from "@/db/schema";
-import { requireAdmin } from "@/lib/admin";
+import { requireRegistrations } from "@/lib/admin";
 
 const HEADERS = [
   "id",
@@ -27,7 +27,7 @@ function csvCell(v: unknown): string {
 }
 
 export async function GET() {
-  const session = await requireAdmin();
+  const session = await requireRegistrations();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const rows = await db

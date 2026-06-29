@@ -2,13 +2,13 @@ import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { articles } from "@/db/schema";
-import { requireAdmin } from "@/lib/admin";
+import { requireBlog } from "@/lib/admin";
 
 export async function PUT(
   req: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const session = await requireAdmin();
+  const session = await requireBlog();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { id } = await params;
@@ -58,7 +58,7 @@ export async function DELETE(
   _req: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const session = await requireAdmin();
+  const session = await requireBlog();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { id } = await params;

@@ -1,19 +1,20 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { auth, isAdminEmail } from "@/auth";
 import { AdminHeader } from "@/components/admin/AdminHeader";
+import { getCurrentUser } from "@/lib/admin";
 
 export default async function AdminBlogLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
-  if (!isAdminEmail(session?.user?.email)) redirect("/admin/signin");
+  const me = await getCurrentUser();
+  if (!me) redirect("/admin/signin");
+  if (!me.canWriteBlog) redirect("/admin");
 
   return (
     <div className="min-h-screen">
-      <AdminHeader email={session!.user!.email!} />
+      <AdminHeader me={me} />
       <div className="mx-auto flex max-w-6xl justify-end px-6 pt-4">
         <Link
           href="/admin/blog/new"

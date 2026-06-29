@@ -2,11 +2,11 @@ import { NextResponse } from "next/server";
 import { desc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { articles, authors } from "@/db/schema";
-import { requireAdmin, getAuthorIdByEmail, slugify } from "@/lib/admin";
+import { requireBlog, getAuthorIdByEmail, slugify } from "@/lib/admin";
 
 export async function GET() {
-  const session = await requireAdmin();
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const me = await requireBlog();
+  if (!me) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const posts = await db
     .select({
@@ -27,8 +27,8 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const session = await requireAdmin();
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const me = await requireBlog();
+  if (!me) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const data = await req.json();
   const title = (data.title ?? "").trim();
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Title and body are required" }, { status: 400 });
   }
 
-  const authorId = await getAuthorIdByEmail(session.user!.email!);
+  const authorId = me.authorId ?? (await getAuthorIdByEmail(me.email));
   const slug = (data.slug ?? "").trim() || slugify(title);
   const isPublished = data.status === "published";
 

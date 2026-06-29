@@ -1,9 +1,10 @@
 import { redirect } from "next/navigation";
-import { auth, signIn, isAdminEmail } from "@/auth";
+import { signIn } from "@/auth";
+import { getCurrentUser } from "@/lib/admin";
 
 export default async function SignInPage() {
-  const session = await auth();
-  if (isAdminEmail(session?.user?.email)) redirect("/admin/blog");
+  const me = await getCurrentUser();
+  if (me) redirect("/admin");
 
   return (
     <main className="flex min-h-screen items-center justify-center px-6">

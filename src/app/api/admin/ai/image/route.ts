@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { put } from "@vercel/blob";
-import { requireAdmin } from "@/lib/admin";
+import { requireBlog } from "@/lib/admin";
 
 export async function POST(req: Request) {
-  const session = await requireAdmin();
+  const session = await requireBlog();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { prompt } = await req.json();

@@ -2,13 +2,13 @@ import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { registrations } from "@/db/schema";
-import { requireAdmin } from "@/lib/admin";
+import { requireRegistrations } from "@/lib/admin";
 
 export async function PATCH(
   req: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const session = await requireAdmin();
+  const session = await requireRegistrations();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { id } = await params;
   const { handled } = await req.json();
@@ -23,7 +23,7 @@ export async function DELETE(
   _req: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const session = await requireAdmin();
+  const session = await requireRegistrations();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { id } = await params;
   await db.delete(registrations).where(eq(registrations.id, Number(id)));

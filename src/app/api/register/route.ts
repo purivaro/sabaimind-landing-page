@@ -3,10 +3,10 @@ import { db } from "@/db";
 import { registrations } from "@/db/schema";
 import { getContent } from "@/lib/content";
 import {
-  findSession,
-  getUpcomingSessions,
-  sessionLabel,
-} from "@/lib/courseSessions";
+  findCohort,
+  getUpcomingCohorts,
+  cohortLabel,
+} from "@/lib/courseDates";
 import { sendRegistrationEmails } from "@/lib/email";
 import type { Locale } from "@/i18n/config";
 
@@ -42,8 +42,9 @@ export async function POST(req: Request) {
   }
 
   const sessionDate = get("sessionDate");
-  // Must be a real, not-yet-passed session (date × slot).
-  if (!getUpcomingSessions().some((s) => s.value === sessionDate)) {
+  // Must be a real, active, not-yet-passed cohort.
+  const cohorts = await getUpcomingCohorts();
+  if (!cohorts.some((c) => c.value === sessionDate)) {
     return NextResponse.json(
       { error: "Selected date is not available" },
       { status: 422 },
@@ -72,7 +73,7 @@ export async function POST(req: Request) {
   }
 
   // Email is best-effort — never block a successful registration.
-  const session = findSession(sessionDate);
+  const cohort = cohorts.find((c) => c.value === sessionDate) ?? (await findCohort(sessionDate));
   const course = getContent("activities", COURSE_SLUG, locale);
   const email = await sendRegistrationEmails({
     email: get("email"),
@@ -84,7 +85,7 @@ export async function POST(req: Request) {
     phone: get("phone") || null,
     referralSource: get("referralSource"),
     photoConsent: get("photoConsent"),
-    sessionLabel: session ? sessionLabel(session, locale) : sessionDate,
+    sessionLabel: cohort ? cohortLabel(cohort, locale) : sessionDate,
     courseTitle: course?.meta.title ?? "Meditation Course",
   }).catch(() => ({ customer: false, team: false }));
 

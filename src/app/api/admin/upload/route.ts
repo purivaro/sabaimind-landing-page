@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { put } from "@vercel/blob";
-import { requireAdmin } from "@/lib/admin";
+import { requireBlog } from "@/lib/admin";
 
 const MAX_BYTES = 8 * 1024 * 1024; // 8 MB
 const ALLOWED = ["image/png", "image/jpeg", "image/webp", "image/gif"];
 
 export async function POST(req: Request) {
-  const session = await requireAdmin();
+  const session = await requireBlog();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const form = await req.formData();

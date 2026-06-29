@@ -1,7 +1,7 @@
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getContent } from "@/lib/content";
-import { getUpcomingSessions, sessionLabel } from "@/lib/courseSessions";
+import { getUpcomingCohorts, cohortLabel } from "@/lib/courseDates";
 import { RegistrationForm } from "@/components/RegistrationForm";
 
 export const dynamic = "force-dynamic"; // available dates depend on the current date
@@ -14,9 +14,9 @@ export default async function RegisterPage({
   const { locale } = await params;
   const t = getDictionary(locale);
   const course = getContent("activities", "utsunomiya-meditation-course", locale);
-  const sessions = getUpcomingSessions().map((s) => ({
-    value: s.value,
-    label: sessionLabel(s, locale),
+  const sessions = (await getUpcomingCohorts()).map((c) => ({
+    value: c.value,
+    label: cohortLabel(c, locale),
   }));
 
   return (

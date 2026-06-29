@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
-import { requireAdmin } from "@/lib/admin";
+import { requireBlog } from "@/lib/admin";
 
 const SYSTEM = `You write blog articles for NPO法人 Sabai Mind, a Japanese non-profit that brings Thai-style mindfulness and meditation to Japan and runs Thai cultural events (Songkran, Sky Lantern festivals).
 Voice: calm, warm, trustworthy, never salesy.
@@ -18,7 +18,7 @@ function parseJson(text: string): { title: string; excerpt: string; body: string
 }
 
 export async function POST(req: Request) {
-  const session = await requireAdmin();
+  const session = await requireBlog();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { idea, instruction, locale } = await req.json();
