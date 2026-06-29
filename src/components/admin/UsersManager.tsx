@@ -14,6 +14,7 @@ export type UserRow = {
   blogRole: string;
   canManageRegistrations: boolean;
   canManageCourseDates: boolean;
+  notifyRegistrations: boolean;
   bylineName: string | null;
   bylineBio: string | null;
 };
@@ -27,6 +28,7 @@ type Draft = {
   blogRole: string;
   canManageRegistrations: boolean;
   canManageCourseDates: boolean;
+  notifyRegistrations: boolean;
 };
 
 const emptyDraft: Draft = {
@@ -38,6 +40,7 @@ const emptyDraft: Draft = {
   blogRole: "none",
   canManageRegistrations: false,
   canManageCourseDates: false,
+  notifyRegistrations: false,
 };
 
 const BLOG_ROLE_VALUES = ["none", "writer", "editor", "director"] as const;
@@ -75,6 +78,7 @@ export function UsersManager({
       blogRole: u.blogRole,
       canManageRegistrations: u.canManageRegistrations,
       canManageCourseDates: u.canManageCourseDates,
+      notifyRegistrations: u.notifyRegistrations,
     });
     setEditingId(u.id);
     setCreating(false);
@@ -102,6 +106,7 @@ export function UsersManager({
       blogRole: draft.blogRole,
       canManageRegistrations: draft.canManageRegistrations,
       canManageCourseDates: draft.canManageCourseDates,
+      notifyRegistrations: draft.notifyRegistrations,
     };
     const url =
       editingId != null ? `/api/admin/users/${editingId}` : "/api/admin/users";
@@ -135,11 +140,15 @@ export function UsersManager({
   const editingSelf = editingId != null && editingId === currentUserId;
 
   function permSummary(u: UserRow): string {
-    if (u.isAdmin) return t("um.permFull");
     const parts: string[] = [];
-    if (u.blogRole !== "none") parts.push(t(`role.${u.blogRole}`));
-    if (u.canManageRegistrations) parts.push(t("nav.registrations"));
-    if (u.canManageCourseDates) parts.push(t("nav.coursedates"));
+    if (u.isAdmin) {
+      parts.push(t("um.permFull"));
+    } else {
+      if (u.blogRole !== "none") parts.push(t(`role.${u.blogRole}`));
+      if (u.canManageRegistrations) parts.push(t("nav.registrations"));
+      if (u.canManageCourseDates) parts.push(t("nav.coursedates"));
+    }
+    if (u.notifyRegistrations) parts.push(`✉ ${t("um.notifyTag")}`);
     return parts.length ? parts.join(" · ") : t("um.permNone");
   }
 
@@ -268,6 +277,19 @@ export function UsersManager({
                 }
               />
               {t("um.activeLogin")}
+            </label>
+            <label className="mt-3 flex items-center gap-2 border-t border-outline-variant/20 pt-3 text-sm text-on-surface">
+              <input
+                type="checkbox"
+                checked={draft.notifyRegistrations}
+                onChange={(e) =>
+                  setDraft({ ...draft, notifyRegistrations: e.target.checked })
+                }
+              />
+              <span className="material-symbols-outlined text-[18px] text-on-surface-variant">
+                mail
+              </span>
+              {t("um.notify")}
             </label>
           </fieldset>
 

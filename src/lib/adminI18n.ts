@@ -76,6 +76,38 @@ const dict: Record<string, Entry> = {
   "reg.th.attr": { ja: "属性", th: "ข้อมูล", en: "Profile" },
   "reg.th.source": { ja: "きっかけ", th: "รู้จักจาก", en: "Source" },
   "reg.th.photo": { ja: "写真", th: "รูปถ่าย", en: "Photo" },
+  // summary
+  "reg.sum.total": { ja: "合計", th: "ทั้งหมด", en: "Total" },
+  "reg.sum.pending": { ja: "未対応", th: "รอดำเนินการ", en: "Pending" },
+  "reg.sum.handled": { ja: "対応済み", th: "ดำเนินการแล้ว", en: "Handled" },
+  // list + detail
+  "reg.recent": { ja: "申し込み", th: "รายการสมัคร", en: "Registrations" },
+  "reg.details": { ja: "詳細", th: "รายละเอียด", en: "Details" },
+  "reg.selectPrompt": {
+    ja: "左の一覧から申し込みを選択してください。",
+    th: "เลือกผู้สมัครจากรายการด้านซ้ายเพื่อดูรายละเอียด",
+    en: "Select a registration from the list to see details.",
+  },
+  "reg.handledBadge": { ja: "対応済み", th: "เสร็จแล้ว", en: "Handled" },
+  "reg.pendingBadge": { ja: "未対応", th: "รอดำเนินการ", en: "Pending" },
+  "reg.markHandled": { ja: "対応済みにする", th: "ทำเครื่องหมายว่าเสร็จ", en: "Mark handled" },
+  "reg.markPending": { ja: "未対応に戻す", th: "กลับเป็นรอดำเนินการ", en: "Mark pending" },
+  "reg.confirmDelete": {
+    ja: "この申し込みを削除しますか？",
+    th: "ลบรายการสมัครนี้หรือไม่?",
+    en: "Delete this registration?",
+  },
+  "reg.d.session": { ja: "開催日", th: "รุ่น/วันจัด", en: "Session" },
+  "reg.d.applied": { ja: "申込日時", th: "วันที่สมัคร", en: "Applied" },
+  "reg.d.name": { ja: "氏名", th: "ชื่อ", en: "Name" },
+  "reg.d.furigana": { ja: "ふりがな", th: "ฟุริงานะ", en: "Furigana" },
+  "reg.d.email": { ja: "メール", th: "อีเมล", en: "Email" },
+  "reg.d.gender": { ja: "性別", th: "เพศ", en: "Gender" },
+  "reg.d.nationality": { ja: "国籍", th: "สัญชาติ", en: "Nationality" },
+  "reg.d.prefecture": { ja: "都道府県", th: "จังหวัด", en: "Prefecture" },
+  "reg.d.phone": { ja: "電話", th: "โทรศัพท์", en: "Phone" },
+  "reg.d.source": { ja: "きっかけ", th: "รู้จักจาก", en: "Referral" },
+  "reg.d.photo": { ja: "写真掲載", th: "ยินยอมให้ลงรูป", en: "Photo consent" },
 
   // ── course dates ──────────────────────────────────────────────────
   "cd.subtitle": {
@@ -118,6 +150,12 @@ const dict: Record<string, Entry> = {
   "um.canReg": { ja: "申込の管理", th: "จัดการผู้สมัคร", en: "Manage registrations" },
   "um.canCd": { ja: "開催日の管理", th: "จัดการรุ่น/วันจัด", en: "Manage course dates" },
   "um.activeLogin": { ja: "有効（ログインを許可）", th: "ใช้งาน (อนุญาตให้ล็อกอิน)", en: "Active (allow sign-in)" },
+  "um.notify": {
+    ja: "新規申し込みのメール通知を受け取る",
+    th: "รับอีเมลแจ้งเตือนเมื่อมีคนสมัครกิจกรรม",
+    en: "Receive email when someone registers",
+  },
+  "um.notifyTag": { ja: "通知", th: "แจ้งเตือน", en: "Notified" },
   "um.th.email": { ja: "メール", th: "อีเมล", en: "Email" },
   "um.th.name": { ja: "表示名", th: "ชื่อที่แสดง", en: "Name" },
   "um.th.perm": { ja: "権限", th: "สิทธิ์", en: "Permissions" },
@@ -131,6 +169,18 @@ const dict: Record<string, Entry> = {
   "um.invalidEmail": { ja: "有効なメールアドレスを入力してください", th: "กรุณากรอกอีเมลที่ถูกต้อง", en: "Enter a valid email" },
   "um.confirmDelete": { ja: "「{email}」のアクセスを削除しますか？", th: "ลบสิทธิ์เข้าระบบของ “{email}” หรือไม่?", en: "Remove access for “{email}”?" },
   "um.roleNone": { ja: "なし", th: "ไม่มี", en: "None" },
+
+  // ── no-access (signed in, no admin sections) ─────────────────────
+  "noaccess.title": {
+    ja: "アクセス権がありません",
+    th: "ยังไม่มีสิทธิ์เข้าใช้งาน",
+    en: "No admin access",
+  },
+  "noaccess.body": {
+    ja: "このアカウントには管理画面の権限が割り当てられていません。管理者にお問い合わせください。",
+    th: "บัญชีนี้ยังไม่ได้รับสิทธิ์เข้าหน้าจัดการ กรุณาติดต่อผู้ดูแลระบบ",
+    en: "This account has no admin sections assigned. Please contact an administrator.",
+  },
 
   // ── login ─────────────────────────────────────────────────────────
   "login.sub": { ja: "管理画面 / Admin", th: "ระบบจัดการ / Admin", en: "Admin" },

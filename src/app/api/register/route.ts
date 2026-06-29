@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
+import { and, eq } from "drizzle-orm";
 import { db } from "@/db";
-import { registrations } from "@/db/schema";
+import { registrations, users } from "@/db/schema";
 import { getContent } from "@/lib/content";
 import {
   findCohort,
@@ -75,19 +76,30 @@ export async function POST(req: Request) {
   // Email is best-effort — never block a successful registration.
   const cohort = cohorts.find((c) => c.value === sessionDate) ?? (await findCohort(sessionDate));
   const course = getContent("activities", COURSE_SLUG, locale);
-  const email = await sendRegistrationEmails({
-    email: get("email"),
-    fullName: get("fullName"),
-    furigana: get("furigana"),
-    gender: get("gender"),
-    nationality: get("nationality"),
-    prefecture: get("prefecture") || null,
-    phone: get("phone") || null,
-    referralSource: get("referralSource"),
-    photoConsent: get("photoConsent"),
-    sessionLabel: cohort ? cohortLabel(cohort, locale) : sessionDate,
-    courseTitle: course?.meta.title ?? "Meditation Course",
-  }).catch(() => ({ customer: false, team: false }));
+
+  // Team recipients: anyone toggled "notify on registration" in the Users page.
+  const notifyTeam = await db
+    .select({ email: users.email })
+    .from(users)
+    .where(and(eq(users.isActive, true), eq(users.notifyRegistrations, true)))
+    .catch(() => [] as { email: string }[]);
+
+  const email = await sendRegistrationEmails(
+    {
+      email: get("email"),
+      fullName: get("fullName"),
+      furigana: get("furigana"),
+      gender: get("gender"),
+      nationality: get("nationality"),
+      prefecture: get("prefecture") || null,
+      phone: get("phone") || null,
+      referralSource: get("referralSource"),
+      photoConsent: get("photoConsent"),
+      sessionLabel: cohort ? cohortLabel(cohort, locale) : sessionDate,
+      courseTitle: course?.meta.title ?? "Meditation Course",
+    },
+    notifyTeam.map((u) => u.email),
+  ).catch(() => ({ customer: false, team: false }));
 
   return NextResponse.json({ ok: true, email });
 }

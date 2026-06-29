@@ -21,6 +21,7 @@ export async function GET() {
       blogRole: users.blogRole,
       canManageRegistrations: users.canManageRegistrations,
       canManageCourseDates: users.canManageCourseDates,
+      notifyRegistrations: users.notifyRegistrations,
       createdAt: users.createdAt,
       bylineName: authors.name,
       bylineBio: authors.bio,
@@ -84,6 +85,7 @@ export async function POST(req: Request) {
         blogRole: normalizeBlogRole(d.blogRole),
         canManageRegistrations: !!d.canManageRegistrations,
         canManageCourseDates: !!d.canManageCourseDates,
+        notifyRegistrations: !!d.notifyRegistrations,
       })
       .returning({ id: users.id });
     return NextResponse.json({ ok: true, id: row.id }, { status: 201 });

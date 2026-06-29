@@ -47,6 +47,8 @@ export async function PATCH(
     set.canManageRegistrations = !!d.canManageRegistrations;
   if (d.canManageCourseDates !== undefined)
     set.canManageCourseDates = !!d.canManageCourseDates;
+  if (d.notifyRegistrations !== undefined)
+    set.notifyRegistrations = !!d.notifyRegistrations;
 
   // Byline (authors row) edits.
   if (existing.authorId && (d.bylineName !== undefined || d.bylineBio !== undefined)) {

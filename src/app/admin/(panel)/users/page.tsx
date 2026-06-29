@@ -23,6 +23,7 @@ export default async function AdminUsersPage() {
       blogRole: users.blogRole,
       canManageRegistrations: users.canManageRegistrations,
       canManageCourseDates: users.canManageCourseDates,
+      notifyRegistrations: users.notifyRegistrations,
       bylineName: authors.name,
       bylineBio: authors.bio,
     })

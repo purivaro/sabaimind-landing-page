@@ -120,6 +120,9 @@ export const users = pgTable("users", {
   canManageCourseDates: boolean("can_manage_course_dates")
     .notNull()
     .default(false),
+  // Receive an email whenever someone registers for an event (independent of
+  // any admin permission — a recipient need not manage anything).
+  notifyRegistrations: boolean("notify_registrations").notNull().default(false),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
     .defaultNow(),

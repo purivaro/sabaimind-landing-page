@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
   },
+  async redirects() {
+    return [
+      // Memorable shortcut to the admin panel.
+      { source: "/login", destination: "/admin", permanent: false },
+    ];
+  },
 };
 
 export default nextConfig;

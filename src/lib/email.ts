@@ -17,13 +17,28 @@ export type RegistrationEmail = {
   courseTitle: string;
 };
 
-function teamEmails(): string[] {
+function envTeamEmails(): string[] {
   const raw =
     process.env.REGISTRATION_TEAM_EMAILS || process.env.ADMIN_EMAILS || "";
   return raw
     .split(",")
     .map((e) => e.trim())
     .filter(Boolean);
+}
+
+/** Env team list + any extra recipients (e.g. DB notify users), deduped. */
+function teamEmails(extra: string[] = []): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const e of [...envTeamEmails(), ...extra]) {
+    const v = e.trim();
+    const key = v.toLowerCase();
+    if (v && !seen.has(key)) {
+      seen.add(key);
+      out.push(v);
+    }
+  }
+  return out;
 }
 
 function rows(reg: RegistrationEmail): [string, string][] {
@@ -76,12 +91,13 @@ async function send(payload: {
  */
 export async function sendRegistrationEmails(
   reg: RegistrationEmail,
+  extraTeam: string[] = [],
 ): Promise<{ customer: boolean; team: boolean; skipped?: boolean }> {
   if (!process.env.RESEND_API_KEY) {
     return { customer: false, team: false, skipped: true };
   }
   const from = process.env.RESEND_FROM_EMAIL || DEFAULT_FROM;
-  const team = teamEmails();
+  const team = teamEmails(extraTeam);
   const body = table(reg);
 
   const results = await Promise.allSettled([
