@@ -15,7 +15,7 @@ export default async function RegisterPage({
   const t = getDictionary(locale);
   const course = getContent("activities", "utsunomiya-meditation-course", locale);
   const sessions = getUpcomingSessions().map((s) => ({
-    value: s.date,
+    value: s.value,
     label: sessionLabel(s, locale),
   }));
 

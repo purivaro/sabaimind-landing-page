@@ -3,7 +3,7 @@ import { db } from "@/db";
 import { registrations } from "@/db/schema";
 import { getContent } from "@/lib/content";
 import {
-  COURSE_SESSIONS,
+  findSession,
   getUpcomingSessions,
   sessionLabel,
 } from "@/lib/courseSessions";
@@ -42,8 +42,8 @@ export async function POST(req: Request) {
   }
 
   const sessionDate = get("sessionDate");
-  // Must be a real, not-yet-passed session.
-  if (!getUpcomingSessions().some((s) => s.date === sessionDate)) {
+  // Must be a real, not-yet-passed session (date × slot).
+  if (!getUpcomingSessions().some((s) => s.value === sessionDate)) {
     return NextResponse.json(
       { error: "Selected date is not available" },
       { status: 422 },
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
   }
 
   // Email is best-effort — never block a successful registration.
-  const session = COURSE_SESSIONS.find((s) => s.date === sessionDate);
+  const session = findSession(sessionDate);
   const course = getContent("activities", COURSE_SLUG, locale);
   const email = await sendRegistrationEmails({
     email: get("email"),

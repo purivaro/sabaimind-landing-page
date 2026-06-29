@@ -2,14 +2,14 @@ import Link from "next/link";
 import { and, desc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { registrations } from "@/db/schema";
-import { COURSE_SESSIONS, sessionLabel } from "@/lib/courseSessions";
+import { ALL_SESSIONS, findSession, sessionLabel } from "@/lib/courseSessions";
 import { RegistrationActions } from "@/components/admin/RegistrationActions";
 
 export const dynamic = "force-dynamic";
 
-function dateLabel(iso: string): string {
-  const s = COURSE_SESSIONS.find((x) => x.date === iso);
-  return s ? sessionLabel(s, "ja") : iso;
+function dateLabel(value: string): string {
+  const s = findSession(value);
+  return s ? sessionLabel(s, "ja") : value;
 }
 
 function fmt(d: Date): string {
@@ -43,7 +43,7 @@ export default async function AdminRegistrationsList({
 
   const filters = [
     { key: "all", label: "すべて" },
-    ...COURSE_SESSIONS.map((s) => ({ key: s.date, label: dateLabel(s.date) })),
+    ...ALL_SESSIONS.map((s) => ({ key: s.value, label: sessionLabel(s, "ja") })),
   ];
 
   return (
@@ -96,7 +96,9 @@ export default async function AdminRegistrationsList({
                 <th className="px-3 py-3 font-medium">属性</th>
                 <th className="px-3 py-3 font-medium">きっかけ</th>
                 <th className="px-3 py-3 font-medium">写真</th>
-                <th className="px-3 py-3" />
+                <th className="px-3 py-3">
+                  <span className="sr-only">操作</span>
+                </th>
               </tr>
             </thead>
             <tbody>

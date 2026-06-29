@@ -55,9 +55,9 @@ export function RegistrationForm({
     nationality: "",
     prefecture: "",
     phone: "",
-    referralSource: "",
     photoConsent: "",
   });
+  const [referral, setReferral] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
@@ -66,15 +66,35 @@ export function RegistrationForm({
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
+  function toggleReferral(option: string) {
+    setReferral((prev) =>
+      prev.includes(option)
+        ? prev.filter((o) => o !== option)
+        : [...prev, option],
+    );
+  }
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (referral.length === 0) {
+      setError(
+        locale === "en"
+          ? "Please select at least one option."
+          : "1つ以上選択してください。",
+      );
+      return;
+    }
     setBusy(true);
     setError("");
     try {
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, locale }),
+        body: JSON.stringify({
+          ...form,
+          referralSource: referral.join(", "),
+          locale,
+        }),
       });
       if (!res.ok) {
         setError(labels.errorGeneric);
@@ -206,16 +226,29 @@ export function RegistrationForm({
 
       <div>
         {label(labels.referral)}
-        <select required className={inputCls} value={form.referralSource} onChange={set("referralSource")}>
-          <option value="" disabled>
-            {labels.choosePlaceholder}
-          </option>
-          {labels.referralOptions.map((o) => (
-            <option key={o} value={o}>
-              {o}
-            </option>
-          ))}
-        </select>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {labels.referralOptions.map((o) => {
+            const checked = referral.includes(o);
+            return (
+              <label
+                key={o}
+                className={`flex cursor-pointer items-center gap-2.5 rounded-lg border px-3.5 py-2.5 text-on-surface transition-colors ${
+                  checked
+                    ? "border-primary bg-primary/10"
+                    : "border-outline-variant/50 hover:bg-surface-container"
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => toggleReferral(o)}
+                  className="h-4 w-4 accent-primary"
+                />
+                {o}
+              </label>
+            );
+          })}
+        </div>
       </div>
 
       <div>
