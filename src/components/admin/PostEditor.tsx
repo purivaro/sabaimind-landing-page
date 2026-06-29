@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { makeT, type AdminLang } from "@/lib/adminI18n";
 
 export type EditorPost = {
   id: number;
@@ -17,7 +18,14 @@ export type EditorPost = {
   status: string;
 };
 
-export function PostEditor({ post }: { post?: EditorPost }) {
+export function PostEditor({
+  post,
+  lang = "ja",
+}: {
+  post?: EditorPost;
+  lang?: AdminLang;
+}) {
+  const t = makeT(lang);
   const router = useRouter();
   const [title, setTitle] = useState(post?.title ?? "");
   const [slug, setSlug] = useState(post?.slug ?? "");
@@ -37,7 +45,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
     const res = await fetch("/api/admin/upload", { method: "POST", body: form });
     const data = await res.json();
     if (!res.ok) {
-      setError(data.error ?? "Upload failed");
+      setError(data.error ?? t("be.uploadFailed"));
       return null;
     }
     return data.url as string;
@@ -67,7 +75,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
 
   async function save(status: "draft" | "published") {
     if (!title.trim() || !body.trim()) {
-      setError("タイトルと本文は必須です。");
+      setError(t("be.errRequired"));
       return;
     }
     setBusy(true);
@@ -84,7 +92,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
     const data = await res.json();
     setBusy(false);
     if (!res.ok) {
-      setError(data.error ?? "保存に失敗しました。");
+      setError(data.error ?? t("common.saveFailed"));
       return;
     }
     router.push("/admin/blog");
@@ -93,7 +101,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
 
   async function aiDraft() {
     if (!idea.trim()) {
-      setError("AI に渡すアイデアを入力してください。");
+      setError(t("be.errIdea"));
       return;
     }
     setBusy(true);
@@ -106,7 +114,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
     const data = await res.json();
     setBusy(false);
     if (!res.ok) {
-      setError(data.error ?? "AI 生成に失敗しました。");
+      setError(data.error ?? t("be.errAiDraft"));
       return;
     }
     setTitle(data.title ?? "");
@@ -117,7 +125,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
   async function aiImage() {
     const subject = (title || idea).trim();
     if (!subject) {
-      setError("画像生成にはタイトルかアイデアが必要です。");
+      setError(t("be.errAiImageNeed"));
       return;
     }
     setBusy(true);
@@ -132,7 +140,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
     const data = await res.json();
     setBusy(false);
     if (!res.ok) {
-      setError(data.error ?? "画像生成に失敗しました。");
+      setError(data.error ?? t("be.errAiImage"));
       return;
     }
     setCoverImage(data.url);
@@ -145,7 +153,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
     <div className="mx-auto max-w-6xl px-6 py-8">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-xl font-semibold text-on-surface">
-          {isEdit ? "記事を編集" : "新しい記事"}
+          {isEdit ? t("be.editTitle") : t("be.newTitle")}
         </h1>
         <div className="flex items-center gap-2">
           <button
@@ -154,7 +162,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
             disabled={busy}
             className="rounded-full border border-outline-variant/50 px-5 py-2 text-sm font-medium text-on-surface hover:bg-surface-container disabled:opacity-50"
           >
-            下書き保存
+            {t("be.saveDraft")}
           </button>
           <button
             type="button"
@@ -162,7 +170,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
             disabled={busy}
             className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-on-primary hover:bg-primary-fixed-dim hover:text-on-primary-fixed disabled:opacity-50"
           >
-            公開する
+            {t("be.publish")}
           </button>
         </div>
       </div>
@@ -178,7 +186,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
         <div className="space-y-4">
           <input
             className={`${inputCls} text-lg font-semibold`}
-            placeholder="タイトル"
+            placeholder={t("be.phTitle")}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -187,14 +195,14 @@ export function PostEditor({ post }: { post?: EditorPost }) {
             <div className="grid grid-cols-[1fr_auto] gap-2">
               <input
                 className={inputCls}
-                placeholder="スラッグ（URL）任意"
+                placeholder={t("be.phSlug")}
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
               />
             </div>
             <select
               className={inputCls}
-              aria-label="言語"
+              aria-label={t("be.lang")}
               value={locale}
               onChange={(e) => setLocale(e.target.value)}
             >
@@ -205,7 +213,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
 
           <textarea
             className={inputCls}
-            placeholder="抜粋（一覧・SNS用）任意"
+            placeholder={t("be.phExcerpt")}
             rows={2}
             value={excerpt}
             onChange={(e) => setExcerpt(e.target.value)}
@@ -214,28 +222,28 @@ export function PostEditor({ post }: { post?: EditorPost }) {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
               <label className="mb-2 block text-sm font-medium text-on-surface-variant">
-                本文（Markdown）
+                {t("be.bodyLabel")}
               </label>
               <textarea
                 className={`${inputCls} font-mono text-sm`}
                 rows={22}
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
-                placeholder="# 見出し&#10;&#10;本文を Markdown で書きます。"
+                placeholder={t("be.phBody")}
               />
               <label className="mt-2 inline-flex cursor-pointer items-center gap-2 text-sm text-primary">
                 <span className="material-symbols-outlined text-[18px]">image</span>
-                本文に画像を挿入
+                {t("be.insertImage")}
                 <input type="file" accept="image/*" className="hidden" onChange={onBodyImageSelected} />
               </label>
             </div>
             <div>
               <label className="mb-2 block text-sm font-medium text-on-surface-variant">
-                プレビュー
+                {t("be.preview")}
               </label>
               <div className="prose prose-zinc h-[36rem] max-w-none overflow-y-auto rounded-lg border border-outline-variant/40 bg-surface-container-lowest p-4">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {body || "_プレビューがここに表示されます_"}
+                  {body || t("be.previewPlaceholder")}
                 </ReactMarkdown>
               </div>
             </div>
@@ -249,12 +257,12 @@ export function PostEditor({ post }: { post?: EditorPost }) {
               <span className="material-symbols-outlined text-[18px] text-primary">
                 auto_awesome
               </span>
-              AI アシスト
+              {t("be.aiAssist")}
             </h3>
             <textarea
               className={`${inputCls} text-sm`}
               rows={3}
-              placeholder="記事のアイデアを入力（例：瞑想を始める人へのアドバイス）"
+              placeholder={t("be.phIdea")}
               value={idea}
               onChange={(e) => setIdea(e.target.value)}
             />
@@ -266,7 +274,7 @@ export function PostEditor({ post }: { post?: EditorPost }) {
                 className="flex items-center justify-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary hover:bg-primary-fixed-dim hover:text-on-primary-fixed disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[18px]">edit_note</span>
-                AI で下書きを生成
+                {t("be.aiDraft")}
               </button>
               <button
                 type="button"
@@ -275,13 +283,13 @@ export function PostEditor({ post }: { post?: EditorPost }) {
                 className="flex items-center justify-center gap-1.5 rounded-full border border-primary/50 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[18px]">image</span>
-                AI でカバー画像を生成
+                {t("be.aiImage")}
               </button>
             </div>
           </div>
 
           <div className="rounded-xl border border-outline-variant/40 bg-surface-container-lowest p-4">
-            <h3 className="mb-3 text-sm font-semibold text-on-surface">カバー画像</h3>
+            <h3 className="mb-3 text-sm font-semibold text-on-surface">{t("be.cover")}</h3>
             {coverImage ? (
               <div className="mb-3 overflow-hidden rounded-lg">
                 <Image
@@ -299,22 +307,26 @@ export function PostEditor({ post }: { post?: EditorPost }) {
             )}
             <label className="inline-flex cursor-pointer items-center gap-2 text-sm text-primary">
               <span className="material-symbols-outlined text-[18px]">upload</span>
-              アップロード
+              {t("be.upload")}
               <input type="file" accept="image/*" className="hidden" onChange={onCoverSelected} />
             </label>
             {coverImage && (
               <button
+                type="button"
                 onClick={() => setCoverImage("")}
                 className="ml-3 text-sm text-on-surface-variant hover:text-error"
               >
-                削除
+                {t("common.delete")}
               </button>
             )}
           </div>
 
           {isEdit && (
             <p className="text-xs text-on-surface-variant">
-              ステータス: {post!.status === "published" ? "公開中" : "下書き"}
+              {t("be.statusLabel")}:{" "}
+              {post!.status === "published"
+                ? t("status.published")
+                : t("status.draft")}
             </p>
           )}
         </aside>

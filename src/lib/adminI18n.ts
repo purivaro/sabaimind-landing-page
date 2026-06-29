@@ -65,6 +65,62 @@ const dict: Record<string, Entry> = {
   "status.draft": { ja: "下書き", th: "ฉบับร่าง", en: "Draft" },
   "status.published": { ja: "公開", th: "เผยแพร่แล้ว", en: "Published" },
 
+  // ── blog editor ──────────────────────────────────────────────────
+  "be.newTitle": { ja: "新しい記事", th: "บทความใหม่", en: "New post" },
+  "be.editTitle": { ja: "記事を編集", th: "แก้ไขบทความ", en: "Edit post" },
+  "be.saveDraft": { ja: "下書き保存", th: "บันทึกฉบับร่าง", en: "Save draft" },
+  "be.publish": { ja: "公開する", th: "เผยแพร่", en: "Publish" },
+  "be.phTitle": { ja: "タイトル", th: "หัวข้อ", en: "Title" },
+  "be.phSlug": { ja: "スラッグ（URL）任意", th: "สลัก (URL) ไม่บังคับ", en: "Slug (URL), optional" },
+  "be.lang": { ja: "言語", th: "ภาษา", en: "Language" },
+  "be.phExcerpt": {
+    ja: "抜粋（一覧・SNS用）任意",
+    th: "บทคัดย่อ (สำหรับหน้ารวม/โซเชียล) ไม่บังคับ",
+    en: "Excerpt (for lists / social), optional",
+  },
+  "be.bodyLabel": { ja: "本文（Markdown）", th: "เนื้อหา (Markdown)", en: "Body (Markdown)" },
+  "be.phBody": {
+    ja: "# 見出し\n\n本文を Markdown で書きます。",
+    th: "# หัวข้อ\n\nเขียนเนื้อหาด้วย Markdown",
+    en: "# Heading\n\nWrite your content in Markdown.",
+  },
+  "be.insertImage": { ja: "本文に画像を挿入", th: "แทรกรูปในเนื้อหา", en: "Insert image into body" },
+  "be.preview": { ja: "プレビュー", th: "ตัวอย่าง", en: "Preview" },
+  "be.previewPlaceholder": {
+    ja: "_プレビューがここに表示されます_",
+    th: "_ตัวอย่างจะแสดงที่นี่_",
+    en: "_Preview appears here_",
+  },
+  "be.aiAssist": { ja: "AI アシスト", th: "ผู้ช่วย AI", en: "AI assist" },
+  "be.phIdea": {
+    ja: "記事のアイデアを入力（例：瞑想を始める人へのアドバイス）",
+    th: "ใส่ไอเดียบทความ (เช่น คำแนะนำสำหรับผู้เริ่มนั่งสมาธิ)",
+    en: "Enter an article idea (e.g. advice for beginners in meditation)",
+  },
+  "be.aiDraft": { ja: "AI で下書きを生成", th: "ให้ AI ร่างบทความ", en: "Generate draft with AI" },
+  "be.aiImage": { ja: "AI でカバー画像を生成", th: "ให้ AI สร้างรูปปก", en: "Generate cover with AI" },
+  "be.cover": { ja: "カバー画像", th: "รูปปก", en: "Cover image" },
+  "be.upload": { ja: "アップロード", th: "อัปโหลด", en: "Upload" },
+  "be.statusLabel": { ja: "ステータス", th: "สถานะ", en: "Status" },
+  "be.errRequired": {
+    ja: "タイトルと本文は必須です。",
+    th: "ต้องกรอกหัวข้อและเนื้อหา",
+    en: "Title and body are required.",
+  },
+  "be.errIdea": {
+    ja: "AI に渡すアイデアを入力してください。",
+    th: "กรุณาใส่ไอเดียสำหรับ AI",
+    en: "Enter an idea for the AI.",
+  },
+  "be.errAiDraft": { ja: "AI 生成に失敗しました。", th: "AI สร้างบทความไม่สำเร็จ", en: "AI generation failed." },
+  "be.errAiImageNeed": {
+    ja: "画像生成にはタイトルかアイデアが必要です。",
+    th: "ต้องมีหัวข้อหรือไอเดียก่อนจึงจะสร้างรูปได้",
+    en: "A title or idea is required to generate an image.",
+  },
+  "be.errAiImage": { ja: "画像生成に失敗しました。", th: "สร้างรูปไม่สำเร็จ", en: "Image generation failed." },
+  "be.uploadFailed": { ja: "アップロードに失敗しました。", th: "อัปโหลดไม่สำเร็จ", en: "Upload failed." },
+
   // ── registrations ─────────────────────────────────────────────────
   "reg.all": { ja: "すべて", th: "ทั้งหมด", en: "All" },
   "reg.csv": { ja: "CSV", th: "CSV", en: "CSV" },

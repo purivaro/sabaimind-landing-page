@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { articles } from "@/db/schema";
 import { PostEditor } from "@/components/admin/PostEditor";
+import { getAdminLang } from "@/lib/adminLang";
 
 export const dynamic = "force-dynamic";
 
@@ -20,8 +21,11 @@ export default async function EditPostPage({
   const post = rows[0];
   if (!post) notFound();
 
+  const lang = await getAdminLang();
+
   return (
     <PostEditor
+      lang={lang}
       post={{
         id: post.id,
         title: post.title,
