@@ -15,6 +15,7 @@ export function Nav({ locale }: { locale: Locale }) {
     { href: "/news", label: t.nav.news },
     { href: "/videos", label: t.nav.videos },
     { href: "/blog", label: t.nav.blog },
+    { href: "/contact", label: t.nav.contact },
   ];
 
   return (
@@ -42,14 +43,14 @@ export function Nav({ locale }: { locale: Locale }) {
             <LocaleSwitcher current={locale} />
           </div>
           <Link
-            href={`/${locale}/contact`}
+            href={`/${locale}/register`}
             className="hidden items-center rounded-full bg-primary px-5 py-2.5 font-label-md uppercase tracking-wide text-on-primary shadow-[0_6px_16px_-6px_rgb(124_87_31_/_0.6)] transition-all duration-200 hover:bg-primary-fixed-dim hover:text-on-primary-fixed active:translate-y-px lg:inline-flex"
           >
-            {t.nav.contact}
+            {t.nav.register}
           </Link>
           <MobileMenu
             locale={locale}
-            items={[...items, { href: "/contact", label: t.nav.contact }]}
+            items={[...items, { href: "/register", label: t.nav.register }]}
           />
         </div>
       </nav>

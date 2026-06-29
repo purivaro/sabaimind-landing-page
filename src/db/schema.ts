@@ -4,6 +4,7 @@ import {
   text,
   timestamp,
   integer,
+  boolean,
   index,
 } from "drizzle-orm/pg-core";
 
@@ -57,6 +58,41 @@ export const articles = pgTable(
   ],
 );
 
+/**
+ * Event/course registrations (simplified signup form). One course is open at a
+ * time (utsunomiya-meditation-course); `sessionDate` is the chosen session
+ * (ISO date, e.g. 2026-07-07). Past sessions are hidden on the form by date.
+ */
+export const registrations = pgTable(
+  "registrations",
+  {
+    id: serial("id").primaryKey(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    courseSlug: text("course_slug")
+      .notNull()
+      .default("utsunomiya-meditation-course"),
+    sessionDate: text("session_date").notNull(), // ISO date of the chosen 開催日
+    email: text("email").notNull(),
+    fullName: text("full_name").notNull(),
+    furigana: text("furigana").notNull(),
+    gender: text("gender").notNull(), // 女 | 男
+    nationality: text("nationality").notNull(),
+    prefecture: text("prefecture"),
+    phone: text("phone"),
+    referralSource: text("referral_source").notNull(),
+    photoConsent: text("photo_consent").notNull(), // agree | disagree
+    locale: text("locale").notNull().default("ja"),
+    handled: boolean("handled").notNull().default(false),
+  },
+  (t) => [
+    index("idx_registrations_session").on(t.sessionDate),
+    index("idx_registrations_created").on(t.createdAt),
+  ],
+);
+
 export type Author = typeof authors.$inferSelect;
 export type Article = typeof articles.$inferSelect;
 export type NewArticle = typeof articles.$inferInsert;
+export type Registration = typeof registrations.$inferSelect;

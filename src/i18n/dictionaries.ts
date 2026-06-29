@@ -14,6 +14,7 @@ type Dict = {
     videos: string;
     blog: string;
     contact: string;
+    register: string;
   };
   blog: {
     title: string;
@@ -21,6 +22,36 @@ type Dict = {
     readMore: string;
     backToList: string;
     empty: string;
+  };
+  register: {
+    title: string;
+    subtitle: string;
+    courseLabel: string;
+    email: string;
+    name: string;
+    furigana: string;
+    gender: string;
+    genderFemale: string;
+    genderMale: string;
+    nationality: string;
+    prefecture: string;
+    phone: string;
+    optional: string;
+    sessionDate: string;
+    sessionPlaceholder: string;
+    noSessions: string;
+    referral: string;
+    referralOptions: string[];
+    photoConsent: string;
+    photoAgree: string;
+    photoDisagree: string;
+    choosePlaceholder: string;
+    submit: string;
+    submitting: string;
+    successTitle: string;
+    successBody: string;
+    backHome: string;
+    errorGeneric: string;
   };
   site: {
     name: string;
@@ -127,6 +158,7 @@ const ja: Dict = {
     videos: "動画",
     blog: "ブログ",
     contact: "お問い合わせ",
+    register: "申し込む",
   },
   blog: {
     title: "ブログ",
@@ -134,6 +166,47 @@ const ja: Dict = {
     readMore: "続きを読む",
     backToList: "ブログ一覧へ戻る",
     empty: "まだ記事がありません。",
+  },
+  register: {
+    title: "お申し込み",
+    subtitle: "下記フォームよりお申し込みください。",
+    courseLabel: "お申し込みコース",
+    email: "メールアドレス",
+    name: "氏名",
+    furigana: "ふりがな",
+    gender: "性別",
+    genderFemale: "女",
+    genderMale: "男",
+    nationality: "国籍",
+    prefecture: "お住まいの都道府県",
+    phone: "電話番号",
+    optional: "任意",
+    sessionDate: "開催日",
+    sessionPlaceholder: "開催日を選択してください",
+    noSessions: "現在お申し込みいただける開催日はありません。",
+    referral: "どのようにして Sabai Mind を知りましたか？",
+    referralOptions: [
+      "リピーター",
+      "友人の紹介",
+      "Facebook",
+      "Instagram",
+      "YouTube",
+      "Google Map",
+      "Google検索",
+      "Yahoo！検索",
+      "その他",
+    ],
+    photoConsent: "コース中に撮影した写真の掲載について",
+    photoAgree: "同意します",
+    photoDisagree: "同意しません",
+    choosePlaceholder: "選択してください",
+    submit: "この内容で申し込む",
+    submitting: "送信中…",
+    successTitle: "お申し込みありがとうございます",
+    successBody:
+      "お申し込みを受け付けました。担当者より追ってご連絡いたします。確認メールもご確認ください。",
+    backHome: "ホームに戻る",
+    errorGeneric: "送信に失敗しました。時間をおいて再度お試しください。",
   },
   site: {
     name: "Sabai Mind",
@@ -290,6 +363,7 @@ const en: Dict = {
     videos: "Videos",
     blog: "Blog",
     contact: "Contact",
+    register: "Register",
   },
   blog: {
     title: "Blog",
@@ -297,6 +371,47 @@ const en: Dict = {
     readMore: "Read more",
     backToList: "Back to blog",
     empty: "No posts yet.",
+  },
+  register: {
+    title: "Registration",
+    subtitle: "Please sign up using the form below.",
+    courseLabel: "Course",
+    email: "Email",
+    name: "Full name",
+    furigana: "Furigana (phonetic)",
+    gender: "Gender",
+    genderFemale: "Female",
+    genderMale: "Male",
+    nationality: "Nationality",
+    prefecture: "Prefecture of residence",
+    phone: "Phone number",
+    optional: "optional",
+    sessionDate: "Session date",
+    sessionPlaceholder: "Select a session date",
+    noSessions: "There are no upcoming sessions open for registration.",
+    referral: "How did you hear about Sabai Mind?",
+    referralOptions: [
+      "Returning participant",
+      "Friend referral",
+      "Facebook",
+      "Instagram",
+      "YouTube",
+      "Google Map",
+      "Google Search",
+      "Yahoo! Search",
+      "Other",
+    ],
+    photoConsent: "Consent to publish photos taken during the course",
+    photoAgree: "I agree",
+    photoDisagree: "I do not agree",
+    choosePlaceholder: "Please choose",
+    submit: "Submit registration",
+    submitting: "Submitting…",
+    successTitle: "Thank you for registering",
+    successBody:
+      "Your registration has been received. Our team will contact you shortly — please also check your confirmation email.",
+    backHome: "Back to home",
+    errorGeneric: "Submission failed. Please try again later.",
   },
   site: {
     name: "Sabai Mind",
