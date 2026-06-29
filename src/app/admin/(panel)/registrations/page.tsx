@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { and, desc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { registrations } from "@/db/schema";
 import { getAllCohorts, cohortLabel } from "@/lib/courseDates";
 import { RegistrationsBoard, type RegRow } from "@/components/admin/RegistrationsBoard";
+import { RegistrationFilter } from "@/components/admin/RegistrationFilter";
 import { getAdminLang } from "@/lib/adminLang";
 import { makeT } from "@/lib/adminI18n";
 
@@ -99,21 +99,11 @@ export default async function AdminRegistrationsList({
       </div>
 
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-2">
-          {filters.map((f) => (
-            <Link
-              key={f.key}
-              href={f.key === "all" ? "/admin/registrations" : `/admin/registrations?session=${f.key}`}
-              className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
-                sessionFilter === f.key
-                  ? "bg-primary text-on-primary"
-                  : "border border-outline-variant/50 text-on-surface hover:bg-surface-container"
-              }`}
-            >
-              {f.label}
-            </Link>
-          ))}
-        </div>
+        <RegistrationFilter
+          options={filters}
+          current={sessionFilter}
+          label={t("reg.filter")}
+        />
         <a
           href="/api/admin/registrations/export"
           className="inline-flex items-center gap-1.5 rounded-full border border-outline-variant/50 px-4 py-1.5 text-sm font-medium text-on-surface hover:bg-surface-container"

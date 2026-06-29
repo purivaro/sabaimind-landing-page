@@ -82,6 +82,7 @@ const dict: Record<string, Entry> = {
   "reg.sum.handled": { ja: "対応済み", th: "ดำเนินการแล้ว", en: "Handled" },
   // list + detail
   "reg.recent": { ja: "申し込み", th: "รายการสมัคร", en: "Registrations" },
+  "reg.filter": { ja: "開催日で絞り込み", th: "กรองตามรุ่น/วันจัด", en: "Filter by session" },
   "reg.details": { ja: "詳細", th: "รายละเอียด", en: "Details" },
   "reg.selectPrompt": {
     ja: "左の一覧から申し込みを選択してください。",
