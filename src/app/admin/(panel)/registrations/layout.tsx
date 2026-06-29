@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import { AdminHeader } from "@/components/admin/AdminHeader";
 import { getCurrentUser } from "@/lib/admin";
 
 export default async function AdminRegistrationsLayout({
@@ -10,11 +9,5 @@ export default async function AdminRegistrationsLayout({
   const me = await getCurrentUser();
   if (!me) redirect("/admin/signin");
   if (!me.canManageRegistrations) redirect("/admin");
-
-  return (
-    <div className="min-h-screen">
-      <AdminHeader me={me} />
-      {children}
-    </div>
-  );
+  return <>{children}</>;
 }

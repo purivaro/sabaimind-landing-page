@@ -3,18 +3,14 @@ import { desc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { articles, authors } from "@/db/schema";
 import { DeleteButton } from "@/components/admin/DeleteButton";
+import { getAdminLang } from "@/lib/adminLang";
+import { makeT } from "@/lib/adminI18n";
 
 export const dynamic = "force-dynamic";
 
 function fmt(d: Date | null) {
   return d ? new Date(d).toISOString().slice(0, 10) : "—";
 }
-
-const LOCALE_FILTERS = [
-  { key: "all", label: "すべて" },
-  { key: "ja", label: "日本語" },
-  { key: "en", label: "English" },
-] as const;
 
 export default async function AdminBlogList({
   searchParams,
@@ -23,6 +19,13 @@ export default async function AdminBlogList({
 }) {
   const sp = await searchParams;
   const locale = sp.locale === "ja" || sp.locale === "en" ? sp.locale : "all";
+  const t = makeT(await getAdminLang());
+
+  const LOCALE_FILTERS = [
+    { key: "all", label: t("reg.all") },
+    { key: "ja", label: "日本語" },
+    { key: "en", label: "English" },
+  ] as const;
 
   const posts = await db
     .select({
@@ -42,8 +45,7 @@ export default async function AdminBlogList({
   return (
     <main className="mx-auto max-w-6xl px-6 py-8">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-xl font-semibold text-on-surface">記事一覧</h1>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {LOCALE_FILTERS.map((opt) => (
             <Link
               key={opt.key}
@@ -58,13 +60,19 @@ export default async function AdminBlogList({
             </Link>
           ))}
         </div>
+        <Link
+          href="/admin/blog/new"
+          className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary hover:bg-primary-fixed-dim hover:text-on-primary-fixed"
+        >
+          + {t("blog.new")}
+        </Link>
       </div>
 
       {posts.length === 0 ? (
         <div className="rounded-xl border border-dashed border-outline-variant/50 p-12 text-center text-on-surface-variant">
-          まだ記事がありません。
+          {t("blog.empty")}
           <Link href="/admin/blog/new" className="ml-2 text-primary underline">
-            最初の記事を書く
+            {t("blog.new")}
           </Link>
         </div>
       ) : (
@@ -72,10 +80,10 @@ export default async function AdminBlogList({
           <table className="w-full text-left text-sm">
             <thead className="border-b border-outline-variant/30 text-on-surface-variant">
               <tr>
-                <th className="px-4 py-3 font-medium">タイトル</th>
-                <th className="px-4 py-3 font-medium">言語</th>
-                <th className="px-4 py-3 font-medium">状態</th>
-                <th className="px-4 py-3 font-medium">更新日</th>
+                <th className="px-4 py-3 font-medium">{t("blog.th.title")}</th>
+                <th className="px-4 py-3 font-medium">{t("blog.th.lang")}</th>
+                <th className="px-4 py-3 font-medium">{t("blog.th.status")}</th>
+                <th className="px-4 py-3 font-medium">{t("blog.th.updated")}</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
@@ -104,7 +112,9 @@ export default async function AdminBlogList({
                           : "bg-surface-container-high text-on-surface-variant"
                       }`}
                     >
-                      {p.status === "published" ? "公開中" : "下書き"}
+                      {p.status === "published"
+                        ? t("status.published")
+                        : t("status.draft")}
                     </span>
                   </td>
                   <td className="px-4 py-3 text-on-surface-variant">
@@ -117,7 +127,7 @@ export default async function AdminBlogList({
                           href={`/${p.locale}/blog/${p.slug}`}
                           target="_blank"
                           className="text-on-surface-variant hover:text-primary"
-                          title="表示"
+                          title={t("nav.viewsite")}
                         >
                           <span className="material-symbols-outlined text-[20px]">
                             open_in_new

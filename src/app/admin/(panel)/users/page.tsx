@@ -3,11 +3,15 @@ import { db } from "@/db";
 import { users, authors } from "@/db/schema";
 import { getCurrentUser } from "@/lib/admin";
 import { UsersManager } from "@/components/admin/UsersManager";
+import { getAdminLang } from "@/lib/adminLang";
+import { makeT } from "@/lib/adminI18n";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminUsersPage() {
   const me = await getCurrentUser();
+  const lang = await getAdminLang();
+  const t = makeT(lang);
   const rows = await db
     .select({
       id: users.id,
@@ -29,13 +33,13 @@ export default async function AdminUsersPage() {
   return (
     <main className="mx-auto max-w-5xl px-6 py-8">
       <div className="mb-6">
-        <h1 className="text-xl font-semibold text-on-surface">ユーザー管理</h1>
-        <p className="mt-1 text-sm text-on-surface-variant">
-          管理画面にアクセスできるユーザーと権限を管理します。ログインは Google
-          アカウントのみ。招待したメールアドレスで初回ログイン時にアクセスが有効になります。
-        </p>
+        <p className="text-sm text-on-surface-variant">{t("um.subtitle")}</p>
       </div>
-      <UsersManager initial={rows} currentUserId={me?.id ?? null} />
+      <UsersManager
+        initial={rows}
+        currentUserId={me?.id ?? null}
+        lang={lang}
+      />
     </main>
   );
 }

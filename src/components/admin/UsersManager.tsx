@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { makeT, type AdminLang } from "@/lib/adminI18n";
 
 export type UserRow = {
   id: number;
@@ -39,20 +40,18 @@ const emptyDraft: Draft = {
   canManageCourseDates: false,
 };
 
-const BLOG_ROLES = [
-  { value: "none", label: "なし" },
-  { value: "writer", label: "ライター" },
-  { value: "editor", label: "編集者" },
-  { value: "director", label: "ディレクター" },
-];
+const BLOG_ROLE_VALUES = ["none", "writer", "editor", "director"] as const;
 
 export function UsersManager({
   initial,
   currentUserId,
+  lang,
 }: {
   initial: UserRow[];
   currentUserId: number | null;
+  lang: AdminLang;
 }) {
+  const t = makeT(lang);
   const router = useRouter();
   const [creating, setCreating] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -89,7 +88,7 @@ export function UsersManager({
 
   async function save() {
     if (!draft.email.trim() || !draft.email.includes("@")) {
-      setError("有効なメールアドレスを入力してください");
+      setError(t("um.invalidEmail"));
       return;
     }
     setBusy(true);
@@ -114,7 +113,7 @@ export function UsersManager({
     setBusy(false);
     if (!res.ok) {
       const j = await res.json().catch(() => ({}));
-      setError(j.error ?? "保存に失敗しました");
+      setError(j.error ?? t("common.saveFailed"));
       return;
     }
     cancel();
@@ -122,11 +121,11 @@ export function UsersManager({
   }
 
   async function remove(u: UserRow) {
-    if (!confirm(`「${u.email}」のアクセスを削除しますか？`)) return;
+    if (!confirm(t("um.confirmDelete", { email: u.email }))) return;
     const res = await fetch(`/api/admin/users/${u.id}`, { method: "DELETE" });
     if (!res.ok) {
       const j = await res.json().catch(() => ({}));
-      alert(j.error ?? "削除に失敗しました");
+      alert(j.error ?? t("common.saveFailed"));
       return;
     }
     router.refresh();
@@ -136,15 +135,12 @@ export function UsersManager({
   const editingSelf = editingId != null && editingId === currentUserId;
 
   function permSummary(u: UserRow): string {
-    if (u.isAdmin) return "管理者（全権限）";
+    if (u.isAdmin) return t("um.permFull");
     const parts: string[] = [];
-    if (u.blogRole !== "none")
-      parts.push(
-        BLOG_ROLES.find((r) => r.value === u.blogRole)?.label ?? u.blogRole,
-      );
-    if (u.canManageRegistrations) parts.push("申込");
-    if (u.canManageCourseDates) parts.push("開催日");
-    return parts.length ? parts.join(" · ") : "権限なし";
+    if (u.blogRole !== "none") parts.push(t(`role.${u.blogRole}`));
+    if (u.canManageRegistrations) parts.push(t("nav.registrations"));
+    if (u.canManageCourseDates) parts.push(t("nav.coursedates"));
+    return parts.length ? parts.join(" · ") : t("um.permNone");
   }
 
   return (
@@ -154,17 +150,17 @@ export function UsersManager({
           onClick={startCreate}
           className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary hover:bg-primary-fixed-dim hover:text-on-primary-fixed"
         >
-          + ユーザーを招待
+          + {t("um.invite")}
         </button>
       </div>
 
       {formOpen && (
         <div className="mb-6 rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-5">
           <h2 className="mb-4 text-sm font-semibold text-on-surface">
-            {editingId != null ? "ユーザーを編集" : "ユーザーを招待"}
+            {editingId != null ? t("um.edit") : t("um.new")}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="メールアドレス（Google）*">
+            <Field label={t("um.f.email")}>
               <input
                 type="email"
                 value={draft.email}
@@ -173,19 +169,19 @@ export function UsersManager({
                 className="w-full rounded-lg border border-outline-variant/50 bg-surface-container-lowest px-3 py-2 text-sm text-on-surface"
               />
             </Field>
-            <Field label="表示名（署名）">
+            <Field label={t("um.f.byline")}>
               <input
                 value={draft.bylineName}
                 onChange={(e) =>
                   setDraft({ ...draft, bylineName: e.target.value })
                 }
-                placeholder="記事の著者名"
+                placeholder={t("um.f.byline")}
                 className="w-full rounded-lg border border-outline-variant/50 bg-surface-container-lowest px-3 py-2 text-sm text-on-surface"
               />
             </Field>
           </div>
           <div className="mt-4">
-            <Field label="プロフィール（任意）">
+            <Field label={t("um.f.bio")}>
               <textarea
                 value={draft.bylineBio}
                 onChange={(e) =>
@@ -199,7 +195,7 @@ export function UsersManager({
 
           <fieldset className="mt-5 rounded-lg border border-outline-variant/30 p-4">
             <legend className="px-1 text-xs font-medium text-on-surface-variant">
-              権限
+              {t("um.perm")}
             </legend>
             <label className="flex items-center gap-2 text-sm text-on-surface">
               <input
@@ -210,13 +206,13 @@ export function UsersManager({
                   setDraft({ ...draft, isAdmin: e.target.checked })
                 }
               />
-              管理者（ユーザー管理を含む全権限）
+              {t("um.admin")}
             </label>
             {!draft.isAdmin && (
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 <label className="block text-sm text-on-surface">
                   <span className="mb-1 block text-xs text-on-surface-variant">
-                    ブログ権限
+                    {t("um.blogRole")}
                   </span>
                   <select
                     value={draft.blogRole}
@@ -225,9 +221,9 @@ export function UsersManager({
                     }
                     className="w-full rounded-lg border border-outline-variant/50 bg-surface-container-lowest px-3 py-2 text-sm text-on-surface"
                   >
-                    {BLOG_ROLES.map((r) => (
-                      <option key={r.value} value={r.value}>
-                        {r.label}
+                    {BLOG_ROLE_VALUES.map((v) => (
+                      <option key={v} value={v}>
+                        {t(`role.${v}`)}
                       </option>
                     ))}
                   </select>
@@ -244,7 +240,7 @@ export function UsersManager({
                         })
                       }
                     />
-                    申込の管理
+                    {t("um.canReg")}
                   </label>
                   <label className="flex items-center gap-2 text-sm text-on-surface">
                     <input
@@ -257,7 +253,7 @@ export function UsersManager({
                         })
                       }
                     />
-                    開催日の管理
+                    {t("um.canCd")}
                   </label>
                 </div>
               </div>
@@ -271,7 +267,7 @@ export function UsersManager({
                   setDraft({ ...draft, isActive: e.target.checked })
                 }
               />
-              有効（ログインを許可）
+              {t("um.activeLogin")}
             </label>
           </fieldset>
 
@@ -282,13 +278,13 @@ export function UsersManager({
               disabled={busy}
               className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-on-primary disabled:opacity-50"
             >
-              {busy ? "保存中…" : "保存"}
+              {busy ? t("common.saving") : t("common.save")}
             </button>
             <button
               onClick={cancel}
               className="rounded-full border border-outline-variant/50 px-5 py-2 text-sm text-on-surface hover:bg-surface-container"
             >
-              キャンセル
+              {t("common.cancel")}
             </button>
           </div>
         </div>
@@ -296,19 +292,19 @@ export function UsersManager({
 
       {initial.length === 0 ? (
         <div className="rounded-xl border border-dashed border-outline-variant/50 p-12 text-center text-on-surface-variant">
-          ユーザーがまだいません。
+          {t("um.empty")}
         </div>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-outline-variant/30 bg-surface-container-lowest">
           <table className="w-full min-w-[760px] text-left text-sm">
             <thead className="border-b border-outline-variant/30 text-on-surface-variant">
               <tr>
-                <th className="px-3 py-3 font-medium">メール</th>
-                <th className="px-3 py-3 font-medium">表示名</th>
-                <th className="px-3 py-3 font-medium">権限</th>
-                <th className="px-3 py-3 font-medium">状態</th>
+                <th className="px-3 py-3 font-medium">{t("um.th.email")}</th>
+                <th className="px-3 py-3 font-medium">{t("um.th.name")}</th>
+                <th className="px-3 py-3 font-medium">{t("um.th.perm")}</th>
+                <th className="px-3 py-3 font-medium">{t("um.th.status")}</th>
                 <th className="px-3 py-3">
-                  <span className="sr-only">操作</span>
+                  <span className="sr-only">—</span>
                 </th>
               </tr>
             </thead>
@@ -322,7 +318,7 @@ export function UsersManager({
                     {u.email}
                     {u.id === currentUserId && (
                       <span className="ml-2 rounded-full bg-primary/15 px-2 py-0.5 text-xs text-primary">
-                        自分
+                        {t("um.you")}
                       </span>
                     )}
                   </td>
@@ -340,7 +336,7 @@ export function UsersManager({
                           : "bg-surface-container text-on-surface-variant"
                       }`}
                     >
-                      {u.isActive ? "有効" : "無効"}
+                      {u.isActive ? t("um.active") : t("um.inactive")}
                     </span>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3 text-right">
@@ -348,14 +344,14 @@ export function UsersManager({
                       onClick={() => startEdit(u)}
                       className="text-primary hover:underline"
                     >
-                      編集
+                      {t("common.edit")}
                     </button>
                     {u.id !== currentUserId && (
                       <button
                         onClick={() => remove(u)}
                         className="ml-3 text-error hover:underline"
                       >
-                        削除
+                        {t("common.delete")}
                       </button>
                     )}
                   </td>

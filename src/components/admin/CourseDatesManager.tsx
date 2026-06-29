@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { CourseDate } from "@/db/schema";
+import { makeT, type AdminLang } from "@/lib/adminI18n";
 
 type Draft = {
   date: string;
@@ -20,7 +21,14 @@ const emptyDraft: Draft = {
   isActive: true,
 };
 
-export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
+export function CourseDatesManager({
+  initial,
+  lang,
+}: {
+  initial: CourseDate[];
+  lang: AdminLang;
+}) {
+  const t = makeT(lang);
   const router = useRouter();
   const [creating, setCreating] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -54,7 +62,7 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
 
   async function save() {
     if (!draft.labelJa.trim()) {
-      setError("日本語ラベルは必須です");
+      setError(t("cd.required"));
       return;
     }
     setBusy(true);
@@ -78,7 +86,7 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
     setBusy(false);
     if (!res.ok) {
       const j = await res.json().catch(() => ({}));
-      setError(j.error ?? "保存に失敗しました");
+      setError(j.error ?? t("common.saveFailed"));
       return;
     }
     cancel();
@@ -95,7 +103,7 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
   }
 
   async function remove(c: CourseDate) {
-    if (!confirm(`「${c.labelJa}」を削除しますか？`)) return;
+    if (!confirm(t("cd.confirmDelete", { name: c.labelJa }))) return;
     await fetch(`/api/admin/course-dates/${c.id}`, { method: "DELETE" });
     router.refresh();
   }
@@ -109,17 +117,17 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
           onClick={startCreate}
           className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-on-primary hover:bg-primary-fixed-dim hover:text-on-primary-fixed"
         >
-          + 開催日を追加
+          + {t("cd.add")}
         </button>
       </div>
 
       {formOpen && (
         <div className="mb-6 rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-5">
           <h2 className="mb-4 text-sm font-semibold text-on-surface">
-            {editingId != null ? "開催日を編集" : "新しい開催日"}
+            {editingId != null ? t("cd.edit") : t("cd.new")}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="日付 (任意, YYYY-MM-DD)">
+            <Field label={`${t("cd.f.date")} ${t("common.optional")}`}>
               <input
                 type="date"
                 value={draft.date}
@@ -127,7 +135,7 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
                 className="w-full rounded-lg border border-outline-variant/50 bg-surface-container-lowest px-3 py-2 text-sm text-on-surface"
               />
             </Field>
-            <Field label="表示順 (小さいほど先)">
+            <Field label={t("cd.f.order")}>
               <input
                 type="number"
                 value={draft.sortOrder}
@@ -137,7 +145,7 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
                 className="w-full rounded-lg border border-outline-variant/50 bg-surface-container-lowest px-3 py-2 text-sm text-on-surface"
               />
             </Field>
-            <Field label="ラベル（日本語）*">
+            <Field label={t("cd.f.labelJa")}>
               <input
                 value={draft.labelJa}
                 onChange={(e) => setDraft({ ...draft, labelJa: e.target.value })}
@@ -145,7 +153,7 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
                 className="w-full rounded-lg border border-outline-variant/50 bg-surface-container-lowest px-3 py-2 text-sm text-on-surface"
               />
             </Field>
-            <Field label="ラベル（English）">
+            <Field label={t("cd.f.labelEn")}>
               <input
                 value={draft.labelEn}
                 onChange={(e) => setDraft({ ...draft, labelEn: e.target.value })}
@@ -162,7 +170,7 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
                 setDraft({ ...draft, isActive: e.target.checked })
               }
             />
-            アクティブ（フォームに表示）
+            {t("cd.f.activeHelp")}
           </label>
           {error && <p className="mt-3 text-sm text-error">{error}</p>}
           <div className="mt-4 flex gap-2">
@@ -171,13 +179,13 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
               disabled={busy}
               className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-on-primary disabled:opacity-50"
             >
-              {busy ? "保存中…" : "保存"}
+              {busy ? t("common.saving") : t("common.save")}
             </button>
             <button
               onClick={cancel}
               className="rounded-full border border-outline-variant/50 px-5 py-2 text-sm text-on-surface hover:bg-surface-container"
             >
-              キャンセル
+              {t("common.cancel")}
             </button>
           </div>
         </div>
@@ -185,19 +193,19 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
 
       {initial.length === 0 ? (
         <div className="rounded-xl border border-dashed border-outline-variant/50 p-12 text-center text-on-surface-variant">
-          開催日がまだありません。
+          {t("cd.empty")}
         </div>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-outline-variant/30 bg-surface-container-lowest">
           <table className="w-full min-w-[720px] text-left text-sm">
             <thead className="border-b border-outline-variant/30 text-on-surface-variant">
               <tr>
-                <th className="px-3 py-3 font-medium">順</th>
-                <th className="px-3 py-3 font-medium">日付</th>
-                <th className="px-3 py-3 font-medium">ラベル</th>
-                <th className="px-3 py-3 font-medium">状態</th>
+                <th className="px-3 py-3 font-medium">{t("cd.th.order")}</th>
+                <th className="px-3 py-3 font-medium">{t("cd.th.date")}</th>
+                <th className="px-3 py-3 font-medium">{t("cd.th.label")}</th>
+                <th className="px-3 py-3 font-medium">{t("cd.th.status")}</th>
                 <th className="px-3 py-3">
-                  <span className="sr-only">操作</span>
+                  <span className="sr-only">—</span>
                 </th>
               </tr>
             </thead>
@@ -230,7 +238,7 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
                           : "bg-surface-container text-on-surface-variant"
                       }`}
                     >
-                      {c.isActive ? "アクティブ" : "非表示"}
+                      {c.isActive ? t("common.active") : t("cd.hidden")}
                     </button>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3 text-right">
@@ -238,13 +246,13 @@ export function CourseDatesManager({ initial }: { initial: CourseDate[] }) {
                       onClick={() => startEdit(c)}
                       className="text-primary hover:underline"
                     >
-                      編集
+                      {t("common.edit")}
                     </button>
                     <button
                       onClick={() => remove(c)}
                       className="ml-3 text-error hover:underline"
                     >
-                      削除
+                      {t("common.delete")}
                     </button>
                   </td>
                 </tr>

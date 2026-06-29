@@ -4,6 +4,8 @@ import { db } from "@/db";
 import { registrations } from "@/db/schema";
 import { getAllCohorts, cohortLabel } from "@/lib/courseDates";
 import { RegistrationActions } from "@/components/admin/RegistrationActions";
+import { getAdminLang } from "@/lib/adminLang";
+import { makeT } from "@/lib/adminI18n";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +27,10 @@ export default async function AdminRegistrationsList({
 }) {
   const sp = await searchParams;
   const sessionFilter = sp.session ?? "all";
+  const lang = await getAdminLang();
+  const t = makeT(lang);
+  // Cohorts carry ja/en labels only; Thai admins see the ja label.
+  const cl = lang === "en" ? "en" : "ja";
 
   const [rows, cohorts] = await Promise.all([
     db
@@ -39,30 +45,27 @@ export default async function AdminRegistrationsList({
     getAllCohorts(),
   ]);
 
-  // value → JA label, for resolving each registration's chosen cohort.
-  const labelByValue = new Map(cohorts.map((c) => [c.value, cohortLabel(c, "ja")]));
+  const labelByValue = new Map(cohorts.map((c) => [c.value, cohortLabel(c, cl)]));
   const dateLabel = (value: string) => labelByValue.get(value) ?? value;
 
   const filters = [
-    { key: "all", label: "すべて" },
-    ...cohorts.map((c) => ({ key: c.value, label: cohortLabel(c, "ja") })),
+    { key: "all", label: t("reg.all") },
+    ...cohorts.map((c) => ({ key: c.value, label: cohortLabel(c, cl) })),
   ];
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-8">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-xl font-semibold text-on-surface">
-          お申し込み一覧{" "}
-          <span className="text-base font-normal text-on-surface-variant">
-            （{rows.length}）
-          </span>
-        </h1>
+        <p className="text-sm text-on-surface-variant">
+          {t("title.registrations")}{" "}
+          <span className="font-semibold text-on-surface">{rows.length}</span>
+        </p>
         <a
           href="/api/admin/registrations/export"
           className="inline-flex items-center gap-1.5 rounded-full border border-outline-variant/50 px-4 py-1.5 text-sm font-medium text-on-surface hover:bg-surface-container"
         >
           <span className="material-symbols-outlined text-[18px]">download</span>
-          CSV
+          {t("reg.csv")}
         </a>
       </div>
 
@@ -84,22 +87,22 @@ export default async function AdminRegistrationsList({
 
       {rows.length === 0 ? (
         <div className="rounded-xl border border-dashed border-outline-variant/50 p-12 text-center text-on-surface-variant">
-          お申し込みはまだありません。
+          {t("reg.empty")}
         </div>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-outline-variant/30 bg-surface-container-lowest">
           <table className="w-full min-w-[900px] text-left text-sm">
             <thead className="border-b border-outline-variant/30 text-on-surface-variant">
               <tr>
-                <th className="px-3 py-3 font-medium">申込日時</th>
-                <th className="px-3 py-3 font-medium">開催日</th>
-                <th className="px-3 py-3 font-medium">氏名</th>
-                <th className="px-3 py-3 font-medium">連絡先</th>
-                <th className="px-3 py-3 font-medium">属性</th>
-                <th className="px-3 py-3 font-medium">きっかけ</th>
-                <th className="px-3 py-3 font-medium">写真</th>
+                <th className="px-3 py-3 font-medium">{t("reg.th.applied")}</th>
+                <th className="px-3 py-3 font-medium">{t("reg.th.date")}</th>
+                <th className="px-3 py-3 font-medium">{t("reg.th.name")}</th>
+                <th className="px-3 py-3 font-medium">{t("reg.th.contact")}</th>
+                <th className="px-3 py-3 font-medium">{t("reg.th.attr")}</th>
+                <th className="px-3 py-3 font-medium">{t("reg.th.source")}</th>
+                <th className="px-3 py-3 font-medium">{t("reg.th.photo")}</th>
                 <th className="px-3 py-3">
-                  <span className="sr-only">操作</span>
+                  <span className="sr-only">—</span>
                 </th>
               </tr>
             </thead>
