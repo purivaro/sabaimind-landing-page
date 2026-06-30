@@ -69,6 +69,38 @@ export default async function ActivityDetail({
       </div>
 
       {openForRegistration && (
+        <section className="mt-16 rounded-2xl border border-outline-variant/20 bg-surface-container-lowest p-8 md:p-10">
+          <h2 className="mb-5 flex items-center gap-2 font-display text-headline-md text-secondary">
+            <span className="material-symbols-outlined text-primary">
+              location_on
+            </span>
+            {locale === "en" ? "Venue" : "会場"}
+          </h2>
+          <div className="font-body text-body-md leading-relaxed text-on-surface-variant">
+            <p className="font-display text-headline-md text-on-surface">
+              Sabai Mind（サバーイマインド）
+            </p>
+            <p className="mt-1">タイの瞑想と癒しの空間</p>
+            <p className="mt-4 text-on-surface">タンマガーイ寺院 栃木別院 瞑想堂</p>
+            <p className="mt-3">
+              〒321-0345
+              <br />
+              栃木県宇都宮市大谷町1068
+            </p>
+          </div>
+          <a
+            href="https://maps.app.goo.gl/Toh6QxdayZbxiKKo6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 rounded-full border border-outline-variant/50 px-6 py-2.5 font-label-md text-primary transition-colors hover:bg-surface-container"
+          >
+            <span className="material-symbols-outlined text-[20px]">map</span>
+            {locale === "en" ? "Open in Maps" : "地図を見る"}
+          </a>
+        </section>
+      )}
+
+      {openForRegistration && (
         <div className="mt-16 rounded-2xl bg-secondary-fixed/40 p-8 text-center md:p-10">
           <h2 className="mb-2 font-display text-headline-md text-on-surface">
             {t.register.title}
