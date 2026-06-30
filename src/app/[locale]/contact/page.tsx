@@ -35,8 +35,12 @@ export default async function ContactPage({
             </span>
             <span>
               {t.contact.addressLine1}
-              <br />
-              {t.contact.addressLine2}
+              {t.contact.addressLine2 && (
+                <>
+                  <br />
+                  {t.contact.addressLine2}
+                </>
+              )}
             </span>
           </li>
           <li className="flex items-center gap-4">
@@ -78,7 +82,7 @@ export default async function ContactPage({
       {/* Map */}
       <section className="max-w-3xl mx-auto mt-12">
         <a
-          href="https://maps.app.goo.gl/ZCX5kSUaHnyefWhGA"
+          href="https://maps.app.goo.gl/2KFSJnPovTrtVgRD8"
           target="_blank"
           rel="noopener noreferrer"
           className="relative group block overflow-hidden rounded-xl h-64 md:h-80 border border-outline-variant/20 shadow-sm"
