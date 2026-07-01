@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { sendGAEvent } from "@next/third-parties/google";
 
 export type RegisterLabels = {
   email: string;
@@ -34,6 +35,39 @@ type SessionOption = { value: string; label: string };
 
 const inputCls =
   "w-full rounded-lg border border-outline-variant/50 bg-surface-container-lowest px-3.5 py-2.5 text-on-surface focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20";
+
+const adsConversionId = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID;
+const adsRegistrationLabel =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_REGISTRATION_LABEL;
+
+function uniqueEventId() {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
+  }
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function trackRegistrationSuccess(locale: string, sessionDate: string) {
+  const eventParams = {
+    event_category: "registration",
+    event_label: sessionDate,
+    locale,
+    session_date: sessionDate,
+    value: 1,
+    currency: "JPY",
+  };
+
+  sendGAEvent("event", "generate_lead", eventParams);
+
+  if (!adsConversionId || !adsRegistrationLabel) return;
+
+  sendGAEvent("event", "conversion", {
+    send_to: `${adsConversionId}/${adsRegistrationLabel}`,
+    transaction_id: uniqueEventId(),
+    value: 1,
+    currency: "JPY",
+  });
+}
 
 export function RegistrationForm({
   locale,
@@ -101,6 +135,7 @@ export function RegistrationForm({
         setBusy(false);
         return;
       }
+      trackRegistrationSuccess(locale, form.sessionDate);
       setDone(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
