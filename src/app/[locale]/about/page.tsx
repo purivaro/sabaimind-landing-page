@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
@@ -146,6 +147,17 @@ export default async function AboutPage({
                 </p>
               </article>
             ))}
+          </div>
+          <div className="mt-12 flex justify-center">
+            <Link
+              href={`/${locale}/contact`}
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 font-label-md text-on-primary shadow-[0_10px_30px_-10px_rgb(124_87_31/0.6)] transition-all duration-200 hover:bg-primary-fixed-dim hover:text-on-primary-fixed active:translate-y-px"
+            >
+              <span className="material-symbols-outlined text-[20px]">
+                mail
+              </span>
+              {t.nav.contact}
+            </Link>
           </div>
         </div>
       </section>
