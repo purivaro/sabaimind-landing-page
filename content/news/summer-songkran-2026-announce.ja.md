@@ -1,14 +1,14 @@
 ---
 title: "夏ソンクラン2026 開催のお知らせ"
 date: 2026-07-01
-cover: /images/news/summer-songkran-2026/poster.jpg
+cover: /images/news/summer-songkran-2026/poster.png
 excerpt: "2026年7月19日（日）、タイ瞑想の森にて、タイのお正月「ソンクラン」を日本の夏に合わせて楽しむ特別イベントを開催します。"
 locale: ja
 published: true
 featured: true
 ---
 
-![夏ソンクラン2026 ポスター](/images/news/summer-songkran-2026/poster.jpg)
+![夏ソンクラン2026 ポスター](/images/news/summer-songkran-2026/poster.png)
 
 # 日本で楽しむ、タイのお正月。
 
