@@ -14,9 +14,9 @@ In Thai, **"Sabai"** means "comfortable, at ease." We blend traditional Thai Bud
 
 Chairman **Iso Minoru (磯 實)**
 
-> In Japan, approximately 1 in 15 people will experience depression in their lifetime. In an era when mental illness is no longer a distant concern, we focus on **prevention** and **everyday accessibility**.
+> Busyness, uncertainty, relationships, and worries about the future can quietly tire the mind. We focus on gentle practices that are easy to bring into everyday life.
 >
-> Mindfulness is highly regarded in Western medicine and business as a method for managing depression and pain. We want to bring that wisdom to Japan in a form anyone can adopt — beyond the bounds of religion. That is the wish of Sabai Mind.
+> We want to bring the wisdom of traditional Thai meditation and mindfulness to Japan in a form anyone can adopt — beyond the bounds of religion. That is the wish of Sabai Mind.
 
 ## Mission
 

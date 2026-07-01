@@ -244,7 +244,7 @@ const ja: Dict = {
     eyebrow: "代表挨拶",
     heroTitle: "穏やかな心で、\n日常を生きる。",
     heroBody:
-      "日本では、生涯のうちに約15人に1人がうつ病を経験すると言われています。マインドフルネスは欧米の医療やビジネスの現場でうつ病や痛みのマネジメントの手法として高く評価されていますが、日本ではまだ十分に広まっていません。",
+      "忙しさ、不安、人間関係、将来への迷い。現代社会の中で、私たちの心は知らないうちに疲れをためています。Sabai Mindは、タイの伝統的な瞑想とマインドフルネスを、日常の中で無理なく実践できる形でお伝えしています。",
     heroQuote:
       "宗教の枠を超えて、誰もが日常に取り入れやすい形で。それが Sabai Mind の願いです。",
     founderName: "磯 實  Iso Minoru",
@@ -252,8 +252,8 @@ const ja: Dict = {
     sectionMessage: "代表メッセージ",
     messageParagraphs: [
       "現代の日本は、将来の就職、結婚、老後がどうなるか不透明になっており、自分の将来像を描きにくく、多くの人々は先行きの見えない不安を抱えています。驚くような事件や事象が次々と起こり心が休まらない中で、仕事や家事、育児や介護など、なにかと多忙でストレスの多い社会環境のなかで、心のバランスを崩し、不調に陥る人が増えています。",
-      "特に抑うつ気分や不安、精神活動の低下などを特徴とする精神疾患、いわゆるうつ病にかかる人は日本人の約15人に1人が生涯のうちにかかるという、非常にありふれた病気になっています。重度になると生きる気力がなくなり、中には自殺してしまう人もいます。",
-      "このような状況において、うつ病を含む様々な精神疾患の予防や治療に用いられる1つの心理療法として、マインドフルネスが注目されています。マインドフルネスとは、今の自分の状態に意識を向けて心を整える技法で、仏教の瞑想実践法をルーツとし、近年では科学的な研究が進んでいます。うつ病等の再発防止や痛みの管理など医療分野でも有効性が認められ、欧米諸国では既にビジネス、教育、精神医療の分野で幅広く活用され大きな成果を挙げています。しかし、日本ではまだ認知度も普及率も高いとは言えない状況です。",
+      "心の疲れは、特別な人だけに起こるものではありません。だからこそ私たちは、難しい修行ではなく、日常の中で誰もが無理なく取り入れられる「心を休ませる習慣」を大切にしています。",
+      "マインドフルネスとは、今の自分の状態に意識を向けて心を整える実践です。仏教の瞑想実践法をルーツとしながら、近年では教育、医療、ビジネスなど幅広い分野で活用されています。Sabai Mindでは、タイの伝統的な瞑想の智慧を、宗教の枠を超えた開かれた学びとして日本に届けてまいります。",
       "そこで私たちは、広く一般市民に対して、タイ式マインドフルネスの普及・啓発に関する事業として、タイ式瞑想を用いた実践会、オンライン実践会、SNS等を利用した情報発信を行い、誰でも気軽にマインドフルネスを知り、学び、体験できる環境を整えてまいります。また、タイ伝統文化を通じた地域交流イベントとして、ソンクラーン祭りやスカイランタン祭り、学校等でのマインドフルネスワークショップを開催し、マインドフルネスを全く知らない方にも、楽しい時間の中で興味を持っていただけるよう工夫してまいります。",
     ],
     sectionAspirations: "私たちの志",
@@ -450,7 +450,7 @@ const en: Dict = {
     eyebrow: "Message from the Representative",
     heroTitle: "Live each day\nwith a peaceful mind.",
     heroBody:
-      "In Japan, approximately 1 in 15 people will experience depression in their lifetime. While mindfulness is highly regarded in Western medicine and business as a method for managing depression and pain, it is still not widely adopted in Japan.",
+      "Busyness, uncertainty, relationships, and worries about the future can quietly tire the mind. Sabai Mind shares traditional Thai meditation and mindfulness in a form that can be practiced gently in everyday life.",
     heroQuote:
       "Beyond the bounds of religion, in a form everyone can incorporate into daily life — that is the wish of Sabai Mind.",
     founderName: "Iso Minoru  磯 實",
@@ -458,8 +458,8 @@ const en: Dict = {
     sectionMessage: "Message from the Chairman",
     messageParagraphs: [
       "In modern Japan, the future of employment, marriage, and retirement is increasingly uncertain. Many people find it difficult to picture their own future and carry the weight of unseen anxieties. Amid a stream of unsettling events and the demands of work, household, childcare, and elder care, more and more people are losing their inner balance and falling into mental distress.",
-      "Depression — characterized by depressed mood, anxiety, and reduced mental activity — has become a common illness, with about 1 in 15 Japanese people experiencing it in their lifetime. In severe cases, sufferers lose the will to live, and some take their own lives.",
-      "In this context, mindfulness has gained attention as a psychological approach used to prevent and treat depression and other mental conditions. Rooted in Buddhist meditation practice and now backed by growing scientific research, mindfulness is widely used in Western medicine, business, and education with proven results. In Japan, however, awareness and adoption remain low.",
+      "Tiredness of the heart is not something that happens only to certain people. That is why we value not difficult training, but simple habits of resting the mind that anyone can bring into daily life.",
+      "Mindfulness is the practice of gently noticing the present state of one's body and mind. Rooted in Buddhist meditation practice, it is now used in many fields, including education, healthcare, and business. Sabai Mind brings the wisdom of traditional Thai meditation to Japan as an open form of learning beyond the bounds of religion.",
       "We therefore offer the general public a way to approach Thai-style mindfulness through in-person and online practice sessions and information shared on social media — creating an environment where anyone can learn and experience mindfulness with ease. We also host community events rooted in traditional Thai culture, such as the Songkran Festival, the Sky Lantern Festival, and mindfulness workshops in schools — so even those unfamiliar with mindfulness can encounter it through joyful moments.",
     ],
     sectionAspirations: "Our Aspirations",
