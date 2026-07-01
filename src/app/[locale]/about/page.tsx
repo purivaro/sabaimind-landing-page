@@ -214,26 +214,6 @@ export default async function AboutPage({
           </dl>
         </div>
       </section>
-
-      {/* CTA */}
-      <section className="py-24 bg-primary-container">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
-          <h2 className="font-display text-headline-lg text-on-primary-container mb-8">
-            {t.about.ctaTitle}
-          </h2>
-          <p className="font-body text-body-lg text-on-primary-container/80 mb-12 max-w-2xl mx-auto">
-            {t.about.ctaBody}
-          </p>
-          <div className="flex flex-col md:flex-row justify-center gap-4">
-            <button className="bg-primary text-on-primary px-12 py-4 rounded-lg font-label-md transition-all hover:scale-105 active:scale-95 shadow-md">
-              {t.about.ctaVolunteer}
-            </button>
-            <button className="border border-secondary text-on-primary-container px-12 py-4 rounded-lg font-label-md transition-all hover:bg-secondary/10 active:scale-95">
-              {t.about.ctaSupport}
-            </button>
-          </div>
-        </div>
-      </section>
     </>
   );
 }
