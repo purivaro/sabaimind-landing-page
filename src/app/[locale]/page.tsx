@@ -14,6 +14,11 @@ export default async function HomePage({
   const t = getDictionary(locale);
 
   const course = getContent("activities", "utsunomiya-meditation-course", locale);
+  const programImages = [
+    "/images/home/activity-workshop.jpg",
+    "/images/home/activity-pro.jpg",
+    "/images/home/activity-songkran.jpg",
+  ];
 
   return (
     <>
@@ -125,6 +130,75 @@ export default async function HomePage({
           </div>
         </section>
       )}
+
+      {/* Programs */}
+      <section className="border-y border-outline-variant/20 bg-surface py-20 md:py-32">
+        <div className="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">
+          <div className="mx-auto mb-14 max-w-3xl text-center">
+            <p className="mb-4 font-label-md uppercase tracking-[0.22em] text-primary">
+              Sabai Mind
+            </p>
+            <h2 className="mb-5 font-display text-4xl leading-tight text-on-surface md:text-display">
+              {t.about.sectionPrograms}
+            </h2>
+            <p className="font-body text-body-lg leading-relaxed text-on-surface-variant">
+              {t.about.sectionProgramsSub}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-gutter md:grid-cols-3">
+            {t.about.programs.map((p, idx) => (
+              <article
+                key={p.title}
+                className="group overflow-hidden rounded-lg border border-outline-variant/20 bg-surface-container-lowest shadow-[0_12px_32px_rgba(124,87,31,0.08)] transition-shadow hover:shadow-[0_18px_42px_rgba(124,87,31,0.14)]"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-surface-container">
+                  <Image
+                    src={programImages[idx]}
+                    alt={p.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-on-primary shadow-lg">
+                    <span className="font-label-md">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-7 md:p-8">
+                  <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-secondary-fixed/50 text-secondary">
+                    <span className="material-symbols-outlined text-[30px]">
+                      {p.icon}
+                    </span>
+                  </div>
+                  <h3 className="mb-4 font-display text-headline-md leading-snug text-on-surface">
+                    {p.title}
+                  </h3>
+                  <p className="font-body text-body-md leading-relaxed text-on-surface-variant">
+                    {p.body}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mx-auto mt-12 max-w-3xl border-t border-outline-variant/30 pt-10 text-center">
+            <p className="mx-auto mb-7 max-w-2xl font-body text-body-lg leading-relaxed text-on-surface-variant">
+              {t.home.programsContactBody}
+            </p>
+            <Link
+              href={`/${locale}/contact`}
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 font-label-md uppercase tracking-wide text-on-primary shadow-[0_10px_30px_-10px_rgb(124_87_31/0.6)] transition-all duration-200 hover:bg-primary-fixed-dim hover:text-on-primary-fixed active:translate-y-px"
+            >
+              <span className="material-symbols-outlined text-[20px]">
+                mail
+              </span>
+              {t.home.ctaContact}
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Video Highlight */}
       <section className="py-20 md:py-32">

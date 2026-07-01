@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
@@ -114,51 +113,6 @@ export default async function AboutPage({
               </p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Programs (事業内容) */}
-      <section className="py-24 md:py-32 bg-surface-container-low border-b border-outline-variant/20">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-headline-lg text-on-surface mb-4">
-              {t.about.sectionPrograms}
-            </h2>
-            <p className="font-body text-body-md text-on-surface-variant">
-              {t.about.sectionProgramsSub}
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-            {t.about.programs.map((p) => (
-              <article
-                key={p.title}
-                className="bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-10 group hover:shadow-[0_12px_32px_rgba(124,87,31,0.08)] transition-shadow"
-              >
-                <div className="mb-6 inline-flex p-4 rounded-full bg-secondary-fixed/40 text-secondary">
-                  <span className="material-symbols-outlined text-3xl">
-                    {p.icon}
-                  </span>
-                </div>
-                <h3 className="font-display text-headline-md text-on-surface mb-4 leading-snug">
-                  {p.title}
-                </h3>
-                <p className="font-body text-body-md text-on-surface-variant">
-                  {p.body}
-                </p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-12 flex justify-center">
-            <Link
-              href={`/${locale}/contact`}
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 font-label-md text-on-primary shadow-[0_10px_30px_-10px_rgb(124_87_31/0.6)] transition-all duration-200 hover:bg-primary-fixed-dim hover:text-on-primary-fixed active:translate-y-px"
-            >
-              <span className="material-symbols-outlined text-[20px]">
-                mail
-              </span>
-              {t.nav.contact}
-            </Link>
-          </div>
         </div>
       </section>
 

@@ -74,6 +74,7 @@ type Dict = {
     ctaSectionBody: string;
     ctaContact: string;
     ctaActivities: string;
+    programsContactBody: string;
     readFullStory: string;
     featuredCourseEyebrow: string;
     featuredCourseCta: string;
@@ -231,6 +232,8 @@ const ja: Dict = {
       "瞑想指導者派遣・瞑想会・文化イベントに関するご相談、ボランティアやご支援のご希望は、お気軽にご連絡ください。",
     ctaContact: "お問い合わせ",
     ctaActivities: "活動を見る",
+    programsContactBody:
+      "学校・企業・地域での体験会、瞑想指導者派遣、文化イベントのご相談まで、お気軽にお問い合わせください。",
     readFullStory: "READ MORE",
     featuredCourseEyebrow: "毎週火曜日開催・初心者歓迎",
     featuredCourseCta: "コースの詳細を見る",
@@ -437,6 +440,8 @@ const en: Dict = {
       "For inquiries about our meditation instructor dispatch, meditation sessions, cultural events — or to volunteer or support us — please feel free to reach out.",
     ctaContact: "Contact Us",
     ctaActivities: "View Activities",
+    programsContactBody:
+      "For school, workplace, or community sessions, instructor dispatch, or cultural events, please feel free to contact us.",
     readFullStory: "READ MORE",
     featuredCourseEyebrow: "Every Tuesday · Beginners welcome",
     featuredCourseCta: "View course details",
