@@ -27,7 +27,7 @@ published: true
 ## お申込み・お問い合わせ
 
 電話：080-3274-8673 / 0287-82-7776
-メール：support [at] sabaimind.or.jp
+メール：support@sabaimind.or.jp
 
 主催：NPO法人Sabai Mind
 協力：日本スカイランタン協会®
