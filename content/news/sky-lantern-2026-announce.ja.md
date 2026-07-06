@@ -1,11 +1,16 @@
 ---
-title: "スカイランタン祭 2026"
-date: 2026-10-11
-cover: /images/activities/sky-lantern-2026/cover.jpg
-excerpt: "2026年10月11日（日）、栃木のタイ瞑想の森で、願いを込めたスカイランタンを夜空へ放つ祈りの祭典を開催します。"
+title: "スカイランタン祭2026 開催のお知らせ"
+date: 2026-07-05
+cover: /images/news/sky-lantern-2026/poster.jpg
+excerpt: "2026年10月11日（日）、栃木のタイ瞑想の森にて、願いを込めたスカイランタンを夜空へ放つ祈りの祭典を開催します。"
 locale: ja
 published: true
+featured: true
 ---
+
+![スカイランタン祭2026 ポスター](/images/news/sky-lantern-2026/poster.jpg)
+
+## スカイランタン祭 2026
 
 ## イベント概要
 
@@ -23,11 +28,3 @@ published: true
 - 屋台にて本格タイ料理の提供
 - タイの僧侶による法話・加持
 - スカイランタンを夜空へ放つ祈りの時間
-
-## お申込み・お問い合わせ
-
-電話：080-3274-8673 / 0287-82-7776
-メール：support [at] sabaimind.or.jp
-
-主催：NPO法人Sabai Mind
-協力：日本スカイランタン協会®
