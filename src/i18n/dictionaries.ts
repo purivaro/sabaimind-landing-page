@@ -219,7 +219,7 @@ const ja: Dict = {
   home: {
     eyebrow: "NPO法人 Sabai Mind",
     heroHeadline: "Make You Mindful",
-    heroSubhead: "瞑想を通じて日本人の心の平安を実現する",
+    heroSubhead: "毎日がんばるあなたへ。\n心にも、休日を。",
     ctaPrimary: "私たちについて",
     featuredActivities: "私たちの活動",
     featuredActivitiesSub: "タイの智慧と日本の日常をつなぐマインドフルネス",

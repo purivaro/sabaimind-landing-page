@@ -52,7 +52,7 @@ export default async function HomePage({
             </p>
             <h1 className="font-display text-display leading-[1.1] text-white">
               {t.home.heroHeadline}
-              <span className="mt-5 block font-display text-headline-lg font-normal text-white/80">
+              <span className="mt-5 block whitespace-pre-line font-display text-headline-lg font-normal text-white/80">
                 {t.home.heroSubhead}
               </span>
             </h1>
