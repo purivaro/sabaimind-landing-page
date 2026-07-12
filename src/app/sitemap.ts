@@ -9,7 +9,6 @@ const staticPaths = [
   "",
   "/about",
   "/activities",
-  "/activities/utsunomiya-meditation-course",
   "/register",
   "/contact",
   "/news",
@@ -76,9 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         path,
         path === ""
           ? 1
-          : path === "/activities/utsunomiya-meditation-course"
-            ? 0.95
-            : path === "/register"
+          : path === "/register"
               ? 0.9
               : 0.7,
         path === "/news" || path === "/blog" ? "weekly" : "monthly",
