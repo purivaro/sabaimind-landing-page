@@ -1,9 +1,61 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getContent } from "@/lib/content";
 import { VideoHighlight } from "@/components/VideoHighlight";
+
+const SITE_URL = "https://sabaimind.or.jp";
+
+const homeSeo: Record<Locale, { title: string; description: string }> = {
+  ja: {
+    title:
+      "栃木・宇都宮の瞑想｜初心者向け瞑想体験｜NPO法人サバーイマインド",
+    description:
+      "栃木・宇都宮で初心者向けの瞑想を体験しませんか。仕事や日常で疲れた心を休める、やさしい瞑想の時間をご案内しています。",
+  },
+  en: {
+    title:
+      "Meditation in Utsunomiya, Tochigi | Beginner-Friendly Mindfulness | Sabai Mind NPO",
+    description:
+      "Sabai Mind NPO offers beginner-friendly Japanese meditation and mindfulness activities in Utsunomiya and Tochigi for people seeking rest, calm, and a gentle reset.",
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const seo = homeSeo[locale];
+  const url = `${SITE_URL}/${locale}`;
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: url,
+      languages: {
+        ja: `${SITE_URL}/ja`,
+        en: `${SITE_URL}/en`,
+        "x-default": `${SITE_URL}/ja`,
+      },
+    },
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      url,
+      siteName: "NPO法人サバーイマインド",
+    },
+    twitter: {
+      title: seo.title,
+      description: seo.description,
+    },
+  };
+}
 
 export default async function HomePage({
   params,

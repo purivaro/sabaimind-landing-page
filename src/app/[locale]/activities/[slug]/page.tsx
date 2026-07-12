@@ -1,10 +1,66 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getContent } from "@/lib/content";
 import { Markdown } from "@/components/Markdown";
+
+const SITE_URL = "https://sabaimind.or.jp";
+
+const activityFallbackDescriptions: Record<Locale, string> = {
+  ja: "NPO法人サバーイマインドが栃木・宇都宮周辺で行う、初心者にも参加しやすい瞑想とマインドフルネスの活動です。",
+  en: "A beginner-friendly meditation and mindfulness activity from Sabai Mind NPO in Tochigi and the Utsunomiya area.",
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale; slug: string }>;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const item = getContent("activities", slug, locale);
+  if (!item) return {};
+
+  const title =
+    slug === "utsunomiya-meditation-course" && locale === "ja"
+      ? "宇都宮の初心者向け瞑想会｜仕事帰りにも参加できる瞑想体験"
+      : item.meta.title;
+  const description =
+    item.meta.excerpt || activityFallbackDescriptions[locale];
+  const url = `${SITE_URL}/${locale}/activities/${slug}`;
+  const image =
+    typeof item.meta.cover === "string"
+      ? new URL(item.meta.cover, SITE_URL).toString()
+      : `${SITE_URL}/opengraph-image.jpg`;
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: {
+        ja: `${SITE_URL}/ja/activities/${slug}`,
+        en: `${SITE_URL}/en/activities/${slug}`,
+        "x-default": `${SITE_URL}/ja/activities/${slug}`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "NPO法人サバーイマインド",
+      images: [{ url: image }],
+    },
+    twitter: {
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
 
 export default async function ActivityDetail({
   params,
