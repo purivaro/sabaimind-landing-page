@@ -33,8 +33,8 @@ const seo: Record<Locale, {
   ogAlt: string;
 }> = {
   ja: {
-    title: "NPO法人 Sabai Mind — 瞑想を通じて日本人の心の平安を実現する",
-    titleTemplate: "%s | NPO法人 Sabai Mind",
+    title: "NPO法人サバイマインド — 心に休息を届ける瞑想とマインドフルネス",
+    titleTemplate: "%s | NPO法人サバイマインド",
     description:
       "NPO法人 Sabai Mindは、タイの伝統的なマインドフルネスを日本に届け、現代社会に心の休息の場をつくる活動を行っています。瞑想会、瞑想指導者派遣、ソンクラーン祭・スカイランタン祭など、タイ文化を通じた地域交流を実施しています。",
     keywords: [
@@ -43,7 +43,6 @@ const seo: Record<Locale, {
       "マインドフルネス",
       "瞑想",
       "瞑想会",
-      "タイ仏教",
       "瞑想指導者派遣",
       "ソンクラーン祭",
       "スカイランタン祭",
@@ -112,10 +111,10 @@ export async function generateMetadata({
     },
     description: s.description,
     keywords: [...s.keywords],
-    authors: [{ name: "NPO法人 Sabai Mind" }],
-    creator: "NPO法人 Sabai Mind",
-    publisher: "NPO法人 Sabai Mind",
-    applicationName: "Sabai Mind",
+    authors: [{ name: "NPO法人サバイマインド" }],
+    creator: "NPO法人サバイマインド",
+    publisher: "NPO法人サバイマインド",
+    applicationName: "NPO法人サバイマインド",
     referrer: "origin-when-cross-origin",
     formatDetection: { email: false, telephone: false, address: false },
     alternates: {
@@ -129,7 +128,7 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       url,
-      siteName: "NPO法人 Sabai Mind",
+      siteName: "NPO法人サバイマインド",
       title: s.title,
       description: s.description,
       locale: s.locale,
@@ -177,7 +176,7 @@ export async function generateMetadata({
     appleWebApp: {
       capable: true,
       statusBarStyle: "default",
-      title: "Sabai Mind",
+      title: "NPO法人サバイマインド",
     },
   };
 }
