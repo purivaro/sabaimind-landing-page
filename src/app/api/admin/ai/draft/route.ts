@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { requireBlog } from "@/lib/admin";
 
-const SYSTEM = `You write blog articles for NPO法人 Sabai Mind, a Japanese non-profit that brings Thai-style mindfulness and meditation to Japan and runs Thai cultural events (Songkran, Sky Lantern festivals).
+const SYSTEM = `You write blog articles for NPO法人サバーイマインド (Sabai Mind NPO), a Japanese non-profit that brings Thai-style mindfulness and meditation to Japan and runs Thai cultural events (Songkran, Sky Lantern festivals).
 Voice: calm, warm, trustworthy, never salesy.
 Return ONLY a JSON object — no markdown fences, no commentary — with exactly these keys:
 - "title": a concise, compelling headline

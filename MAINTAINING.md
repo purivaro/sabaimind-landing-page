@@ -12,7 +12,7 @@ coding agents (Codex / Claude).
 
 ## 1. What this site is
 
-- **Owner:** NPO法人 Sabai Mind — a Japanese non‑profit offering Thai‑style meditation
+- **Owner:** NPO法人サバーイマインド (Sabai Mind NPO) — a Japanese non‑profit offering Thai‑style meditation
   and mindfulness to a Japanese audience.
 - **Live site:** https://sabaimind.or.jp
 - **Audience / languages:** Public site is **Japanese (default) + English**. (Thai was

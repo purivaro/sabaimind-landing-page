@@ -1,6 +1,6 @@
 # Sabai Mind — sabaimind.or.jp
 
-Website for NPO法人 Sabai Mind (Thai‑style meditation & mindfulness for a Japanese
+Website for NPO法人サバーイマインド (Sabai Mind NPO) (Thai‑style meditation & mindfulness for a Japanese
 audience). Next.js 16 + Tailwind v4, Neon Postgres, deployed on Vercel.
 
 **→ Read [`MAINTAINING.md`](./MAINTAINING.md)** for the full guide: architecture, content,

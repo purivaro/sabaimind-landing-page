@@ -10,7 +10,7 @@ import { Markdown } from "@/components/Markdown";
 const SITE_URL = "https://sabaimind.or.jp";
 
 const activityFallbackDescriptions: Record<Locale, string> = {
-  ja: "NPO法人サバイマインドが栃木・宇都宮周辺で行う、初心者にも参加しやすい瞑想とマインドフルネスの活動です。",
+  ja: "NPO法人サバーイマインドが栃木・宇都宮周辺で行う、初心者にも参加しやすい瞑想とマインドフルネスの活動です。",
   en: "A beginner-friendly meditation and mindfulness activity from Sabai Mind NPO in Tochigi and the Utsunomiya area.",
 };
 
@@ -51,7 +51,7 @@ export async function generateMetadata({
       title,
       description,
       url,
-      siteName: "NPO法人サバイマインド",
+      siteName: "NPO法人サバーイマインド",
       images: [{ url: image }],
     },
     twitter: {

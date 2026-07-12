@@ -11,7 +11,7 @@ const SITE_URL = "https://sabaimind.or.jp";
 const homeSeo: Record<Locale, { title: string; description: string }> = {
   ja: {
     title:
-      "栃木・宇都宮の瞑想｜初心者向け瞑想体験｜NPO法人サバイマインド",
+      "栃木・宇都宮の瞑想｜初心者向け瞑想体験｜NPO法人サバーイマインド",
     description:
       "栃木・宇都宮で初心者向けの瞑想を体験しませんか。仕事や日常で疲れた心を休める、やさしい瞑想の時間をご案内しています。",
   },
@@ -48,7 +48,7 @@ export async function generateMetadata({
       title: seo.title,
       description: seo.description,
       url,
-      siteName: "NPO法人サバイマインド",
+      siteName: "NPO法人サバーイマインド",
     },
     twitter: {
       title: seo.title,

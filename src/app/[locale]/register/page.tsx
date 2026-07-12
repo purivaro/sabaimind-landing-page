@@ -47,7 +47,7 @@ export async function generateMetadata({
       title: seo.title,
       description: seo.description,
       url,
-      siteName: "NPO法人サバイマインド",
+      siteName: "NPO法人サバーイマインド",
     },
     twitter: {
       title: seo.title,
