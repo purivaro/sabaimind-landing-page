@@ -1,6 +1,6 @@
 import type { Locale } from "./config";
 
-// Content reflects the actual organization (NPO法人 Sabai Mind) from sabaimind.or.jp.
+// Content reflects the actual organization (NPO法人サバーイマインド / Sabai Mind NPO) from sabaimind.or.jp.
 // Japanese is canonical; Thai translates with equivalent meaning.
 
 type Program = { icon: string; title: string; body: string };
@@ -213,11 +213,11 @@ const ja: Dict = {
     name: "Sabai Mind",
     tagline: "瞑想を通じて日本人の心の平安を実現する",
     footerDescription:
-      "NPO法人 Sabai Mindは、タイの伝統的なマインドフルネスを日本に届け、現代社会に心の休息の場をつくる活動をしています。",
-    rights: "© 2024 NPO法人 Sabai Mind. All rights reserved.",
+      "NPO法人サバーイマインドは、タイの伝統的なマインドフルネスを日本に届け、現代社会に心の休息の場をつくる活動をしています。",
+    rights: "© 2024 NPO法人サバーイマインド. All rights reserved.",
   },
   home: {
-    eyebrow: "NPO法人 Sabai Mind",
+    eyebrow: "NPO法人サバーイマインド",
     heroHeadline: "Make You Mindful",
     heroSubhead: "毎日がんばるあなたへ。\n心にも、休日を。",
     ctaPrimary: "私たちについて",
@@ -251,7 +251,7 @@ const ja: Dict = {
     heroQuote:
       "宗教の枠を超えて、誰もが日常に取り入れやすい形で。それが Sabai Mind の願いです。",
     founderName: "磯 實  Iso Minoru",
-    founderRole: "NPO法人 Sabai Mind 理事長",
+    founderRole: "NPO法人サバーイマインド 理事長",
     sectionMessage: "代表メッセージ",
     messageParagraphs: [
       "現代の日本は、将来の就職、結婚、老後がどうなるか不透明になっており、自分の将来像を描きにくく、多くの人々は先行きの見えない不安を抱えています。驚くような事件や事象が次々と起こり心が休まらない中で、仕事や家事、育児や介護など、なにかと多忙でストレスの多い社会環境のなかで、心のバランスを崩し、不調に陥る人が増えています。",
@@ -295,7 +295,7 @@ const ja: Dict = {
     communityCaption: "理事長 磯 實 が、川俣 純子 那須烏山市長と面会いたしました。地域との連携を深め、マインドフルネスを通じた社会福祉に取り組んでまいります。",
     sectionOrg: "法人概要",
     orgFields: [
-      { label: "法人の名称", value: "特定非営利活動法人 Sabai Mind（サバーイマインド）" },
+      { label: "法人の名称", value: "特定非営利活動法人サバーイマインド" },
       { label: "代表者氏名", value: "磯 實（いそ みのる）" },
       { label: "事業所の所在地", value: "〒321-0625 栃木県那須烏山市曲畑1021番地1" },
       { label: "電話", value: "080-3274-8673 / 0287-82-7776" },
@@ -340,7 +340,7 @@ const ja: Dict = {
     title: "Contact",
     subtitle:
       "瞑想指導者派遣、瞑想会、文化イベントに関するお問い合わせ、ご支援のご相談などをお寄せください。",
-    sidebarTitle: "NPO法人 Sabai Mind",
+    sidebarTitle: "NPO法人サバーイマインド",
     addressLine1: "〒321-0625 栃木県那須烏山市曲畑1021番地1",
     addressLine2: "",
     phone: "080-3274-8673 / 0287-82-7776",

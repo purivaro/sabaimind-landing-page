@@ -6,7 +6,7 @@ published: true
 
 ## Organization
 
-Sabai Mind NPO (特定非営利活動法人 Sabai Mind)
+Sabai Mind NPO (特定非営利活動法人サバーイマインド)
 
 In Thai, **"Sabai"** means "comfortable, at ease." We blend traditional Thai Buddhist wisdom with the Japanese aesthetic of stillness, creating "places of mental rest" for modern society.
 
