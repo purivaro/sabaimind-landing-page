@@ -80,6 +80,7 @@ export function RegistrationForm({
   labels: RegisterLabels;
   homeHref: string;
 }) {
+  const phoneRequired = locale === "ja";
   const [form, setForm] = useState({
     sessionDate: "",
     email: "",
@@ -255,8 +256,14 @@ export function RegistrationForm({
       </div>
 
       <div>
-        {label(labels.phone, false)}
-        <input type="tel" className={inputCls} value={form.phone} onChange={set("phone")} />
+        {label(labels.phone, phoneRequired)}
+        <input
+          type="tel"
+          required={phoneRequired}
+          className={inputCls}
+          value={form.phone}
+          onChange={set("phone")}
+        />
       </div>
 
       <div>

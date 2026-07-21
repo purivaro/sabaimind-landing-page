@@ -34,7 +34,9 @@ export async function POST(req: Request) {
   const get = (k: string) =>
     typeof data[k] === "string" ? (data[k] as string).trim() : "";
 
-  const missing = REQUIRED.filter((k) => !get(k));
+  const locale: Locale = get("locale") === "en" ? "en" : "ja";
+  const requiredFields = locale === "ja" ? [...REQUIRED, "phone"] : REQUIRED;
+  const missing = requiredFields.filter((k) => !get(k));
   if (missing.length) {
     return NextResponse.json(
       { error: "Missing required fields", fields: missing },
@@ -51,8 +53,6 @@ export async function POST(req: Request) {
       { status: 422 },
     );
   }
-
-  const locale: Locale = get("locale") === "en" ? "en" : "ja";
 
   try {
     await db.insert(registrations).values({
